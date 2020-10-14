@@ -309,19 +309,10 @@
                     <a href="#before-we-even-start" class="toc-h2 toc-link" data-title="Before we even start...">Before we even start...</a>
                   </li>
                   <li>
-                    <a href="#this-ain-39-t-your-grandma-39-s-javascript" class="toc-h2 toc-link" data-title="This ain't your grandma's Javascript...">This ain't your grandma's Javascript...</a>
-                  </li>
-                  <li>
-                    <a href="#pixi-hotwire" class="toc-h2 toc-link" data-title="pixi-hotwire?">pixi-hotwire?</a>
-                  </li>
-                  <li>
-                    <a href="#typescript" class="toc-h2 toc-link" data-title="Typescript?">Typescript?</a>
-                  </li>
-                  <li>
-                    <a href="#i-will-never-scream-pixi" class="toc-h2 toc-link" data-title="I will never scream (PIXI.)">I will never scream (<code>PIXI.</code>)</a>
-                  </li>
-                  <li>
                     <a href="#enough-talk-have-at-you" class="toc-h2 toc-link" data-title="Enough talk, have at you!">Enough talk, have at you!</a>
+                  </li>
+                  <li>
+                    <a href="#finally-some-code" class="toc-h2 toc-link" data-title="Finally some code!">Finally some code!</a>
                   </li>
               </ul>
           </li>
@@ -341,21 +332,25 @@
 <p>This tutorial won&#39;t teach you to code from scratch. I will assume you already know your way around code and about object-oriented programming.<br>
 Furthermore, while I will explain some of the quirks of Javascript (actually Typescript, but we will cross that bridge when we get there).<br>
 Git and some shell (console) experience will be good but not mandatory. If you know any object-oriented programming you will be just fine.  </p>
-<h2 id='this-ain-39-t-your-grandma-39-s-javascript'>This ain&#39;t your grandma&#39;s Javascript...</h2>
+<h3 id='this-ain-39-t-your-grandma-39-s-javascript'>This ain&#39;t your grandma&#39;s Javascript...</h3>
 <p>If you came here expecting to write javascript between two <code>&lt;script&gt;</code> tags in your .html file, oh boy I have bad news for you.<br>
 Web development might have started with only a text editor and dumping code into a single .js file but on today&#39;s spooky fast world of javascript libraries, going commando ain&#39;t gonna cut it.<br>
 This... guide? course? tutorial? will use Typescript and it will be designed to work with <a href="https://github.com/miltoncandelero/pixi-hotwire"><em>pixi-hotwire</em></a>, a boilerplate to get you started fast without the hassle of how to create and maintain a standard web project with a bundler. (If you have a bit more experience in web development, feel free to tinker and try any bundler of your liking.)    </p>
-<h2 id='pixi-hotwire'>pixi-hotwire?</h2>
+<h3 id='pixi-hotwire'>pixi-hotwire?</h3>
 <p>In case you realize you have no idea what a bundler is or why you need one, worry not! I&#39;ve created a base template project called <a href="https://github.com/miltoncandelero/pixi-hotwire"><em>pixi-hotwire</em></a>. It is the simplest boilerplate I could build. It goes from nothing to watching your code running with the least amount of configurations.<br>
 It is a <em>just-add-npm</em> solution that sets you up with <em>typescript</em>, <em>pixi.js</em> and <em>parcel</em>. It also will make a final build folder for you instead of you having to pluck manually files out of your project folder to get the <em>uploadeable</em> result of your hard work.</p>
-<h2 id='typescript'>Typescript?</h2>
+<h3 id='typescript'>Typescript?</h3>
 <p>I&#39;ll be honest with you: I hate Javascript. I hate the meme of truthy and falsy values. I hate the implicit type coercion. I hate the dynamic context binding. I hate a lot of javascript... But I must endure, adapt, overcome.<br>
 Enter Typescript: Typescript will force your hand to keep your code as strictly typed as possible, and if you need to use type coercion and really <em>javascripty</em> code, you must consciously choose to make the data type as <code>any</code>.<br>
 As a nice bonus you get <em>intellisense</em> on Visual Studio Code (which is Microsoft fancy name for code auto-complete).  </p>
-<h2 id='i-will-never-scream-pixi'>I will never scream (<code>PIXI.</code>)</h2>
+<h3 id='i-will-never-scream-pixi'>I will never scream (<code>PIXI.</code>)</h3>
 <p>I feel that doing <code>import * as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Loader</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Loader } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
 I could say it is better for three-shaking (the step where the bundler doesn&#39;t add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  </p>
 <h2 id='enough-talk-have-at-you'>Enough talk, have at you!</h2>
+<blockquote>
+<p>Be patient. When the time is right, the code will show on this column.</p>
+</blockquote>
+
 <p>Let&#39;s start by making sure you have all the tools and materials.  </p>
 
 <p>You will need:</p>
@@ -396,7 +391,7 @@ I could say it is better for three-shaking (the step where the bundler doesn&#39
 <p>Run <code>npm run start</code> and open your web browser on the website <code>http://localhost:1234</code>.<br>
 <code>localhost</code> means &quot;your own computer&quot; and <code>1234</code> is the port where this web server is running. Nobody else will see your game running on their <code>localhost</code>. You will need to export it and upload it somewhere.<br>
 Try hitting F12 and finding the Javascript Console. That will be your best friend when needing to know why something is or isn&#39;t working. That is where <code>console.log()</code> will write and where you will see any errors that you might have made.</p>
-
+<h2 id='finally-some-code'>Finally some code!</h2>
 <blockquote>
 <p>Now, for the actual code inside the <code>index.ts</code> file</p>
 </blockquote>
