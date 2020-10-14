@@ -383,29 +383,27 @@ I could say it is better for three-shaking (the step where the bundler doesn&#39
 Try hitting F12 and finding the Javascript Console. That will be your best friend when needing to know why something is or isn&#39;t working. That is where <code>console.log()</code> will write and where you will see any errors that you might have made.</p>
 
 <blockquote>
-<p>Now, for the actual code inside the <code>index.ts</code> file
-```ts
-import { Application, Sprite } from &#39;pixi.js&#39;</p>
+<p>Now, for the actual code inside the <code>index.ts</code> file</p>
 </blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Application</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">pixi.js</span><span class="dl">'</span>
 
-<p>const app = new Application({
-    view: document.getElementById(&quot;pixi-canvas&quot;) as HTMLCanvasElement,
-    resolution: window.devicePixelRatio || 1,
-    backgroundColor: 0x6495ed,
-    width: 640,
-    height: 480
-});</p>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
+    <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
+    <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="mh">0x6495ed</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">480</span>
+<span class="p">});</span>
 
-<p>const clampy: Sprite = Sprite.from(&quot;clampy.png&quot;);</p>
+<span class="kd">const</span> <span class="nx">clampy</span><span class="p">:</span> <span class="nx">Sprite</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">clampy.png</span><span class="dl">"</span><span class="p">);</span>
 
-<p>clampy.anchor.set(0.5);</p>
+<span class="nx">clampy</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
 
-<p>clampy.x = app.screen.width / 2;
-clampy.y = app.screen.height / 2;</p>
+<span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">screen</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">clampy</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">screen</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
 
-<p>app.stage.addChild(clampy);
-```</p>
-
+<span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">clampy</span><span class="p">);</span>
+</code></pre></div>
 <p>First we see the <code>import</code> statement. As previously stated, I prefer named imports to just importing everything under a big all caps <code>PIXI</code> object.  </p>
 
 <p>After that we create an <code>app</code> instance of PixiJS <code>Application</code>. This object is a quick way to setup a renderer and a stage to drop stuff on screen and be ready to render. You can see that I call for an HTML element by id <code>pixi-canvas</code>, this element can be found on the <code>index.html</code> file. (If you know a bit of web development, that file will reference directly the typescript file, that is usually illegal. This works because that file it&#39;s used by <code>parcel</code> as the entry point. The final exported index.html file won&#39;t have any reference to any typescript file.)<br>
