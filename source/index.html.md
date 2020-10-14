@@ -69,6 +69,7 @@ Run `npm run start` and open your web browser on the website `http://localhost:1
 Try hitting F12 and finding the Javascript Console. That will be your best friend when needing to know why something is or isn't working. That is where `console.log()` will write and where you will see any errors that you might have made.
 
 > Now, for the actual code inside the `index.ts` file
+
 ```ts
 import { Application, Sprite } from 'pixi.js'
 
