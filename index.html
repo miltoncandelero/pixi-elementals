@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>PixiJS Elementals</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -288,7 +288,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -297,34 +297,31 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo-1e815a84.png" class="logo" alt="" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started">Getting Started</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#before-we-even-start" class="toc-h2 toc-link" data-title="Before we even start...">Before we even start...</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#this-ain-39-t-your-grandma-39-s-javascript" class="toc-h2 toc-link" data-title="This ain't your grandma's Javascript...">This ain't your grandma's Javascript...</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#pixi-hotwire" class="toc-h2 toc-link" data-title="pixi-hotwire?">pixi-hotwire?</a>
+                  </li>
+                  <li>
+                    <a href="#typescript" class="toc-h2 toc-link" data-title="Typescript?">Typescript?</a>
+                  </li>
+                  <li>
+                    <a href="#i-will-never-scream-pixi" class="toc-h2 toc-link" data-title="I will never scream (PIXI.)">I will never scream (<code>PIXI.</code>)</a>
+                  </li>
+                  <li>
+                    <a href="#enough-talk-have-at-you" class="toc-h2 toc-link" data-title="Enough talk, have at you!">Enough talk, have at you!</a>
                   </li>
               </ul>
           </li>
@@ -340,185 +337,100 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='getting-started'>Getting Started</h1><h2 id='before-we-even-start'>Before we even start...</h2>
+<p>This tutorial won&#39;t teach you to code from scratch. I will assume you already know your way around code and about object-oriented programming.<br>
+Furthermore, while I will explain some of the quirks of Javascript (actually Typescript, but we will cross that bridge when we get there).<br>
+Git and some shell (console) experience will be good but not mandatory. If you know any object-oriented programming you will be just fine.  </p>
+<h2 id='this-ain-39-t-your-grandma-39-s-javascript'>This ain&#39;t your grandma&#39;s Javascript...</h2>
+<p>If you came here expecting to write javascript between two <code>&lt;script&gt;</code> tags in your .html file, oh boy I have bad news for you.<br>
+Web development might have started with only a text editor and dumping code into a single .js file but on today&#39;s spooky fast world of javascript libraries, going commando ain&#39;t gonna cut it.<br>
+This... guide? course? tutorial? will use Typescript and it will be designed to work with <a href="https://github.com/miltoncandelero/pixi-hotwire"><em>pixi-hotwire</em></a>, a boilerplate to get you started fast without the hassle of how to create and maintain a standard web project with a bundler. (If you have a bit more experience in web development, feel free to tinker and try any bundler of your liking.)    </p>
+<h2 id='pixi-hotwire'>pixi-hotwire?</h2>
+<p>In case you realize you have no idea what a bundler is or why you need one, worry not! I&#39;ve created a base template project called <a href="https://github.com/miltoncandelero/pixi-hotwire"><em>pixi-hotwire</em></a>. It is the simplest boilerplate I could build. It goes from nothing to watching your code running with the least amount of configurations.<br>
+It is a <em>just-add-npm</em> solution that sets you up with <em>typescript</em>, <em>pixi.js</em> and <em>parcel</em>. It also will make a final build folder for you instead of you having to pluck manually files out of your project folder to get the <em>uploadeable</em> result of your hard work.</p>
+<h2 id='typescript'>Typescript?</h2>
+<p>I&#39;ll be honest with you: I hate Javascript. I hate the meme of truthy and falsy values. I hate the implicit type coercion. I hate the dynamic context binding. I hate a lot of javascript... But I must endure, adapt, overcome.<br>
+Enter Typescript: Typescript will force your hand to keep your code as strictly typed as possible, and if you need to use type coercion and really <em>javascripty</em> code, you must consciously choose to make the data type as <code>any</code>.<br>
+As a nice bonus you get <em>intellisense</em> on Visual Studio Code (which is Microsoft fancy name for code auto-complete).  </p>
+<h2 id='i-will-never-scream-pixi'>I will never scream (<code>PIXI.</code>)</h2>
+<p>I feel that doing <code>import * as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Loader</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Loader } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
+I could say it is better for three-shaking (the step where the bundler doesn&#39;t add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  </p>
+<h2 id='enough-talk-have-at-you'>Enough talk, have at you!</h2>
+<p>Let&#39;s start by making sure you have all the tools and materials.  </p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>You will need:
+* <a href="https://nodejs.org/">NodeJS</a> (it comes with <code>npm</code>).
+* <a href="https://github.com/miltoncandelero/pixi-hotwire">pixi-hotwire</a> boilerplate.
+* A text editor (consider <a href="https://code.visualstudio.com/">Visual Studio Code</a> but any would do)
+* A web browser from this era. (Sorry internet explorer, you are out!)</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<p>A quick overview of what you will find inside <em>pixi-hotwire</em>:
+* <code>src</code> folder: Contains the typescript code for your project.
+* <code>static</code> folder: Contains all the assets (non-code) for your project.
+* <code>package.json</code> file: Contains a list of all the libraries and tools you need along with some script code to run and build your project. The heart and soul of any <code>npm</code> project.
+* <code>dist</code> folder: Won&#39;t be there yet. Here you will find your ready to upload build when you want to share your game.</p>
+
+<p>Once you have cloned or downloaded <em>pixi-hotwire</em> you will need to grab all the dependencies (stored inside the <code>package.json</code> file), to do so you will need to use a shell (console), navigate to the project folder and use the command <code>npm install</code> to read all the dependencies and download them into the <code>node_modules</code> folder.  </p>
+
+<p>When the progress finishes you now have access to new stuff that begins with <code>npm</code>!
+* <code>npm run start</code> will convert your typescript into javascript as you write it and let you test the game! 
+  * &quot;as you write&quot; means you just need to save the file you are working to see the changes, no need to run it again!
+* <code>npm run build</code> will create a package for you to upload to your webserver. Find it inside the folder <code>dist</code> (short for distributable)
+  * Don&#39;t try to &quot;just double click&quot; the index.html file there. It may work, it may not. This is meant to upload into a webserver or service. Try <a href="https://itch.io/">itch.io</a></p>
+
+<p>Run <code>npm run start</code> and open your web browser on the website <code>http://localhost:1234</code>.<br>
+<code>localhost</code> means &quot;your own computer&quot; and <code>1234</code> is the port where this web server is running. Nobody else will see your game running on their <code>localhost</code>. You will need to export it and upload it somewhere.<br>
+Try hitting F12 and finding the Javascript Console. That will be your best friend when needing to know why something is or isn&#39;t working. That is where <code>console.log()</code> will write and where you will see any errors that you might have made.</p>
+
 <blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Now, for the actual code inside the <code>index.ts</code> file
+```ts
+import { Application, Sprite } from &#39;pixi.js&#39;</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>const app = new Application({
+    view: document.getElementById(&quot;pixi-canvas&quot;) as HTMLCanvasElement,
+    resolution: window.devicePixelRatio || 1,
+    backgroundColor: 0x6495ed,
+    width: 640,
+    height: 480
+});</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>const clampy: Sprite = Sprite.from(&quot;clampy.png&quot;);</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>clampy.anchor.set(0.5);</p>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>clampy.x = app.screen.width / 2;
+clampy.y = app.screen.height / 2;</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>app.stage.addChild(clampy);
+```</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<p>First we see the <code>import</code> statement. As previously stated, I prefer named imports to just importing everything under a big all caps <code>PIXI</code> object.  </p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<p>After that we create an <code>app</code> instance of PixiJS <code>Application</code>. This object is a quick way to setup a renderer and a stage to drop stuff on screen and be ready to render. You can see that I call for an HTML element by id <code>pixi-canvas</code>, this element can be found on the <code>index.html</code> file. (If you know a bit of web development, that file will reference directly the typescript file, that is usually illegal. This works because that file it&#39;s used by <code>parcel</code> as the entry point. The final exported index.html file won&#39;t have any reference to any typescript file.)<br>
+As a parameter for the <code>Application</code> object we give it some options. You can see and explore the full list in <a href="https://pixijs.download/dev/docs/PIXI.Application.html">PixiJS official docs</a>.  </p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>Then, I create a <code>Sprite</code> with the <code>Sprite.from(...)</code> method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
+* A <code>Texture</code> object.
+* The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="todo">loading assets</a>)
+* The URL of an image file</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Can you guess what we used here?<br>
+Well, I hope you guessed option three, &quot;the URL of an image file&quot; because that is the correct option.<br>
+By saying <code>&quot;clampy.png&quot;</code> it means &quot;find a file called clampy.png in the root of my asset folder&quot;. You will see that our asset folder is called <code>static</code> and if you check in there, indeed there it is, <code>clampy.png</code>!  </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-X</span> DELETE
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
+<p>Finally I set the position of Clampy and add it to the screen by doing an <code>addChild()</code> to the <code>app.stage</code>.<br>
+You will learn soon enough what the stage and why is it called <code>addChild()</code> but for now it should suffice to know that <code>app.stage</code> is the name for &quot;the entire screen&quot; and everything that you want to show needs to be appended by using <code>addChild()</code>.</p>
+<h3 id='homework'>Homework!</h3>
+<p>Oh boy, you thought you could get away?<br>
+Try these on for size!
+* Try moving the <code>clampy.png</code> into a folder (keeping it inside <code>static</code>!)
+  * Now, try referencing the new location to make Clampy appear again
+* Try using an image from the internet, say from <a href="https://imgur.com/">imgur</a>
+  * Make sure your file ends with <code>.png</code> or <code>.jpg</code>, that means it is the actual image file.
+* Try an image from a random website. (it may work, it may not, don&#39;t panic)
+  * Did you get a <code>blocked by CORS</code> error on the javascript console? <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> is a safety measure to prevent a webpage from calling other webpages without your permission, this is why we have our own images on the <code>static</code> folder!.</p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
@@ -580,12 +492,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
