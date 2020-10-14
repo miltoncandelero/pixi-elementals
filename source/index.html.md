@@ -37,32 +37,35 @@ Enter Typescript: Typescript will force your hand to keep your code as strictly 
 As a nice bonus you get _intellisense_ on Visual Studio Code (which is Microsoft fancy name for code auto-complete).  
 
 ## I will never scream (`PIXI.`)
-I feel that doing `import - as PIXI from "pixi.js"` so that I can go `PIXI.Sprite`, `PIXI.Container`, `PIXI.Loader`, etc, is silly and makes me feel clumsy. I will use named imports: `import { Sprite, Container, Loader } from "pixi.js"` and that allows me to just use the class name without adding `PIXI` everywhere.  
+I feel that doing `import * as PIXI from "pixi.js"` so that I can go `PIXI.Sprite`, `PIXI.Container`, `PIXI.Loader`, etc, is silly and makes me feel clumsy. I will use named imports: `import { Sprite, Container, Loader } from "pixi.js"` and that allows me to just use the class name without adding `PIXI` everywhere.  
 I could say it is better for three-shaking (the step where the bundler doesn't add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  
 
 ## Enough talk, have at you!
 Let's start by making sure you have all the tools and materials.  
 
 You will need:
-- [NodeJS](https://nodejs.org/) (it comes with `npm`).
-- [pixi-hotwire](https://github.com/miltoncandelero/pixi-hotwire) boilerplate.
-- A text editor (consider [Visual Studio Code](https://code.visualstudio.com/) but any would do)
-- A web browser from this era. (Sorry internet explorer, you are out!)
+
+* [NodeJS](https://nodejs.org/) (it comes with `npm`).
+* [pixi-hotwire](https://github.com/miltoncandelero/pixi-hotwire) boilerplate.
+* A text editor (consider [Visual Studio Code](https://code.visualstudio.com/) but any would do)
+* A web browser from this era. (Sorry internet explorer, you are out!)
 
 
 A quick overview of what you will find inside _pixi-hotwire_:
-- `src` folder: Contains the typescript code for your project.
-- `static` folder: Contains all the assets (non-code) for your project.
-- `package.json` file: Contains a list of all the libraries and tools you need along with some script code to run and build your project. The heart and soul of any `npm` project.
-- `dist` folder: Won't be there yet. Here you will find your ready to upload build when you want to share your game.
+
+* `src` folder: Contains the typescript code for your project.
+* `static` folder: Contains all the assets (non-code) for your project.
+* `package.json` file: Contains a list of all the libraries and tools you need along with some script code to run and build your project. The heart and soul of any `npm` project.
+* `dist` folder: Won't be there yet. Here you will find your ready to upload build when you want to share your game.
 
 Once you have cloned or downloaded _pixi-hotwire_ you will need to grab all the dependencies (stored inside the `package.json` file), to do so you will need to use a shell (console), navigate to the project folder and use the command `npm install` to read all the dependencies and download them into the `node_modules` folder.  
 
 When the progress finishes you now have access to new stuff that begins with `npm`!
-- `npm run start` will convert your typescript into javascript as you write it and let you test the game! 
-  - "as you write" means you just need to save the file you are working to see the changes, no need to run it again!
-- `npm run build` will create a package for you to upload to your webserver. Find it inside the folder `dist` (short for distributable)
-  - Don't try to "just double click" the index.html file there. It may work, it may not. This is meant to upload into a webserver or service. Try [itch.io](https://itch.io/)
+
+* `npm run start` will convert your typescript into javascript as you write it and let you test the game! 
+  * "as you write" means you just need to save the file you are working to see the changes, no need to run it again!
+* `npm run build` will create a package for you to upload to your webserver. Find it inside the folder `dist` (short for distributable)
+  * Don't try to "just double click" the index.html file there. It may work, it may not. This is meant to upload into a webserver or service. Try [itch.io](https://itch.io/)
 
 Run `npm run start` and open your web browser on the website `http://localhost:1234`.  
 `localhost` means "your own computer" and `1234` is the port where this web server is running. Nobody else will see your game running on their `localhost`. You will need to export it and upload it somewhere.  
@@ -97,9 +100,10 @@ After that we create an `app` instance of PixiJS `Application`. This object is a
 As a parameter for the `Application` object we give it some options. You can see and explore the full list in [PixiJS official docs](https://pixijs.download/dev/docs/PIXI.Application.html).  
 
 Then, I create a `Sprite` with the `Sprite.from(...)` method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
-- A `Texture` object.
-- The name of a `Texture` object you loaded previously. (using a `Loader`, we will see this when we get to [loading assets](todo))
-- The URL of an image file
+
+* A `Texture` object.
+* The name of a `Texture` object you loaded previously. (using a `Loader`, we will see this when we get to [loading assets](todo))
+* The URL of an image file
 
 Can you guess what we used here?  
 Well, I hope you guessed option three, "the URL of an image file" because that is the correct option.  
@@ -111,9 +115,10 @@ You will learn soon enough what the stage and why is it called `addChild()` but 
 ### Homework!
 Oh boy, you thought you could get away?  
 Try these on for size!
-- Try moving the `clampy.png` into a folder (keeping it inside `static`!)
-  - Now, try referencing the new location to make Clampy appear again
-- Try using an image from the internet, say from [imgur](https://imgur.com/)
-  - Make sure your file ends with `.png` or `.jpg`, that means it is the actual image file.
-- Try an image from a random website. (it may work, it may not, don't panic)
-  - Did you get a `blocked by CORS` error on the javascript console? [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a safety measure to prevent a webpage from calling other webpages without your permission, this is why we have our own images on the `static` folder!.
+
+* Try moving the `clampy.png` into a folder (keeping it inside `static`!)
+  * Now, try referencing the new location to make Clampy appear again
+* Try using an image from the internet, say from [imgur](https://imgur.com/)
+  * Make sure your file ends with `.png` or `.jpg`, that means it is the actual image file.
+* Try an image from a random website. (it may work, it may not, don't panic)
+  * Did you get a `blocked by CORS` error on the javascript console? [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a safety measure to prevent a webpage from calling other webpages without your permission, this is why we have our own images on the `static` folder!.
