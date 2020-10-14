@@ -353,30 +353,45 @@ It is a <em>just-add-npm</em> solution that sets you up with <em>typescript</em>
 Enter Typescript: Typescript will force your hand to keep your code as strictly typed as possible, and if you need to use type coercion and really <em>javascripty</em> code, you must consciously choose to make the data type as <code>any</code>.<br>
 As a nice bonus you get <em>intellisense</em> on Visual Studio Code (which is Microsoft fancy name for code auto-complete).  </p>
 <h2 id='i-will-never-scream-pixi'>I will never scream (<code>PIXI.</code>)</h2>
-<p>I feel that doing <code>import - as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Loader</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Loader } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
+<p>I feel that doing <code>import * as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Loader</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Loader } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
 I could say it is better for three-shaking (the step where the bundler doesn&#39;t add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  </p>
 <h2 id='enough-talk-have-at-you'>Enough talk, have at you!</h2>
 <p>Let&#39;s start by making sure you have all the tools and materials.  </p>
 
-<p>You will need:
-- <a href="https://nodejs.org/">NodeJS</a> (it comes with <code>npm</code>).
-- <a href="https://github.com/miltoncandelero/pixi-hotwire">pixi-hotwire</a> boilerplate.
-- A text editor (consider <a href="https://code.visualstudio.com/">Visual Studio Code</a> but any would do)
-- A web browser from this era. (Sorry internet explorer, you are out!)</p>
+<p>You will need:</p>
 
-<p>A quick overview of what you will find inside <em>pixi-hotwire</em>:
-- <code>src</code> folder: Contains the typescript code for your project.
-- <code>static</code> folder: Contains all the assets (non-code) for your project.
-- <code>package.json</code> file: Contains a list of all the libraries and tools you need along with some script code to run and build your project. The heart and soul of any <code>npm</code> project.
-- <code>dist</code> folder: Won&#39;t be there yet. Here you will find your ready to upload build when you want to share your game.</p>
+<ul>
+<li><a href="https://nodejs.org/">NodeJS</a> (it comes with <code>npm</code>).</li>
+<li><a href="https://github.com/miltoncandelero/pixi-hotwire">pixi-hotwire</a> boilerplate.</li>
+<li>A text editor (consider <a href="https://code.visualstudio.com/">Visual Studio Code</a> but any would do)</li>
+<li>A web browser from this era. (Sorry internet explorer, you are out!)</li>
+</ul>
+
+<p>A quick overview of what you will find inside <em>pixi-hotwire</em>:</p>
+
+<ul>
+<li><code>src</code> folder: Contains the typescript code for your project.</li>
+<li><code>static</code> folder: Contains all the assets (non-code) for your project.</li>
+<li><code>package.json</code> file: Contains a list of all the libraries and tools you need along with some script code to run and build your project. The heart and soul of any <code>npm</code> project.</li>
+<li><code>dist</code> folder: Won&#39;t be there yet. Here you will find your ready to upload build when you want to share your game.</li>
+</ul>
 
 <p>Once you have cloned or downloaded <em>pixi-hotwire</em> you will need to grab all the dependencies (stored inside the <code>package.json</code> file), to do so you will need to use a shell (console), navigate to the project folder and use the command <code>npm install</code> to read all the dependencies and download them into the <code>node_modules</code> folder.  </p>
 
-<p>When the progress finishes you now have access to new stuff that begins with <code>npm</code>!
-- <code>npm run start</code> will convert your typescript into javascript as you write it and let you test the game! 
-  - &quot;as you write&quot; means you just need to save the file you are working to see the changes, no need to run it again!
-- <code>npm run build</code> will create a package for you to upload to your webserver. Find it inside the folder <code>dist</code> (short for distributable)
-  - Don&#39;t try to &quot;just double click&quot; the index.html file there. It may work, it may not. This is meant to upload into a webserver or service. Try <a href="https://itch.io/">itch.io</a></p>
+<p>When the progress finishes you now have access to new stuff that begins with <code>npm</code>!</p>
+
+<ul>
+<li><code>npm run start</code> will convert your typescript into javascript as you write it and let you test the game! 
+
+<ul>
+<li>&quot;as you write&quot; means you just need to save the file you are working to see the changes, no need to run it again!</li>
+</ul></li>
+<li><code>npm run build</code> will create a package for you to upload to your webserver. Find it inside the folder <code>dist</code> (short for distributable)
+
+<ul>
+<li>Don&#39;t try to &quot;just double click&quot; the index.html file there. It may work, it may not. This is meant to upload into a webserver or service. Try <a href="https://itch.io/">itch.io</a></li>
+</ul></li>
+</ul>
 
 <p>Run <code>npm run start</code> and open your web browser on the website <code>http://localhost:1234</code>.<br>
 <code>localhost</code> means &quot;your own computer&quot; and <code>1234</code> is the port where this web server is running. Nobody else will see your game running on their <code>localhost</code>. You will need to export it and upload it somewhere.<br>
@@ -409,10 +424,13 @@ Try hitting F12 and finding the Javascript Console. That will be your best frien
 <p>After that we create an <code>app</code> instance of PixiJS <code>Application</code>. This object is a quick way to setup a renderer and a stage to drop stuff on screen and be ready to render. You can see that I call for an HTML element by id <code>pixi-canvas</code>, this element can be found on the <code>index.html</code> file. (If you know a bit of web development, that file will reference directly the typescript file, that is usually illegal. This works because that file it&#39;s used by <code>parcel</code> as the entry point. The final exported index.html file won&#39;t have any reference to any typescript file.)<br>
 As a parameter for the <code>Application</code> object we give it some options. You can see and explore the full list in <a href="https://pixijs.download/dev/docs/PIXI.Application.html">PixiJS official docs</a>.  </p>
 
-<p>Then, I create a <code>Sprite</code> with the <code>Sprite.from(...)</code> method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
-- A <code>Texture</code> object.
-- The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="todo">loading assets</a>)
-- The URL of an image file</p>
+<p>Then, I create a <code>Sprite</code> with the <code>Sprite.from(...)</code> method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:</p>
+
+<ul>
+<li>A <code>Texture</code> object.</li>
+<li>The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="todo">loading assets</a>)</li>
+<li>The URL of an image file</li>
+</ul>
 
 <p>Can you guess what we used here?<br>
 Well, I hope you guessed option three, &quot;the URL of an image file&quot; because that is the correct option.<br>
@@ -422,13 +440,25 @@ By saying <code>&quot;clampy.png&quot;</code> it means &quot;find a file called 
 You will learn soon enough what the stage and why is it called <code>addChild()</code> but for now it should suffice to know that <code>app.stage</code> is the name for &quot;the entire screen&quot; and everything that you want to show needs to be appended by using <code>addChild()</code>.</p>
 <h3 id='homework'>Homework!</h3>
 <p>Oh boy, you thought you could get away?<br>
-Try these on for size!
-- Try moving the <code>clampy.png</code> into a folder (keeping it inside <code>static</code>!)
-  - Now, try referencing the new location to make Clampy appear again
-- Try using an image from the internet, say from <a href="https://imgur.com/">imgur</a>
-  - Make sure your file ends with <code>.png</code> or <code>.jpg</code>, that means it is the actual image file.
-- Try an image from a random website. (it may work, it may not, don&#39;t panic)
-  - Did you get a <code>blocked by CORS</code> error on the javascript console? <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> is a safety measure to prevent a webpage from calling other webpages without your permission, this is why we have our own images on the <code>static</code> folder!.</p>
+Try these on for size!</p>
+
+<ul>
+<li>Try moving the <code>clampy.png</code> into a folder (keeping it inside <code>static</code>!)
+
+<ul>
+<li>Now, try referencing the new location to make Clampy appear again</li>
+</ul></li>
+<li>Try using an image from the internet, say from <a href="https://imgur.com/">imgur</a>
+
+<ul>
+<li>Make sure your file ends with <code>.png</code> or <code>.jpg</code>, that means it is the actual image file.</li>
+</ul></li>
+<li>Try an image from a random website. (it may work, it may not, don&#39;t panic)
+
+<ul>
+<li>Did you get a <code>blocked by CORS</code> error on the javascript console? <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> is a safety measure to prevent a webpage from calling other webpages without your permission, this is why we have our own images on the <code>static</code> folder!.</li>
+</ul></li>
+</ul>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
