@@ -22,25 +22,28 @@ This tutorial won't teach you to code from scratch. I will assume you already kn
 Furthermore, while I will explain some of the quirks of Javascript (actually Typescript, but we will cross that bridge when we get there).  
 Git and some shell (console) experience will be good but not mandatory. If you know any object-oriented programming you will be just fine.  
 
-## This ain't your grandma's Javascript...
+### This ain't your grandma's Javascript...
 If you came here expecting to write javascript between two `<script>` tags in your .html file, oh boy I have bad news for you.  
 Web development might have started with only a text editor and dumping code into a single .js file but on today's spooky fast world of javascript libraries, going commando ain't gonna cut it.  
 This... guide? course? tutorial? will use Typescript and it will be designed to work with [_pixi-hotwire_](https://github.com/miltoncandelero/pixi-hotwire), a boilerplate to get you started fast without the hassle of how to create and maintain a standard web project with a bundler. (If you have a bit more experience in web development, feel free to tinker and try any bundler of your liking.)    
 
-## pixi-hotwire?
+### pixi-hotwire?
 In case you realize you have no idea what a bundler is or why you need one, worry not! I've created a base template project called [_pixi-hotwire_](https://github.com/miltoncandelero/pixi-hotwire). It is the simplest boilerplate I could build. It goes from nothing to watching your code running with the least amount of configurations.  
 It is a _just-add-npm_ solution that sets you up with _typescript_, _pixi.js_ and _parcel_. It also will make a final build folder for you instead of you having to pluck manually files out of your project folder to get the _uploadeable_ result of your hard work.
 
-## Typescript?
+### Typescript?
 I'll be honest with you: I hate Javascript. I hate the meme of truthy and falsy values. I hate the implicit type coercion. I hate the dynamic context binding. I hate a lot of javascript... But I must endure, adapt, overcome.  
 Enter Typescript: Typescript will force your hand to keep your code as strictly typed as possible, and if you need to use type coercion and really _javascripty_ code, you must consciously choose to make the data type as `any`.  
 As a nice bonus you get _intellisense_ on Visual Studio Code (which is Microsoft fancy name for code auto-complete).  
 
-## I will never scream (`PIXI.`)
+### I will never scream (`PIXI.`)
 I feel that doing `import * as PIXI from "pixi.js"` so that I can go `PIXI.Sprite`, `PIXI.Container`, `PIXI.Loader`, etc, is silly and makes me feel clumsy. I will use named imports: `import { Sprite, Container, Loader } from "pixi.js"` and that allows me to just use the class name without adding `PIXI` everywhere.  
 I could say it is better for three-shaking (the step where the bundler doesn't add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  
 
 ## Enough talk, have at you!
+
+> Be patient. When the time is right, the code will show on this column.
+
 Let's start by making sure you have all the tools and materials.  
 
 You will need:
@@ -70,6 +73,8 @@ When the progress finishes you now have access to new stuff that begins with `np
 Run `npm run start` and open your web browser on the website `http://localhost:1234`.  
 `localhost` means "your own computer" and `1234` is the port where this web server is running. Nobody else will see your game running on their `localhost`. You will need to export it and upload it somewhere.  
 Try hitting F12 and finding the Javascript Console. That will be your best friend when needing to know why something is or isn't working. That is where `console.log()` will write and where you will see any errors that you might have made.
+
+## Finally some code!
 
 > Now, for the actual code inside the `index.ts` file
 
