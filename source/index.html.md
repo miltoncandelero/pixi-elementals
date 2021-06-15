@@ -2,10 +2,9 @@
 title: PixiJS Elementals
 
 language_tabs: 
-  - typescript 
 
 toc_footers:
-  - <a href='https://commerce.coinbase.com/checkout/aadf6aa9-fa06-4a7f-b4b2-3ca868b86b9a'>If you have money to spare, consider donating</a>
+  - <a href='https://commerce.coinbase.com/checkout/aadf6aa9-fa06-4a7f-b4b2-3ca868b86b9a'>If you have money to spare...</a>
 
 includes:
   - 00-about
