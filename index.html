@@ -913,20 +913,19 @@ Technically applying a filter on a <code>Sprite</code> should be cheaper than ap
 <p><em>Make it rain</em></p>
 
 <blockquote>
-<p>Make sure you dropped your emitter.json somewhere inside your src folder
-```ts
-import * as particleSettings from &quot;../emitter.json&quot;;</p>
+<p>Make sure you dropped your emitter.json somewhere inside your src folder</p>
 </blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">particleSettings</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../emitter.json</span><span class="dl">"</span><span class="p">;</span>
 
-<p>const particleContainer = new ParticleContainer();
-app.stage.addChild(particleContainer);</p>
 
-<p>const emitter = new particles.Emitter(particleContainer, Texture.from(&quot;particleTexture.png&quot;), particleSettings);
-emitter.autoUpdate = true; // If you keep it false, you have to update your particles yourself.
-emitter.updateSpawnPos(200, 100);
-emitter.emit = true;
-```</p>
+<span class="kd">const</span> <span class="nx">particleContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ParticleContainer</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">particleContainer</span><span class="p">);</span>
 
+<span class="kd">const</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">Emitter</span><span class="p">(</span><span class="nx">particleContainer</span><span class="p">,</span> <span class="nx">Texture</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">particleTexture.png</span><span class="dl">"</span><span class="p">),</span> <span class="nx">particleSettings</span><span class="p">);</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">autoUpdate</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// If you keep it false, you have to update your particles yourself.</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">updateSpawnPos</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div>
 <p>For handling particles, PixiJS uses their own format and you need to install the library: <code>npm install pixi-particles</code> and you can create them using <a href="https://pixijs.io/pixi-particles-editor/">the Particle Designer</a></p>
 
 <p>Once we have our particles looking good on the editor we download a <code>.json</code> file and we will feed the parsed object into the <code>Emitter</code> constructor along with a container for our particles (it can be any <code>Container</code> but if you have a lot of particles you might want a <code>ParticleContainer</code>), and the <code>Texture</code> (or an array of textures) you want your particles to use.</p>
@@ -1085,10 +1084,16 @@ The curly braces in the import are there because a single file can export many c
         <span class="k">super</span><span class="p">();</span>
 
         <span class="c1">// This is an array of strings, we need an array of Texture</span>
-        <span class="kd">const</span> <span class="nx">clampyFrames</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">clampy_sequence_01.png</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">clampy_sequence_02.png</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">clampy_sequence_03.png</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">clampy_sequence_04.png</span><span class="dl">"</span><span class="p">];</span>
+        <span class="kd">const</span> <span class="nx">clampyFrames</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span>
+          <span class="dl">"</span><span class="s2">clampy_sequence_01.png</span><span class="dl">"</span><span class="p">,</span>
+          <span class="dl">"</span><span class="s2">clampy_sequence_02.png</span><span class="dl">"</span><span class="p">,</span>
+          <span class="dl">"</span><span class="s2">clampy_sequence_03.png</span><span class="dl">"</span><span class="p">,</span>
+          <span class="dl">"</span><span class="s2">clampy_sequence_04.png</span><span class="dl">"</span>
+        <span class="p">];</span>
 
         <span class="c1">// `array.map()` creates an array from another array by doing something to each element.</span>
-        <span class="c1">// the whole `(stringy) =&gt; Texture.from(stringy)`  means "A function that takes a string and returns a Texture.from(that String)"</span>
+        <span class="c1">// `(stringy) =&gt; Texture.from(stringy)` means</span>
+        <span class="c1">// "A function that takes a string and returns a Texture.from(that String)"</span>
         <span class="kd">const</span> <span class="nx">animatedClampy</span><span class="p">:</span> <span class="nx">AnimatedSprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimatedSprite</span><span class="p">(</span><span class="nx">clampyFrames</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">stringy</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Texture</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">stringy</span><span class="p">)));</span>
         <span class="c1">// (if this javascript is too much, you can do a simple for loop and create a new array with Texture.from())</span>
 
@@ -1675,7 +1680,8 @@ The <code>name</code> field is going to be our <em>key</em> to retrieve the down
 
 <span class="c1">// In the future, when the download finishes you will find your entire asset like this</span>
 <span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="dl">"</span><span class="s2">the name you gave your asset in the manifest</span><span class="dl">"</span><span class="p">];</span> 
-<span class="c1">// You will probably want `.data` or `.texture` or `.sound` of this object however for Pixi objects there is are better ways of creating them...</span>
+<span class="c1">// You will probably want `.data` or `.texture` or `.sound` of this object </span>
+<span class="c1">// however for Pixi objects there is are better ways of creating them...</span>
 </code></pre></div>
 <blockquote>
 <p>This is enough to start downloading assets... but what about progress? and how can we tell when we are done?</p>
@@ -1717,7 +1723,8 @@ The <code>add(...)</code> method can take many shapes but we are feeding it our 
         <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenWidth</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//Looks complex but this just centers the bar on screen.</span>
+        <span class="c1">//Looks complex but this just centers the bar on screen.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenWidth</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> 
         <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenHeight</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">);</span>
 
@@ -1784,20 +1791,18 @@ This section will show some of the most common asset types and how to load and u
 The PixiJS Loader extends <a href="https://github.com/englercj/resource-loader">Resource Loader by Chad Engler</a> and includes some plugins for downloading and parsing images, and spritesheets however for other types we will need custom plugins (e.g. for WebFonts) or the plugin will come bundled with a library (e.g. PixiSound includes a loader plugin)</p>
 <h3 id='spritesheets'>Spritesheets</h3>
 <blockquote>
-<p>Add this to your <code>assets.ts</code> array...
-<code>ts
-{ name: &quot;you wont use this name&quot;, url: &quot;./yourSpritesheetUrl.json&quot; }
-// Don&#39;t add an entry for the .png file! Just make sure it exists next to your json file and it will work.
-</code></p>
-
-<p>Then your textures from inside your spritesheet will exist in the cache! Ready to Sprite.from()
-<code>ts
-Sprite.from(&quot;Name from inside your spritesheet&quot;);
-// or
-Texture.from(&quot;Name from inside your spritesheet&quot;);
-</code></p>
+<p>Add this to your <code>assets.ts</code> array...</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight typescript"><code><span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">you wont use this name</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./yourSpritesheetUrl.json</span><span class="dl">"</span> <span class="p">}</span>
+<span class="c1">// Don't add an entry for the .png file! Just make sure it exists next to your json file and it will work.</span>
+</code></pre></div>
+<blockquote>
+<p>Then your textures from inside your spritesheet will exist in the cache! Ready to Sprite.from()</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Name from inside your spritesheet</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="nx">Texture</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Name from inside your spritesheet</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>
 <p>A spritesheet (also known as texture atlas) is a single image file with many assets inside next to a text file (in our case a <code>json</code> file) that explains how to slice that texture to extract all the assets. It is really good for performance and you should try to always use them.<br>
 To create a spritesheet you can use paid programs like <a href="https://www.codeandweb.com/texturepacker">TexturePacker</a> or free ones like <a href="https://renderhjs.net/shoebox/">ShoeBox</a> or <a href="http://free-tex-packer.com/">FreeTexPacker</a>.<br>
 If you have problems finding a <em>PixiJS</em> compatible format in the packer of your choice, it might also be called <em>JSON Hash format</em></p>
@@ -1805,27 +1810,25 @@ If you have problems finding a <em>PixiJS</em> compatible format in the packer o
 <p>PixiJS includes a spritesheet parser so all you need to do is provide the <em>url</em> for the <em>json</em> file. <strong>You shouldn&#39;t add the URL for .png file but it must be next to the json file!</strong></p>
 <h3 id='fonts'>Fonts</h3>
 <blockquote>
-<p>Install PixiJS Webfont Loader by running <code>npm i pixi-webfont-loader</code> and then proceed to run this code <strong>before using your loader</strong>
-<code>ts
-// Add before using Loader!!!
-Loader.registerPlugin(WebfontLoaderPlugin);
-// Now you can start using loader like Loader.shared.add(assets);
-</code></p>
-
-<p>Add your .css fonts to your <code>assets.ts</code> array
-<code>ts
-{ name: &quot;you wont use this name&quot;, url: &quot;./fonts/stylesheet.css&quot; }
-</code></p>
-
-<p>Your fonts will be registered into the system and you can just ask for the Font Name. You can check the font name by opening your <code>.css</code> with a text editor and checking the <code>font-family</code> inside. Also, remember you can make your text style with the <a href="https://pixijs.io/pixi-text-style">PixiJS Textstyle editor</a>.
-<code>ts
-const customStyleFont: TextStyle = new TextStyle({
-    fontFamily: &quot;Open Sans Condensed&quot;,
-});
-new Text(&#39;Ready to use!&#39;, customStyleFont); // Text supports unicode!
-</code></p>
+<p>Install PixiJS Webfont Loader by running <code>npm i pixi-webfont-loader</code> and then proceed to run this code <strong>before using your loader</strong></p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight typescript"><code><span class="c1">// Add before using Loader!!!</span>
+<span class="nx">Loader</span><span class="p">.</span><span class="nx">registerPlugin</span><span class="p">(</span><span class="nx">WebfontLoaderPlugin</span><span class="p">);</span>
+<span class="c1">// Now you can start using loader like Loader.shared.add(assets);</span>
+</code></pre></div>
+<blockquote>
+<p>Add your .css fonts to your <code>assets.ts</code> array</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">you wont use this name</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./fonts/stylesheet.css</span><span class="dl">"</span> <span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Your fonts will be registered into the system and you can just ask for the Font Name. You can check the font name by opening your <code>.css</code> with a text editor and checking the <code>font-family</code> inside. Also, remember you can make your text style with the <a href="https://pixijs.io/pixi-text-style">PixiJS Textstyle editor</a>.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="kd">const</span> <span class="nx">customStyleFont</span><span class="p">:</span> <span class="nx">TextStyle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextStyle</span><span class="p">({</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open Sans Condensed</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="k">new</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ready to use!</span><span class="dl">'</span><span class="p">,</span> <span class="nx">customStyleFont</span><span class="p">);</span> <span class="c1">// Text supports unicode!</span>
+</code></pre></div>
 <p>When I showed you text examples I used system fonts on purpose, but what if you want to use your custom font? or a google font?<br>
 In the web world, there are many font formats: <code>ttf</code>, <code>svg</code>, <code>woff</code>, <code>woff2</code>, and more but how do we make sure we have the right font format for each browser? Simple, WE HAVE THEM ALL!<br>
 An easy way is to get the font file you want to use and convert it using a service like <a href="https://transfonter.org/">Transfonter</a>. That will give you a <code>.css</code> file and all the formats required.<br>
@@ -1839,21 +1842,19 @@ No matter where you get your font from, you need to get a <code>.css</code> file
 You can install the plugin by running <code>npm i pixi-webfont-loader</code> in a console in your project and then inside your code you must register the plugin.</p>
 <h3 id='maps-from-level-editors-or-custom-txt-json-xml-etc'>Maps from level editors or custom txt, json, xml, etc.</h3>
 <blockquote>
-<p>Just add your custom file to your <code>assets.ts</code>
-<code>ts
-{ name: &quot;my text&quot;, url: &quot;./myTextFile.txt&quot; },
-{ name: &quot;my json&quot;, url: &quot;./myJsonFile.json&quot; },
-{ name: &quot;my xml&quot;, url: &quot;./myXMLFile.xml&quot; },
-</code></p>
-
-<p>A good way to see what you got is to <code>console.log()</code> the <code>data</code>
-<code>ts
-console.log(Loader.shared.resources[&quot;my text&quot;].data); 
-console.log(Loader.shared.resources[&quot;my json&quot;].data); 
-console.log(Loader.shared.resources[&quot;my xml&quot;].data); 
-</code></p>
+<p>Just add your custom file to your <code>assets.ts</code></p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight typescript"><code><span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my text</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myTextFile.txt</span><span class="dl">"</span> <span class="p">},</span>
+<span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my json</span><span class="dl">"</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myJsonFile.json</span><span class="dl">"</span> <span class="p">},</span>
+<span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my xml</span><span class="dl">"</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myXMLFile.xml</span><span class="dl">"</span> <span class="p">},</span>
+</code></pre></div>
+<blockquote>
+<p>A good way to see what you got is to <code>console.log()</code> the <code>data</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="dl">"</span><span class="s2">my text</span><span class="dl">"</span><span class="p">].</span><span class="nx">data</span><span class="p">);</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="dl">"</span><span class="s2">my json</span><span class="dl">"</span><span class="p">].</span><span class="nx">data</span><span class="p">);</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="dl">"</span><span class="s2">my xml</span><span class="dl">"</span><span class="p">].</span><span class="nx">data</span><span class="p">);</span> 
+</code></pre></div>
 <p>The <em>Loader</em> class will recognize simple text formats like <code>txt</code>, <code>json</code> or <code>xml</code> and will give out a somewhat usable object inside the <code>data</code> object of the resource.</p>
 
 <aside class="info">
@@ -2182,7 +2183,8 @@ You might see that I read but never change the <code>Manager.width</code> and <c
     <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
     <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
 
-    <span class="c1">// We no longer need to store width and height since now it is literally the size of the screen. We just modify our getters</span>
+    <span class="c1">// We no longer need to store width and height since now it is literally the size of the screen.</span>
+    <span class="c1">// We just modify our getters</span>
     <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
     <span class="p">}</span>
