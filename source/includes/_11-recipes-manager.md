@@ -1,6 +1,6 @@
 # Recipe: Scene Manager
 
-In the [Splitting Code](todo) chapter I explained how to create a `Scene` object to try to encapsulate different parts of our object and be able to swap them when needed but I didn't explain how to actually change from one scene to the next.  
+In the [Splitting Code](#splitting-code) chapter I explained how to create a `Scene` object to try to encapsulate different parts of our object and be able to swap them when needed but I didn't explain how to actually change from one scene to the next.  
 For this purpose, we are going to create a _Manager_ static global class that wraps the PixiJS `Application` object and exposes a simple way to change from one scene to the next.
 
 <aside class="info">If you are a hardcore programmer from another language you might be familiar with the Singleton pattern and might prefer to use that instead of a static class. Feel free to do so if you feel that is better.</aside>

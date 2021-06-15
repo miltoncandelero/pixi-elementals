@@ -5,7 +5,7 @@ _(and being in control of said stuff)_
 _In my not-so-humble opinion, the best way to handle 2d graphics._  
 
 It all starts with an abstract class: The `DisplayObject`. Anything that can be shown on the screen **must** inherit from this abstract class at some point in his genealogy. When I want to refer to "anything that can be placed on the screen" I will use the generic term `DisplayObject`.  
-In PixiJS your bread and butter are going to be `Container` and `Sprite`. _Sprites_ can show graphics (if you come from the [getting started](todo) you've already seen it in action) and _Containers_ are used to group sprites to move, rotate and scale them as a whole. You can add a _Container_ to another _Container_ and keep going as deep as you need your rabbit hole to go.  
+In PixiJS your bread and butter are going to be `Container` and `Sprite`. _Sprites_ can show graphics (if you come from the [getting started](#getting-started) you've already seen it in action) and _Containers_ are used to group sprites to move, rotate and scale them as a whole. You can add a _Container_ to another _Container_ and keep going as deep as you need your rabbit hole to go.  
 Imagine a cork bulletin board, some photos, and a box of thumbtacks. You could pin every photo directly to the board... or you could pin some photos to another and then move them all together by moving the photo you pinned every other photo to.  
 In this relationship, the _Container_ is called the **parent** and the _DisplayObjects_ that are attached to this parent are called **children**.
 Things are rendered _back-to-front_, which means that children will always be covering their parents. Between siblings (children with the same parent), the render order will start from the first added child and move to the last one, making the last child added show on top of all his siblings (unless you use the `zOrder` property of any display object. However, this property only works between siblings. A child will never be able to be behind his parent).  
@@ -92,8 +92,8 @@ Methods and properties that you will use most frequently:
 * `rotation` and `angle`: Rotation is in _radians_ while angle is in _degrees_. Changing one updates the other. 
 * `width` and `height`: The size of a container it's defined by the size of a box that contains all his children. This means it changes if the children move. 
   * **Changing these values modifies the scale of the object.**
-* `interactive`, `on(...)` and `off(...)`: With this, you can manage your event listeners. It will be really useful when we get to see [interacting with your display objects](todo)
-* `getBounds(...)`: Will give you a rectangle of this object. It will be very useful for [detecting basic collisions](todo).
+* `interactive`, `on(...)` and `off(...)`: With this, you can manage your event listeners. It will be really useful when we get to see [interacting with your display objects](#getting-interactive)
+* `getBounds(...)`: Will give you a rectangle of this object. It will be very useful for [detecting basic collisions](#collision-detection).
 * `destroy()` This will remove the object from his parent and render it unusable forever. After that, get rid of any reference and the garbage collector should eat it.
 
 ### Particle Container
@@ -142,7 +142,7 @@ Methods and properties that you will use most frequently:
 
 * `Sprite.from(...)`: This is a static method to create new sprites. It does some black magic inside it so that it can take a lot of different kinds of parameters. (You technically can use the `new Sprite(...)` way of creating sprites but this is way easier).  
 This method can take any of the following parameters:
-  * Name of a texture you loaded before (we will see [how to load assets in another chapter](todo)).
+  * Name of a texture you loaded before (we will see [how to load assets in another chapter](#recipe-preloading-assets)).
   * URL of an image or video. This can be an absolute one (`http://somedomain.com/image.png`) or relative (`assets/image.png`).
   * A PixiJS Base texture
   * A canvas or video HTML element
@@ -209,7 +209,7 @@ Tips:
 
 * Go to [PixiJS Textstyle Editor](https://pixijs.io/pixi-text-style) to make your text look exactly like you want it to.
 * `text`: Contains the text to show. **Changing this is expensive**. If you need your text to change every frame (for example, a score) consider using `BitmapText`
-* To use custom fonts you need to add them as webfonts to your webpage. If you know your _html-fu_ you can do this or you can check the [fonts section on how to load assets](todo)
+* To use custom fonts you need to add them as webfonts to your webpage. If you know your _html-fu_ you can do this or you can check the [fonts section on how to load assets](#recipe-preloading-assets)
 
 ## BitmapText
 
@@ -257,6 +257,7 @@ I won't cover **all** the filters (at the time of writing there are 37 of them!!
 [You can see a demo of the filters](http://filters.pixijs.download/dev/demo/index.html) or [go directly to Github to see what package to install](https://github.com/pixijs/filters).  
 
 > Creating and using filters is so easy that I wasn't sure if I needed to make this part or not
+
 ```ts
 // import the filters
 // If you are using pixijs < 6 you might need to import `filters`

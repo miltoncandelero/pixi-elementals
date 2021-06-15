@@ -89,7 +89,7 @@ As a parameter for the `Application` object, we give it some options. You can se
 Then, I create a `Sprite` with the `Sprite.from(...)` method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
 
 * A `Texture` object.
-* The name of a `Texture` object you loaded previously. (using a `Loader`, we will see this when we get to [loading assets](todo))
+* The name of a `Texture` object you loaded previously. (using a `Loader`, we will see this when we get to [loading assets](#recipe-preloading-assets))
 * The URL of an image file
 
 Can you guess what we used here?  

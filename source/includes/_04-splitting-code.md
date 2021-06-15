@@ -34,7 +34,7 @@ export class Scene extends Container {
 }
 ```
 
-In a future chapter I will [provide an example of my scene management system](todo) but for now, let's start by making a class that inherits from Container and that will be the lifecycle of our examples and demos. This will allow us to have methods that come from an object instead of being global functions.  
+In a future chapter I will [provide an example of my scene management system](#recipe-scene-manager) but for now, let's start by making a class that inherits from Container and that will be the lifecycle of our examples and demos. This will allow us to have methods that come from an object instead of being global functions.  
 Start by creating a new `.ts` file and create a class that extends `Container`. In my case, I created `Scene.ts` and created the `Scene` class. (I like to name my files with the same name as my class and to keep my classes starting with an uppercase).  
 See the `export` keyword? In this wacky modular world, other files can only see what you export.  
 And in the constructor of this new class, let's dump the code of our getting started.

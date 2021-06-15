@@ -47,7 +47,7 @@ Frame-by-frame animations go with 2d games like toe and dirt. Animated sprite ha
 Tips and stuff:
 
 * You make this by passing an array of `Texture` objects.
-  * A good way to do this is by loading a spritesheet directly. We will touch that on the [loader recipe](todo).
+  * A good way to do this is by loading a spritesheet directly. We will touch that on the [loader recipe](#recipe-preloading-assets).
 * The constructor has a parameter `autoUpdate` that comes by default on true.
   * If you set it to false, you need to use `.update(...)` manually.
 * A bunch of things that do exactly what they say...

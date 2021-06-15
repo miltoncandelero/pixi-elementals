@@ -114,9 +114,9 @@ export class LoaderScene extends Container {
 ```
 > Keep in mind that if you have few assets (or a really fast internet connection), you might not see the progress bar at all!
 
-I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check [that chapter again](todo).
+I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check [that chapter again](#putting-stuff-on-screen).
 
-Those events don't look exactly like the other events we saw in the [Interaction section](todo) and that is because _Loader_ uses their own kind of events called _signals_ or _minisignals_ however they work quite similarly to regular events, the big difference is that each _signal_ is only good for one kind of event and that is why we don't have a string explaining what kind of event we need and instead we have two objects `onProgress` and `onComplete`.
+Those events don't look exactly like the other events we saw in the [Interaction section](#getting-interactive) and that is because _Loader_ uses their own kind of events called _signals_ or _minisignals_ however they work quite similarly to regular events, the big difference is that each _signal_ is only good for one kind of event and that is why we don't have a string explaining what kind of event we need and instead we have two objects `onProgress` and `onComplete`.
 
 <aside class="info">You might have noted that I used only <code>Graphics</code> to make my loader progress bar. This is because if I were to use assets I would need a loader for the loader assets and that would mess with the space-time continuum. However, should you want your loader to have assets you can reference them directly by URL (<code>Sprite.from(urlHere)</code>) or make your loader... loader and indeed destroy space-time itself.</aside>
 
@@ -137,7 +137,7 @@ PixiJS Sound names can be confusing, while <code>Sound</code> with uppercase is 
 Remember you can always access your assets with <code>Loader.shared.resources["the name you gave your asset in the manifest"];</code> and then use <code>.texture</code> for making sprites or <code>.sound</code> for playing sounds directly.
 </aside>
 
-# Advanced loading
+## Advanced loading
 
 Ok, we have seen how to load our basic _png_ and _mp3_ but what about other kinds of assets? What about _spritesheets_, _fonts_, _levels_, and more?  
 This section will show some of the most common asset types and how to load and use them.
@@ -145,7 +145,7 @@ This section will show some of the most common asset types and how to load and u
 But before we start, a bit of how things will work behind the curtains: _Loader plugins_.  
 The PixiJS Loader extends [Resource Loader by Chad Engler](https://github.com/englercj/resource-loader) and includes some plugins for downloading and parsing images, and spritesheets however for other types we will need custom plugins (e.g. for WebFonts) or the plugin will come bundled with a library (e.g. PixiSound includes a loader plugin)
 
-## Spritesheets
+### Spritesheets
 
 > Add this to your `assets.ts` array...
 ```ts
@@ -166,7 +166,7 @@ If you have problems finding a _PixiJS_ compatible format in the packer of your 
 
 PixiJS includes a spritesheet parser so all you need to do is provide the _url_ for the _json_ file. **You shouldn't add the URL for .png file but it must be next to the json file!**
 
-## Fonts
+### Fonts
 > Install PixiJS Webfont Loader by running `npm i pixi-webfont-loader` and then proceed to run this code **before using your loader**
 ```ts
 // Add before using Loader!!!
@@ -199,7 +199,7 @@ No matter where you get your font from, you need to get a <code>.css</code> file
 To load our font `css` file we are going to need a _Loader plugin_: [PixiJS Webfont Loader](https://github.com/miltoncandelero/pixi-webfont-loader).  
 You can install the plugin by running `npm i pixi-webfont-loader` in a console in your project and then inside your code you must register the plugin.
 
-## Maps from level editors or custom txt, json, xml, etc.
+### Maps from level editors or custom txt, json, xml, etc.
 
 > Just add your custom file to your `assets.ts`
 ```ts
