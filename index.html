@@ -433,19 +433,8 @@
                   <li>
                     <a href="#how-to-easily-use-your-loaded-sprites-and-sounds" class="toc-h2 toc-link" data-title="How to easily use your loaded Sprites and Sounds?">How to easily use your loaded Sprites and Sounds?</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#advanced-loading" class="toc-h1 toc-link" data-title="Advanced loading">Advanced loading</a>
-              <ul class="toc-list-h2">
                   <li>
-                    <a href="#spritesheets" class="toc-h2 toc-link" data-title="Spritesheets">Spritesheets</a>
-                  </li>
-                  <li>
-                    <a href="#fonts" class="toc-h2 toc-link" data-title="Fonts">Fonts</a>
-                  </li>
-                  <li>
-                    <a href="#maps-from-level-editors-or-custom-txt-json-xml-etc" class="toc-h2 toc-link" data-title="Maps from level editors or custom txt, json, xml, etc.">Maps from level editors or custom txt, json, xml, etc.</a>
+                    <a href="#advanced-loading" class="toc-h2 toc-link" data-title="Advanced loading">Advanced loading</a>
                   </li>
               </ul>
           </li>
@@ -589,7 +578,7 @@ As a parameter for the <code>Application</code> object, we give it some options.
 
 <ul>
 <li>A <code>Texture</code> object.</li>
-<li>The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="todo">loading assets</a>)</li>
+<li>The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="#recipe-preloading-assets">loading assets</a>)</li>
 <li>The URL of an image file</li>
 </ul>
 
@@ -626,7 +615,7 @@ Try these on for size!</p>
 <p><em>In my not-so-humble opinion, the best way to handle 2d graphics.</em>  </p>
 
 <p>It all starts with an abstract class: The <code>DisplayObject</code>. Anything that can be shown on the screen <strong>must</strong> inherit from this abstract class at some point in his genealogy. When I want to refer to &quot;anything that can be placed on the screen&quot; I will use the generic term <code>DisplayObject</code>.<br>
-In PixiJS your bread and butter are going to be <code>Container</code> and <code>Sprite</code>. <em>Sprites</em> can show graphics (if you come from the <a href="todo">getting started</a> you&#39;ve already seen it in action) and <em>Containers</em> are used to group sprites to move, rotate and scale them as a whole. You can add a <em>Container</em> to another <em>Container</em> and keep going as deep as you need your rabbit hole to go.<br>
+In PixiJS your bread and butter are going to be <code>Container</code> and <code>Sprite</code>. <em>Sprites</em> can show graphics (if you come from the <a href="#getting-started">getting started</a> you&#39;ve already seen it in action) and <em>Containers</em> are used to group sprites to move, rotate and scale them as a whole. You can add a <em>Container</em> to another <em>Container</em> and keep going as deep as you need your rabbit hole to go.<br>
 Imagine a cork bulletin board, some photos, and a box of thumbtacks. You could pin every photo directly to the board... or you could pin some photos to another and then move them all together by moving the photo you pinned every other photo to.<br>
 In this relationship, the <em>Container</em> is called the <strong>parent</strong> and the <em>DisplayObjects</em> that are attached to this parent are called <strong>children</strong>.
 Things are rendered <em>back-to-front</em>, which means that children will always be covering their parents. Between siblings (children with the same parent), the render order will start from the first added child and move to the last one, making the last child added show on top of all his siblings (unless you use the <code>zOrder</code> property of any display object. However, this property only works between siblings. A child will never be able to be behind his parent).<br>
@@ -727,8 +716,8 @@ Methods and properties that you will use most frequently:  </p>
 <ul>
 <li><strong>Changing these values modifies the scale of the object.</strong></li>
 </ul></li>
-<li><code>interactive</code>, <code>on(...)</code> and <code>off(...)</code>: With this, you can manage your event listeners. It will be really useful when we get to see <a href="todo">interacting with your display objects</a></li>
-<li><code>getBounds(...)</code>: Will give you a rectangle of this object. It will be very useful for <a href="todo">detecting basic collisions</a>.</li>
+<li><code>interactive</code>, <code>on(...)</code> and <code>off(...)</code>: With this, you can manage your event listeners. It will be really useful when we get to see <a href="#getting-interactive">interacting with your display objects</a></li>
+<li><code>getBounds(...)</code>: Will give you a rectangle of this object. It will be very useful for <a href="#collision-detection">detecting basic collisions</a>.</li>
 <li><code>destroy()</code> This will remove the object from his parent and render it unusable forever. After that, get rid of any reference and the garbage collector should eat it.</li>
 </ul>
 <h3 id='particle-container'>Particle Container</h3>
@@ -779,7 +768,7 @@ Methods and properties that you will use most frequently:  </p>
 This method can take any of the following parameters:
 
 <ul>
-<li>Name of a texture you loaded before (we will see <a href="todo">how to load assets in another chapter</a>).</li>
+<li>Name of a texture you loaded before (we will see <a href="#recipe-preloading-assets">how to load assets in another chapter</a>).</li>
 <li>URL of an image or video. This can be an absolute one (<code>http://somedomain.com/image.png</code>) or relative (<code>assets/image.png</code>).</li>
 <li>A PixiJS Base texture</li>
 <li>A canvas or video HTML element</li>
@@ -849,7 +838,7 @@ Tips:  </p>
 <ul>
 <li>Go to <a href="https://pixijs.io/pixi-text-style">PixiJS Textstyle Editor</a> to make your text look exactly like you want it to.</li>
 <li><code>text</code>: Contains the text to show. <strong>Changing this is expensive</strong>. If you need your text to change every frame (for example, a score) consider using <code>BitmapText</code></li>
-<li>To use custom fonts you need to add them as webfonts to your webpage. If you know your <em>html-fu</em> you can do this or you can check the <a href="todo">fonts section on how to load assets</a></li>
+<li>To use custom fonts you need to add them as webfonts to your webpage. If you know your <em>html-fu</em> you can do this or you can check the <a href="#recipe-preloading-assets">fonts section on how to load assets</a></li>
 </ul>
 <h2 id='bitmaptext'>BitmapText</h2>
 <blockquote>
@@ -901,20 +890,18 @@ I won&#39;t cover <strong>all</strong> the filters (at the time of writing there
 <a href="http://filters.pixijs.download/dev/demo/index.html">You can see a demo of the filters</a> or <a href="https://github.com/pixijs/filters">go directly to Github to see what package to install</a>.  </p>
 
 <blockquote>
-<p>Creating and using filters is so easy that I wasn&#39;t sure if I needed to make this part or not
-``<code>ts
-// import the filters
-// If you are using pixijs &lt; 6 you might need to import</code>filters`
-import { BlurFilter } from &quot;pixi.js&quot;; </p>
+<p>Creating and using filters is so easy that I wasn&#39;t sure if I needed to make this part or not</p>
 </blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="c1">// import the filters</span>
+<span class="c1">// If you are using pixijs &lt; 6 you might need to import `filters`</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BlurFilter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span> 
 
-<p>// Make your filter
-const myBlurFilter = new BlurFilter();</p>
+<span class="c1">// Make your filter</span>
+<span class="kd">const</span> <span class="nx">myBlurFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlurFilter</span><span class="p">();</span>
 
-<p>// Add it to the <code>.filters</code> array of any DisplayObject
-clampy.filters = [myBlurFilter];
-```</p>
-
+<span class="c1">// Add it to the `.filters` array of any DisplayObject</span>
+<span class="nx">clampy</span><span class="p">.</span><span class="nx">filters</span> <span class="o">=</span> <span class="p">[</span><span class="nx">myBlurFilter</span><span class="p">];</span>
+</code></pre></div>
 <p>This is a section that I almost didn&#39;t make because using filters is super simple but I made it anyway so you guys know there is a huge list of filters ready to use.</p>
 
 <p>In essence, create a filter, add it to the filters array of your display object, and you are done!</p>
@@ -1039,7 +1026,7 @@ PixiJS events also have another way to bind the context. It will be most likely 
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>In a future chapter I will <a href="todo">provide an example of my scene management system</a> but for now, let&#39;s start by making a class that inherits from Container and that will be the lifecycle of our examples and demos. This will allow us to have methods that come from an object instead of being global functions.<br>
+<p>In a future chapter I will <a href="#recipe-scene-manager">provide an example of my scene management system</a> but for now, let&#39;s start by making a class that inherits from Container and that will be the lifecycle of our examples and demos. This will allow us to have methods that come from an object instead of being global functions.<br>
 Start by creating a new <code>.ts</code> file and create a class that extends <code>Container</code>. In my case, I created <code>Scene.ts</code> and created the <code>Scene</code> class. (I like to name my files with the same name as my class and to keep my classes starting with an uppercase).<br>
 See the <code>export</code> keyword? In this wacky modular world, other files can only see what you export.<br>
 And in the constructor of this new class, let&#39;s dump the code of our getting started.</p>
@@ -1128,7 +1115,7 @@ Tips and stuff:</p>
 <li>You make this by passing an array of <code>Texture</code> objects.
 
 <ul>
-<li>A good way to do this is by loading a spritesheet directly. We will touch that on the <a href="todo">loader recipe</a>.</li>
+<li>A good way to do this is by loading a spritesheet directly. We will touch that on the <a href="#recipe-preloading-assets">loader recipe</a>.</li>
 </ul></li>
 <li>The constructor has a parameter <code>autoUpdate</code> that comes by default on true.
 
@@ -1769,9 +1756,9 @@ The <code>add(...)</code> method can take many shapes but we are feeding it our 
 <p>Keep in mind that if you have few assets (or a really fast internet connection), you might not see the progress bar at all!</p>
 </blockquote>
 
-<p>I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check <a href="todo">that chapter again</a>.</p>
+<p>I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check <a href="#putting-stuff-on-screen">that chapter again</a>.</p>
 
-<p>Those events don&#39;t look exactly like the other events we saw in the <a href="todo">Interaction section</a> and that is because <em>Loader</em> uses their own kind of events called <em>signals</em> or <em>minisignals</em> however they work quite similarly to regular events, the big difference is that each <em>signal</em> is only good for one kind of event and that is why we don&#39;t have a string explaining what kind of event we need and instead we have two objects <code>onProgress</code> and <code>onComplete</code>.</p>
+<p>Those events don&#39;t look exactly like the other events we saw in the <a href="#getting-interactive">Interaction section</a> and that is because <em>Loader</em> uses their own kind of events called <em>signals</em> or <em>minisignals</em> however they work quite similarly to regular events, the big difference is that each <em>signal</em> is only good for one kind of event and that is why we don&#39;t have a string explaining what kind of event we need and instead we have two objects <code>onProgress</code> and <code>onComplete</code>.</p>
 
 <aside class="info">You might have noted that I used only <code>Graphics</code> to make my loader progress bar. This is because if I were to use assets I would need a loader for the loader assets and that would mess with the space-time continuum. However, should you want your loader to have assets you can reference them directly by URL (<code>Sprite.from(urlHere)</code>) or make your loader... loader and indeed destroy space-time itself.</aside>
 <h2 id='how-to-easily-use-your-loaded-sprites-and-sounds'>How to easily use your loaded Sprites and Sounds?</h2>
@@ -1789,13 +1776,13 @@ PixiJS Sound names can be confusing, while <code>Sound</code> with uppercase is 
 <aside class="info">
 Remember you can always access your assets with <code>Loader.shared.resources["the name you gave your asset in the manifest"];</code> and then use <code>.texture</code> for making sprites or <code>.sound</code> for playing sounds directly.
 </aside>
-<h1 id='advanced-loading'>Advanced loading</h1>
+<h2 id='advanced-loading'>Advanced loading</h2>
 <p>Ok, we have seen how to load our basic <em>png</em> and <em>mp3</em> but what about other kinds of assets? What about <em>spritesheets</em>, <em>fonts</em>, <em>levels</em>, and more?<br>
 This section will show some of the most common asset types and how to load and use them.</p>
 
 <p>But before we start, a bit of how things will work behind the curtains: <em>Loader plugins</em>.<br>
 The PixiJS Loader extends <a href="https://github.com/englercj/resource-loader">Resource Loader by Chad Engler</a> and includes some plugins for downloading and parsing images, and spritesheets however for other types we will need custom plugins (e.g. for WebFonts) or the plugin will come bundled with a library (e.g. PixiSound includes a loader plugin)</p>
-<h2 id='spritesheets'>Spritesheets</h2>
+<h3 id='spritesheets'>Spritesheets</h3>
 <blockquote>
 <p>Add this to your <code>assets.ts</code> array...
 <code>ts
@@ -1816,7 +1803,7 @@ To create a spritesheet you can use paid programs like <a href="https://www.code
 If you have problems finding a <em>PixiJS</em> compatible format in the packer of your choice, it might also be called <em>JSON Hash format</em></p>
 
 <p>PixiJS includes a spritesheet parser so all you need to do is provide the <em>url</em> for the <em>json</em> file. <strong>You shouldn&#39;t add the URL for .png file but it must be next to the json file!</strong></p>
-<h2 id='fonts'>Fonts</h2>
+<h3 id='fonts'>Fonts</h3>
 <blockquote>
 <p>Install PixiJS Webfont Loader by running <code>npm i pixi-webfont-loader</code> and then proceed to run this code <strong>before using your loader</strong>
 <code>ts
@@ -1850,7 +1837,7 @@ No matter where you get your font from, you need to get a <code>.css</code> file
 
 <p>To load our font <code>css</code> file we are going to need a <em>Loader plugin</em>: <a href="https://github.com/miltoncandelero/pixi-webfont-loader">PixiJS Webfont Loader</a>.<br>
 You can install the plugin by running <code>npm i pixi-webfont-loader</code> in a console in your project and then inside your code you must register the plugin.</p>
-<h2 id='maps-from-level-editors-or-custom-txt-json-xml-etc'>Maps from level editors or custom txt, json, xml, etc.</h2>
+<h3 id='maps-from-level-editors-or-custom-txt-json-xml-etc'>Maps from level editors or custom txt, json, xml, etc.</h3>
 <blockquote>
 <p>Just add your custom file to your <code>assets.ts</code>
 <code>ts
@@ -1875,7 +1862,7 @@ If a json file happens to be a spritesheet, the Loader will recognize it automat
 
 <p>If you would like to parse a particular kind of file you will need to write your own <em>Loader plugin</em>. I might write a tutorial for that in the future but for now, you can read <a href="https://medium.com/@bigtimebuddy/new-pixijs-v5-plugins-75a7d86afb6">this one by Matt Karl</a>.</p>
 <h1 id='recipe-scene-manager'>Recipe: Scene Manager</h1>
-<p>In the <a href="todo">Splitting Code</a> chapter I explained how to create a <code>Scene</code> object to try to encapsulate different parts of our object and be able to swap them when needed but I didn&#39;t explain how to actually change from one scene to the next.<br>
+<p>In the <a href="#splitting-code">Splitting Code</a> chapter I explained how to create a <code>Scene</code> object to try to encapsulate different parts of our object and be able to swap them when needed but I didn&#39;t explain how to actually change from one scene to the next.<br>
 For this purpose, we are going to create a <em>Manager</em> static global class that wraps the PixiJS <code>Application</code> object and exposes a simple way to change from one scene to the next.</p>
 
 <aside class="info">If you are a hardcore programmer from another language you might be familiar with the Singleton pattern and might prefer to use that instead of a static class. Feel free to do so if you feel that is better.</aside>
