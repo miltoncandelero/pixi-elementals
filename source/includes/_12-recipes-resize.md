@@ -109,7 +109,8 @@ export class Manager {
     private static app: Application;
     private static currentScene: IScene;
 
-    // We no longer need to store width and height since now it is literally the size of the screen. We just modify our getters
+    // We no longer need to store width and height since now it is literally the size of the screen.
+    // We just modify our getters
     public static get width(): number {
         return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     }

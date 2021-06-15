@@ -34,7 +34,8 @@ Loader.shared.load();
 
 // In the future, when the download finishes you will find your entire asset like this
 Loader.shared.resources["the name you gave your asset in the manifest"]; 
-// You will probably want `.data` or `.texture` or `.sound` of this object however for Pixi objects there is are better ways of creating them...
+// You will probably want `.data` or `.texture` or `.sound` of this object 
+// however for Pixi objects there is are better ways of creating them...
 ```
 
 > This is enough to start downloading assets... but what about progress? and how can we tell when we are done?
@@ -77,7 +78,8 @@ export class LoaderScene extends Container {
         this.loaderBar = new Container();
         this.loaderBar.addChild(this.loaderBarFill);
         this.loaderBar.addChild(this.loaderBarBoder);
-        this.loaderBar.position.x = (screenWidth - this.loaderBar.width) / 2; //Looks complex but this just centers the bar on screen.
+        //Looks complex but this just centers the bar on screen.
+        this.loaderBar.position.x = (screenWidth - this.loaderBar.width) / 2; 
         this.loaderBar.position.y = (screenHeight - this.loaderBar.height) / 2;
         this.addChild(this.loaderBar);
 
@@ -148,12 +150,14 @@ The PixiJS Loader extends [Resource Loader by Chad Engler](https://github.com/en
 ### Spritesheets
 
 > Add this to your `assets.ts` array...
+
 ```ts
 { name: "you wont use this name", url: "./yourSpritesheetUrl.json" }
 // Don't add an entry for the .png file! Just make sure it exists next to your json file and it will work.
 ```
 
 > Then your textures from inside your spritesheet will exist in the cache! Ready to Sprite.from()
+
 ```ts
 Sprite.from("Name from inside your spritesheet");
 // or
@@ -168,6 +172,7 @@ PixiJS includes a spritesheet parser so all you need to do is provide the _url_ 
 
 ### Fonts
 > Install PixiJS Webfont Loader by running `npm i pixi-webfont-loader` and then proceed to run this code **before using your loader**
+
 ```ts
 // Add before using Loader!!!
 Loader.registerPlugin(WebfontLoaderPlugin);
@@ -175,11 +180,13 @@ Loader.registerPlugin(WebfontLoaderPlugin);
 ```
 
 > Add your .css fonts to your `assets.ts` array
+
 ```ts
 { name: "you wont use this name", url: "./fonts/stylesheet.css" }
 ```
 
 > Your fonts will be registered into the system and you can just ask for the Font Name. You can check the font name by opening your `.css` with a text editor and checking the `font-family` inside. Also, remember you can make your text style with the [PixiJS Textstyle editor](https://pixijs.io/pixi-text-style).
+
 ```ts
 const customStyleFont: TextStyle = new TextStyle({
     fontFamily: "Open Sans Condensed",
@@ -202,6 +209,7 @@ You can install the plugin by running `npm i pixi-webfont-loader` in a console i
 ### Maps from level editors or custom txt, json, xml, etc.
 
 > Just add your custom file to your `assets.ts`
+
 ```ts
 { name: "my text", url: "./myTextFile.txt" },
 { name: "my json", url: "./myJsonFile.json" },
@@ -209,6 +217,7 @@ You can install the plugin by running `npm i pixi-webfont-loader` in a console i
 ```
 
 > A good way to see what you got is to `console.log()` the `data`
+
 ```ts
 console.log(Loader.shared.resources["my text"].data); 
 console.log(Loader.shared.resources["my json"].data); 

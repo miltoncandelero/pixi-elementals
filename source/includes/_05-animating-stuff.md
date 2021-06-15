@@ -21,10 +21,16 @@ export class Scene extends Container {
         super();
 
         // This is an array of strings, we need an array of Texture
-        const clampyFrames: Array<String> = ["clampy_sequence_01.png", "clampy_sequence_02.png", "clampy_sequence_03.png", "clampy_sequence_04.png"];
+        const clampyFrames: Array<String> = [
+          "clampy_sequence_01.png",
+          "clampy_sequence_02.png",
+          "clampy_sequence_03.png",
+          "clampy_sequence_04.png"
+        ];
 
         // `array.map()` creates an array from another array by doing something to each element.
-        // the whole `(stringy) => Texture.from(stringy)`  means "A function that takes a string and returns a Texture.from(that String)"
+        // `(stringy) => Texture.from(stringy)` means
+        // "A function that takes a string and returns a Texture.from(that String)"
         const animatedClampy: AnimatedSprite = new AnimatedSprite(clampyFrames.map((stringy) => Texture.from(stringy)));
         // (if this javascript is too much, you can do a simple for loop and create a new array with Texture.from())
 

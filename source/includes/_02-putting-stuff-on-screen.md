@@ -13,6 +13,7 @@ I know that it has **list** in the name, but it actually looks more like a tree.
 Finally, we have the root of everything, the granddaddy of them all, the greatest of grandfathers, and we shall call it the `Stage`. The stage is just a regular container that the `Application` class creates for us and feeds it to the `Renderer` to... well render it.
 
 ### Have some code
+
 ```ts
 import { Application, Sprite, Container } from 'pixi.js'
 
@@ -282,6 +283,7 @@ Technically applying a filter on a <code>Sprite</code> should be cheaper than ap
 _Make it rain_
 
 > Make sure you dropped your emitter.json somewhere inside your src folder
+
 ```ts
 import * as particleSettings from "../emitter.json";
 
