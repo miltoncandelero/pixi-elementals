@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/middleman/middleman.git
-  revision: ad2c0900f17b8edc8ac4a584433b4bf77c769f5a
+  revision: ae9c4bd1bc57b7dab6b20c842d0f7210abd183dd
   branch: 4.x
   specs:
     middleman (4.4.0)
@@ -62,7 +62,7 @@ GEM
     execjs (2.7.0)
     fast_blank (1.0.0)
     fastimage (2.2.4)
-    ffi (1.15.1)
+    ffi (1.15.3)
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
