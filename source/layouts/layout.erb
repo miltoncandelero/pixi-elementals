@@ -124,5 +124,30 @@ under the License.
         <% end %>
       </div>
     </div>
+
+
+    <button
+      style="z-index: 100; bottom: 30%; position: fixed; left: 2%;"
+      onclick="var cws = document.getElementById('codepen-wrapper').style; cws.visibility = cws.visibility === 'visible' ? 'hidden' : 'visible'">
+      Codepen
+    </button>
+
+    <div
+    id="codepen-wrapper"
+    style="position: absolute; bottom: 0; left: 0; width: 100vw; visibility: hidden">
+      <iframe
+        style="height: 25vh; width: 100vw; bottom: 0; left: 0; position: fixed; z-index: 100"
+        scrolling="no"
+        title="pixijs"
+        src="https://codepen.io/qpwo-1475625292/embed/JjJqbqR?default-tab=js%2Cresult&editable=true"
+        frameborder="no"
+        loading="lazy"
+        allowtransparency="true"
+        allowfullscreen="true">
+        Original pen: <a href="https://codepen.io/qpwo-1475625292/pen/JjJqbqR">
+        pixijs elementals
+      </iframe>
+    </div>
+
   </body>
 </html>
