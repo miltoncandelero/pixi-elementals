@@ -126,28 +126,29 @@ under the License.
     </div>
 
 
-    <button
-      style="z-index: 100; bottom: 30%; position: fixed; left: 2%;"
+    <div style="position: relative">
+      <button
+      style="z-index: 101; bottom: 2%; position: fixed; right: 2%; opacity: 0.3;"
       onclick="var cws = document.getElementById('codepen-wrapper').style; cws.visibility = cws.visibility === 'visible' ? 'hidden' : 'visible'">
       Codepen
-    </button>
+      </button>
+      <div
+      id="codepen-wrapper"
+      style="position: fixed; bottom: 0; left: 0; z-index: 100; width: 100vw; visibility: hidden; resize: vertical; overflow: auto; height: 25%; transform: rotateX(180deg);">
 
-    <div
-    id="codepen-wrapper"
-    style="position: fixed; bottom: 0; left: 0; z-index: 100; width: 100vw; visibility: hidden; resize: vertical; overflow: auto; height: 25%; transform: rotateX(180deg);">
-
-      <iframe
-        style="width: 100%; height: 100%; transform: rotateX(180deg);"
-        scrolling="no"
-        title="pixijs"
-        src="https://codepen.io/qpwo-1475625292/embed/JjJqbqR?default-tab=js%2Cresult&editable=true"
-        frameborder="no"
-        loading="lazy"
-        allowtransparency="true"
-        allowfullscreen="true">
-        Original pen: <a href="https://codepen.io/qpwo-1475625292/pen/JjJqbqR">
-        pixijs elementals
-      </iframe>
+        <iframe
+          style="width: 100%; height: 100%; transform: rotateX(180deg);"
+          scrolling="no"
+          title="pixijs"
+          src="https://codepen.io/qpwo-1475625292/embed/JjJqbqR?default-tab=js%2Cresult&editable=true"
+          frameborder="no"
+          loading="lazy"
+          allowtransparency="true"
+          allowfullscreen="true">
+          Original pen: <a href="https://codepen.io/qpwo-1475625292/pen/JjJqbqR">
+          pixijs elementals
+        </iframe>
+      </div>
     </div>
 
   </body>
