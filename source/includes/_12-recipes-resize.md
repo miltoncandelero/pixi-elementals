@@ -45,6 +45,7 @@ export class Manager {
         Manager.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resolution: window.devicePixelRatio || 1,
+            autoDensity: true,
             backgroundColor: background,
             width: width,
             height: height
@@ -124,6 +125,7 @@ export class Manager {
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resizeTo: window, // This line here handles the actual resize!
             resolution: window.devicePixelRatio || 1,
+            autoDensity: true,
             backgroundColor: background,
         });
 
@@ -169,6 +171,7 @@ You might realize that we no longer have `width` and `height` variables but inst
 new Application({
     view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
     resolution: window.devicePixelRatio || 1, // This bad boy right here...
+    autoDensity: true, // and his friend
     backgroundColor: background,
     width: width,
     height: height
@@ -178,6 +181,8 @@ new Application({
 The keen-eyed of you might have noticed that when we create our `Application` object we have a line that says `resolution: window.devicePixelRatio || 1` but what does that mean?  
 The standard for screens was set to 96 dpi (dots per inch) for a long time and we were happy until the Apple nation attacked with their _Retina Display_ that had twice as many dots per inch, thus if `devicePixelRatio` was equal to 1 it meant _96 dpi_ and if it was equal to 2 it was _Retina display_.  
 And then the world kept moving forward, adding more and more dots per inch, in seemingly random amounts so `devicePixelRatio` started reporting decimal numbers left and right: everything as a factor of that original  _96 dpi_.  
+
+There is the complementary line that says `autoDensity: true` and that is meant for the `InteractionManager`. It makes it so that DOM and CSS coordinates (and thus, touch and mouse coordinates) match your global pixel units.
 
 By letting feeding the `Apllication` constructor the `devicePixelRatio` we render our game in a _native resolution_ for the displays dpi, resulting in a sharper image on devices that have more than _96 dpi_ but at the cost of some performance since we are effectively _supersampling_ every pixel.  
 
