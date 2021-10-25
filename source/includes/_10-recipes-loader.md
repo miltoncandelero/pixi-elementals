@@ -189,22 +189,23 @@ Loader.registerPlugin(WebfontLoaderPlugin);
 
 ```ts
 const customStyleFont: TextStyle = new TextStyle({
-    fontFamily: "Open Sans Condensed",
+    fontFamily: "Open Sans Condensed", // name from inside the .css file
 });
 new Text('Ready to use!', customStyleFont); // Text supports unicode!
 ```
 
 When I showed you text examples I used system fonts on purpose, but what if you want to use your custom font? or a google font?  
-In the web world, there are many font formats: `ttf`, `svg`, `woff`, `woff2`, and more but how do we make sure we have the right font format for each browser? Simple, WE HAVE THEM ALL!  
+In the web world, there are many font formats: `ttf`, `otf`, `woff`, `woff2`; but how do we make sure we have the right font format for each browser? Simple, WE HAVE THEM ALL!  
 An easy way is to get the font file you want to use and convert it using a service like [Transfonter](https://transfonter.org/). That will give you a `.css` file and all the formats required.  
 Another way is to go to [Google Fonts](https://fonts.google.com/) and download a Webfont from there.  
 
+To load our font's `css` file we are going to need a _Loader plugin_: [PixiJS Webfont Loader](https://github.com/miltoncandelero/pixi-webfont-loader).  
+You can install the plugin by running `npm i pixi-webfont-loader` in a console in your project and then inside your code you must register the plugin.
+
 <aside class="info">
-No matter where you get your font from, you need to get a <code>.css</code> file with your <code>@font-face</code> declaration inside
+If you don't want to trouble yourself converting your original font file (<code>ttf</code>, <code>otf</code>, <code>woff</code>, or <code>woff2</code>) font into a <code>.css</code> Webfont you can still use it by loading it directly as long as you are using a version of PixiJS Webfont Loader equal or greater than 1.0.0.
 </aside>
 
-To load our font `css` file we are going to need a _Loader plugin_: [PixiJS Webfont Loader](https://github.com/miltoncandelero/pixi-webfont-loader).  
-You can install the plugin by running `npm i pixi-webfont-loader` in a console in your project and then inside your code you must register the plugin.
 
 ### Maps from level editors or custom txt, json, xml, etc.
 
