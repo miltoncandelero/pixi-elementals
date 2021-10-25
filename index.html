@@ -555,6 +555,7 @@ Try hitting F12 and finding the Javascript Console. That will be your best frien
 <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
     <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
     <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">backgroundColor</span><span class="p">:</span> <span class="mh">0x6495ed</span><span class="p">,</span>
     <span class="na">width</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
     <span class="na">height</span><span class="p">:</span> <span class="mi">480</span>
@@ -626,6 +627,7 @@ Finally, we have the root of everything, the granddaddy of them all, the greates
 <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
     <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
     <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">backgroundColor</span><span class="p">:</span> <span class="mh">0x6495ed</span><span class="p">,</span>
     <span class="na">width</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
     <span class="na">height</span><span class="p">:</span> <span class="mi">480</span>
@@ -1043,6 +1045,7 @@ See how I passed the screen size as a parameter to the constructor and stored it
 <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
     <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
     <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">backgroundColor</span><span class="p">:</span> <span class="mh">0x6495ed</span><span class="p">,</span>
     <span class="na">width</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
     <span class="na">height</span><span class="p">:</span> <span class="mi">480</span>
@@ -1825,21 +1828,21 @@ If you have problems finding a <em>PixiJS</em> compatible format in the packer o
 <p>Your fonts will be registered into the system and you can just ask for the Font Name. You can check the font name by opening your <code>.css</code> with a text editor and checking the <code>font-family</code> inside. Also, remember you can make your text style with the <a href="https://pixijs.io/pixi-text-style">PixiJS Textstyle editor</a>.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight typescript"><code><span class="kd">const</span> <span class="nx">customStyleFont</span><span class="p">:</span> <span class="nx">TextStyle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextStyle</span><span class="p">({</span>
-    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open Sans Condensed</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open Sans Condensed</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// name from inside the .css file</span>
 <span class="p">});</span>
 <span class="k">new</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ready to use!</span><span class="dl">'</span><span class="p">,</span> <span class="nx">customStyleFont</span><span class="p">);</span> <span class="c1">// Text supports unicode!</span>
 </code></pre></div>
 <p>When I showed you text examples I used system fonts on purpose, but what if you want to use your custom font? or a google font?<br>
-In the web world, there are many font formats: <code>ttf</code>, <code>svg</code>, <code>woff</code>, <code>woff2</code>, and more but how do we make sure we have the right font format for each browser? Simple, WE HAVE THEM ALL!<br>
+In the web world, there are many font formats: <code>ttf</code>, <code>otf</code>, <code>woff</code>, <code>woff2</code>; but how do we make sure we have the right font format for each browser? Simple, WE HAVE THEM ALL!<br>
 An easy way is to get the font file you want to use and convert it using a service like <a href="https://transfonter.org/">Transfonter</a>. That will give you a <code>.css</code> file and all the formats required.<br>
 Another way is to go to <a href="https://fonts.google.com/">Google Fonts</a> and download a Webfont from there.  </p>
 
-<aside class="info">
-No matter where you get your font from, you need to get a <code>.css</code> file with your <code>@font-face</code> declaration inside
-</aside>
-
-<p>To load our font <code>css</code> file we are going to need a <em>Loader plugin</em>: <a href="https://github.com/miltoncandelero/pixi-webfont-loader">PixiJS Webfont Loader</a>.<br>
+<p>To load our font&#39;s <code>css</code> file we are going to need a <em>Loader plugin</em>: <a href="https://github.com/miltoncandelero/pixi-webfont-loader">PixiJS Webfont Loader</a>.<br>
 You can install the plugin by running <code>npm i pixi-webfont-loader</code> in a console in your project and then inside your code you must register the plugin.</p>
+
+<aside class="info">
+If you don't want to trouble yourself converting your original font file (<code>ttf</code>, <code>otf</code>, <code>woff</code>, or <code>woff2</code>) font into a <code>.css</code> Webfont you can still use it by loading it directly as long as you are using a version of PixiJS Webfont Loader equal or greater than 1.0.0.
+</aside>
 <h3 id='maps-from-level-editors-or-custom-txt-json-xml-etc'>Maps from level editors or custom txt, json, xml, etc.</h3>
 <blockquote>
 <p>Just add your custom file to your <code>assets.ts</code></p>
@@ -1905,6 +1908,7 @@ For this purpose, we are going to create a <em>Manager</em> static global class 
         <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
             <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
             <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
             <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
             <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
@@ -2120,6 +2124,7 @@ In <em>responsive</em> you make your <code>stage</code> grow to fill the entire 
         <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
             <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
             <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
             <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
             <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
@@ -2198,6 +2203,7 @@ You might see that I read but never change the <code>Manager.width</code> and <c
             <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
             <span class="na">resizeTo</span><span class="p">:</span> <span class="nb">window</span><span class="p">,</span> <span class="c1">// This line here handles the actual resize!</span>
             <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
         <span class="p">});</span>
 
@@ -2240,6 +2246,7 @@ You might realize that we no longer have `width` and `height` variables but inst
 <h2 id='resolution-device-pixel-ratio'>Resolution (Device Pixel Ratio)</h2><div class="highlight"><pre class="highlight typescript"><code><span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
     <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
     <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">// This bad boy right here...</span>
+    <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// and his friend</span>
     <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
     <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
     <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
@@ -2248,6 +2255,8 @@ You might realize that we no longer have `width` and `height` variables but inst
 <p>The keen-eyed of you might have noticed that when we create our <code>Application</code> object we have a line that says <code>resolution: window.devicePixelRatio || 1</code> but what does that mean?<br>
 The standard for screens was set to 96 dpi (dots per inch) for a long time and we were happy until the Apple nation attacked with their <em>Retina Display</em> that had twice as many dots per inch, thus if <code>devicePixelRatio</code> was equal to 1 it meant <em>96 dpi</em> and if it was equal to 2 it was <em>Retina display</em>.<br>
 And then the world kept moving forward, adding more and more dots per inch, in seemingly random amounts so <code>devicePixelRatio</code> started reporting decimal numbers left and right: everything as a factor of that original  <em>96 dpi</em>.  </p>
+
+<p>There is the complementary line that says <code>autoDensity: true</code> and that is meant for the <code>InteractionManager</code>. It makes it so that DOM and CSS coordinates (and thus, touch and mouse coordinates) match your global pixel units.</p>
 
 <p>By letting feeding the <code>Apllication</code> constructor the <code>devicePixelRatio</code> we render our game in a <em>native resolution</em> for the displays dpi, resulting in a sharper image on devices that have more than <em>96 dpi</em> but at the cost of some performance since we are effectively <em>supersampling</em> every pixel.  </p>
 
