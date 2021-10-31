@@ -11,7 +11,7 @@ This... guide? course? tutorial? will use Typescript and it will be designed to 
 
 ### pixi-hotwire?
 In case you realize you have no idea what a bundler is or why you need one, worry not! I've created a base template project called [_pixi-hotwire_](https://github.com/miltoncandelero/pixi-hotwire). It is the simplest boilerplate I could build. It goes from nothing to watching your code running with the least amount of configurations.  
-It is a _just-add-npm_ solution that sets you up with _typescript_, _pixi.js_ and _parcel_. It also will make a final build folder for you instead of you having to pluck manually files out of your project folder to get the _uploadeable_ result of your hard work.
+It is a _just-add-npm_ solution that sets you up with _typescript_, _pixi.js_ and _webpack_. It also will make a final build folder for you instead of you having to pluck manually files out of your project folder to get the _uploadeable_ result of your hard work.
 
 ### Typescript?
 I'll be honest with you: I hate Javascript. I hate the meme of truthy and falsy values. I hate the implicit type coercion. I hate the dynamic context binding. I hate a lot of javascript... But I must endure, adapt, overcome.  
