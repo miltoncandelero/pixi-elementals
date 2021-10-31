@@ -84,7 +84,7 @@ app.stage.addChild(clampy);
 
 First, we see the `import` statement. As previously stated, I prefer named imports to just importing everything under a big all-caps `PIXI` object.  
 
-After that, we create an `app` instance of PixiJS `Application`. This object is a quick way to set up a renderer and a stage to drop stuff on screen and be ready to render. You can see that I call for an HTML element by id `pixi-canvas`, this element can be found on the `index.html` file. (If you know a bit of web development, that file will reference directly the typescript file, which is usually illegal. This works because that file it's used by `parcel` as the entry point. The final exported index.html file won't have any reference to any typescript file.)  
+After that, we create an `app` instance of PixiJS `Application`. This object is a quick way to set up a renderer and a stage to drop stuff on screen and be ready to render. You can see that I call for an HTML element by id `pixi-canvas`, this element can be found on the `index.ejs` file. (The ejs file is template that _webpack_ will use to create your final `index.html` with your code bundle referenced inside)
 As a parameter for the `Application` object, we give it some options. You can see and explore the full list in [PixiJS official docs](https://pixijs.download/dev/docs/PIXI.Application.html).  
 
 Then, I create a `Sprite` with the `Sprite.from(...)` method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
