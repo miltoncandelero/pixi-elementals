@@ -1,17 +1,17 @@
 GIT
   remote: https://github.com/middleman/middleman.git
-  revision: ad2c0900f17b8edc8ac4a584433b4bf77c769f5a
+  revision: b68f5ed0059973619c2fbba9043135cccd7dccc9
   branch: 4.x
   specs:
-    middleman (4.4.0)
+    middleman (4.4.1)
       coffee-script (~> 2.2)
       haml (>= 4.0.5)
       kramdown (>= 2.3.0)
-      middleman-cli (= 4.4.0)
-      middleman-core (= 4.4.0)
-    middleman-cli (4.4.0)
+      middleman-cli (= 4.4.1)
+      middleman-core (= 4.4.1)
+    middleman-cli (4.4.1)
       thor (>= 0.17.0, < 2.0)
-    middleman-core (4.4.0)
+    middleman-core (4.4.1)
       activesupport (>= 6.1, < 7.0)
       addressable (~> 2.4)
       backports (~> 3.6)
@@ -40,13 +40,13 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.3.2)
+    activesupport (6.1.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     autoprefixer-rails (10.2.5.0)
       execjs (< 2.8.0)
@@ -60,10 +60,10 @@ GEM
     dotenv (2.7.6)
     erubis (2.7.0)
     execjs (2.7.0)
-    fast_blank (1.0.0)
-    fastimage (2.2.4)
-    ffi (1.15.1)
-    haml (5.2.1)
+    fast_blank (1.0.1)
+    fastimage (2.2.5)
+    ffi (1.15.4)
+    haml (5.2.2)
       temple (>= 0.8.0)
       tilt
     hamster (3.0.0)
@@ -96,7 +96,7 @@ GEM
       padrino-support (= 0.15.1)
       tilt (>= 1.4.1, < 3)
     padrino-support (0.15.1)
-    parallel (1.20.1)
+    parallel (1.21.0)
     parslet (2.0.0)
     public_suffix (4.0.6)
     racc (1.5.2)
@@ -128,7 +128,7 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     webrick (1.7.0)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
