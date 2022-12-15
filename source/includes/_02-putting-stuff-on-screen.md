@@ -303,7 +303,7 @@ For handling particles, PixiJS uses their own format and you need to install the
 
 Once we have our particles looking good on the editor we download a `.json` file and we will feed the parsed object into the `Emitter` constructor along with a container for our particles (it can be any `Container` but if you have a lot of particles you might want a `ParticleContainer`), and the `Texture` (or an array of textures) you want your particles to use.
 
-To make that `.json` into something usable we need to either load it with the `Loader` or just add it as part of our source code and `import` it.
+To make that `.json` into something usable we need to either load it with `Assets` or just add it as part of our source code and `import` it.
 
 Methods and properties that you will use most frequently:  
 

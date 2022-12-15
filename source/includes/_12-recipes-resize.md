@@ -1,4 +1,4 @@
-# Recipe: Resize your game.
+# Recipe: Resize your game
 
 By now you probably have realized that all the examples so far have the game in the top-left corner of the screen, this is because we never bothered to move it or change its size: Let's make it fill the screen.  
 There are two ways to fill the screen that I like to call _letterbox_ and _responsive_.  

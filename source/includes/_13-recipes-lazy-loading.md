@@ -1,55 +1,175 @@
-# Recipe: Preloading assets
+# Recipe: Lazy loading assets
+
+// todo!
+
 
 So far we have seen how to create images and sounds by downloading the asset behind them just as we need to show it to the user. While this is good enough if we want a quick way to make a proof of concept or prototype, it won't be good enough for a project release.  
-The elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache. To this purpose, PixiJS includes [Loader](https://pixijs.download/dev/docs/PIXI.Loader.html): An extensible class to allow the download and caching of any file you might need for your game.  
+The old and elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache.   
+However, times change and users now want everything ready **right now!** so instead of having one big load at the beginning we will aim to have the smaller download possible to make do and keep everything loading in the background and _hopefully_ when the user reaches further into the game our assets will be ready.  
+To this purpose, PixiJS includes [Assets](https://pixijs.download/dev/docs/PIXI.Assets.html): A system for your resource management needs. A promise-based, background-loading, webworker-using, format-detecting, juggernaut of a system.
 
 In this recipe, we are going to create one of our `Scene` to load all the files we declare in a manifest object and then I will teach you how to recover the files from the `Loader` cache.
 
-## The file to download manifest.
+## First of all, a primer on _Promises_.
 
-> Let's start with our _manifest_ object. I will call this file `assets.ts`
+> use `.then(..)` to be notified when that value is ready
 
 ```ts
-export const assets = [
-    { name: "Clampy the clamp", url: "./clampy.png" },
-    { name: "another image", url: "./monster.png" },
-    { name: "whistle", url: "./whistle.mp3" },
-]
+somePromise.then((myValue) => {
+    // This function will be called when "myValue" is ready to go!
+});
 ```
 
-As javascript is unable to "scan" a directory and just load everything inside we need to add some sort of _manifest object_ that lists all the files that we need to download.
-Here we can see we are how we can declare (and export for outside use) an array of objects that will be used by the `Loader`.  
-The `name` field is going to be our _key_ to retrieve the downloaded object and the `url` field must point to where our asset is going to be located (by starting with `./` we mean "relative to our _index.html_").  
+A promise is something that _will eventually have a value_ for you to use but you can't be sure if that value is ready or not just yet, so you ask nicely to be notified when that happens.  
+When a Promise has your value, it is said that it _resolves_ your value. For you to use the value you need to give a function to the `.then(...)` method.
 
-## How to use the _Loader_
+> keep in mind that even resolved promises take a bit of time before executing your then, so take a look at this code...
 
-> This is just a snippet of how to use `Loader`. After this, we will see how to make a full loader `Scene`
+```ts
+console.log("before");
+alreadyResolvedPromise((value)=>{
+    console.log("inside the then with my value", value);
+});
+console.log("after")
+```
+
+> will give us: "before" -> "after" -> "inside the then with my value".
+
+<aside class="info">Even if the promise was resolved long ago, adding a <code>.then(...)</code> will trigger almost immediately, this means you don't have to <i>see it</i> resolve, you can come after it has resolved and it will still give you a value.</aside>
+
+### Awaiting Promises
+
+> Take a look at this very naïve code...
+
+```ts
+// async functions always return a Promise of whatever they return
+async function waitForPromise() : Promise<string>
+{
+    console.log("This starts excecuting");
+
+    // As this next line has `await` in it, it will "freeze" the execution here until that magical promise resolves to a value.
+    const magicalNumber = await someMagicalPromise;
+
+    // When the promise is resolved, our code keeps executing
+    console.log("Wow, that took a while!");
+
+    // We return a string with the resolved value... but that took some time, so the entire function actually returns a promise.
+    return "This will be finally resolved! The Magical number was " + magicalNumber.toString(); 
+}
+
+// We kinda need to call the function, right?
+waitForPromise();
+```
+
+To keep code somewhat easier to read, you can use two keywords `async` and `await` to _freeze_ the code until a promise resolves.  
+This doesn't really change how Promises work, this is only _syntax sugar_ that will be turned into the regular functions by the browser.  
+
+<aside class="warning">
+Some rules about <code>async</code> and <code>await</code>:
+<ul>
+<li><code>await</code> can only be used inside an <code>async</code> function.</li>
+<li>a Constructor can never be <code>async</code></li>
+<li>try to avoid mixing <code>.then(...)</code> and <code>await</code> inside an <code>async</code> function if you can. It can get confusing very fast</li>
+</ul>
+</aside>
+
+## Using _Assets_
+
+> Using `Assets.load(...)` with `.then(...)`
+
+```ts
+Assets.load("./clampy.png").then(clampyTexture => {
+    const clampySprite = Sprite.from(clampyTexture);
+});
+// Be careful, `clampySprite` doesn't exist out here, only inside those brackets!
+```
+
+> Using `Assets.load(...)` with `async` `await`
+
+```ts
+async function loadClampy() : Promise<Sprite>
+{
+    const clampyTexture = Assets.load("./clampy.png");
+    return Sprite.from(clampyTexture);
+}
+// now calling `loadClampy()` will yield a Clampy sprite!
+```
+
+Sometimes we just want to load one single file, quick and dirty. For that purpose we have `Assets.load(...)`.  
+This will return a promise that will solve with the loaded and parsed asset ready to use! 
+
+<aside class="info">Assets is a very smart piece of code and it will never download twice the same asset! Feel free to call <code>Assets.load(...)</code> every time you need an asset and it will give you the cached asset if it was already downloaded.</aside>
+
+## The files-to-download Manifest.
+
+> Let's start with our _manifest_ object. I will call this file `assets.ts` {manifest's entries can have many shapes, this is the one I like the most.}
+
+```ts
+export const manifest = {
+    bundles: [
+        {
+            name : "bundleName",
+            assets:
+            {
+                "Clampy the clamp" : "./clampy.png",
+                "nother image" : "./monster.png",
+            }
+        },
+        {
+            name : "another bundle",
+            assets:
+            {
+                "whistle" : "./whistle.mp3",
+            }
+        },
+    ]
+}
+```
+
+As javascript is unable to "scan" a directory and just load everything inside we need to add some sort of _manifest object_ that lists all the files that we need to download. Conveniently, `Assets` has a format to feed _Asset Bundles_ from a _manifest_.  
+An _Asset Bundle_ is just that, a group of assets that make sense for our game to download together, for example, you make an _bundle_ for each screen of your game.  
+Here we can see we are how we can declare (and export for outside use) an _Asset Bundle_ with the format that `Assets` wants it.  
+Each bundle has a `name` field and an object of `assets` where the _key_ is the name for each asset and the _value_ is the URL for it. (by starting with `./` we mean "relative to our _index.html_").  
+
+<aside class="info">Remember that Assets never downloads the same asset twice so don't be afraid to put the same asset in two different bundles.</aside>
+
+## Using our _Manifest_
+
+> This is just a snippet of how to initialize `Assets`. After this, we will see how to make a full loader `Scene` and background loading.
 
 ```ts
 // remember the assets manifest we created before? You need to import it here
-Loader.shared.add(assets);
+async function initializeLoader(): Promise<void> // This promise won't return any value, will just take time to finish.
+{
+    // Make sure you don't use Assets before this or you will get a warning and it won't work!
+    await Assets.init({ manifest: manifest });
 
-// this will start the load of the files
-Loader.shared.load();
+    // let's extract the bundle ids. This is a bit of js black magic
+    const bundleIds =  manifest.bundles.map(bundle => bundle.name);
 
-// In the future, when the download finishes you will find your entire asset like this
-Loader.shared.resources["the name you gave your asset in the manifest"]; 
-// You will probably want `.data` or `.texture` or `.sound` of this object 
-// however for Pixi objects there is are better ways of creating them...
+    // we download ALL our bundles and wait for them
+    await Assets.loadBundle(bundleIds);
+
+    // Code ends when all bundles are loaded!
+}
+
+// Remember to call it and remember it returns a promise
+initializeLoader().then(() => {
+    // ALL your assets are ready!
+});
 ```
 
 > This is enough to start downloading assets... but what about progress? and how can we tell when we are done?
 
-Like the `Ticker` class we saw before (and many other PixiJS classes), `Loader` has a _shared_ instance we can access globally and we are going to use that to load our assets and keep them in _cache_ so we can reference them without downloading them each time.  
-The `add(...)` method can take many shapes but we are feeding it our resource manifest we stored in `assets.ts` and then begin the download by calling the `load()` method.
+`Assets` is the global static instance in charge of resolving, downloading and keeping track of all our assets so we never download twice. We initialize with `Assets.init(...)` feeding it our manifest and then we call `Assets.loadBundle(...)` with _all_ the names of our _asset bundles_.  
 
 ## Making it look pretty
 
 > This is our full code for `LoaderScene.ts`
 
 ```ts
-import { Container, Graphics, Loader } from "pixi.js";
-import { assets } from "../assets";
+import { Container, Graphics, Assets } from "pixi.js";
+import { manifest } from "../assets";
 
 export class LoaderScene extends Container {
 
@@ -83,22 +203,25 @@ export class LoaderScene extends Container {
         this.loaderBar.position.y = (screenHeight - this.loaderBar.height) / 2;
         this.addChild(this.loaderBar);
 
-        // Now the actual asset loader:
-
-        // we add the asset manifest
-        Loader.shared.add(assets);
-
-        // connect the events
-        Loader.shared.onProgress.add(this.downloadProgress, this);
-        Loader.shared.onComplete.once(this.gameLoaded, this);
-
         // Start loading!
-        Loader.shared.load();
+        this.initializeLoader().then(() => {
+            // Remember that constructors can't be async, so we are forced to use .then(...) here!
+            this.gameLoaded();
+        })
     }
 
-    private downloadProgress(loader: Loader): void {
-        // Progress goes from 0 to 100 but we are going to use 0 to 1 to set it to scale
-        const progressRatio = loader.progress / 100;
+    private async initializeLoader(): Promise<void>
+    {
+        await Assets.init({ manifest: manifest });
+
+        const bundleIds =  manifest.bundles.map(bundle => bundle.name);
+
+        // The second parameter for `loadBundle` is a function that reports the download progress!
+        await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
+    }
+
+    private downloadProgress(progressRatio: number): void {
+        // progressRatio goes from 0 to 1, so set it to scale
         this.loaderBarFill.scale.x = progressRatio;
     }
 
@@ -118,9 +241,14 @@ export class LoaderScene extends Container {
 
 I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check [that chapter again](#putting-stuff-on-screen).
 
-Those events don't look exactly like the other events we saw in the [Interaction section](#getting-interactive) and that is because _Loader_ uses their own kind of events called _signals_ or _minisignals_ however they work quite similarly to regular events, the big difference is that each _signal_ is only good for one kind of event and that is why we don't have a string explaining what kind of event we need and instead we have two objects `onProgress` and `onComplete`.
+You will see that the constructor calls an `async` function and is forced to use the `.then(...)` method, that is because constructors can never be async. 
+You might have realized that we just downloaded _all_ our assets at the same time, at the very beginning of our game. This is has the benefit that once we leave that loading screen we will never need to download anything else ever again, however we forced our user to stay some time waiting and users nowadays don't like waiting.  
+To remedy this we can take a different approach: we just load the bare minimum needed for the current screen and let the rest download in the background. We take advantages of the bundles and make one bundle per _scene_ and we make sure each scene knows how to load it's own bundler and notify to any external viewer the status of the load.
 
-<aside class="info">You might have noted that I used only <code>Graphics</code> to make my loader progress bar. This is because if I were to use assets I would need a loader for the loader assets and that would mess with the space-time continuum. However, should you want your loader to have assets you can reference them directly by URL (<code>Sprite.from(urlHere)</code>) or make your loader... loader and indeed destroy space-time itself.</aside>
+<aside class="warning">You might have noted that I used only <code>Graphics</code> to make my loader progress bar. This is because if I were to use assets I would need a loader for the loader assets and that would mess with the space-time continuum. However, should you want your loader to have assets you can reference them directly by URL (<code>Sprite.from(urlHere)</code>) but make sure you call <code>Asssets.init(...)</code> before that, otherwise <code>Assets</code> will auto-initialize itself and your loader will break with a cryptic warning.</aside>
+
+
+
 
 ## How to easily use your loaded Sprites and Sounds?
 

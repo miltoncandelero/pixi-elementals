@@ -20,6 +20,9 @@ includes:
   - 10-recipes-loader
   - 11-recipes-manager
   - 12-recipes-resize
+  - 90-legacy-start
+  - 99-recipes-loader-v6
+
 
 search: true
 

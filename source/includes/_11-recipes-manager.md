@@ -106,7 +106,7 @@ Well, it has to be a `DisplayObject` of some sort because we need to put it on t
 > Look at this buffed up `LoaderScene.ts` that now `implements IScene` and uses `Manager` to know its size!
 
 ```ts
-import { Container, Graphics, Loader } from "pixi.js";
+import { Container, Graphics, Assets } from "pixi.js";
 import { assets } from "../assets";
 import { IScene, Manager } from "../Manager";
 import { GameScene } from "./GameScene";
@@ -139,16 +139,21 @@ export class LoaderScene extends Container implements IScene {
         this.loaderBar.position.y = (Manager.height - this.loaderBar.height) / 2;
         this.addChild(this.loaderBar);
 
-        Loader.shared.add(assets);
-
-        Loader.shared.onProgress.add(this.downloadProgress, this);
-        Loader.shared.onComplete.once(this.gameLoaded, this);
-
-        Loader.shared.load();
+        this.initializeLoader().then(() => {
+            this.gameLoaded();
+        })
     }
 
-    private downloadProgress(loader: Loader): void {
-        const progressRatio = loader.progress / 100;
+    private async initializeLoader(): Promise<void>
+    {
+        await Assets.init({ manifest: manifest });
+
+        const bundleIds =  manifest.bundles.map(bundle => bundle.name);
+
+        await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
+    }
+
+    private downloadProgress(progressRatio: number): void {
         this.loaderBarFill.scale.x = progressRatio;
     }
 
@@ -178,7 +183,7 @@ export class GameScene extends Container implements IScene {
     constructor() {
         super();
 
-        // Inside assets.ts we have a line that says `{ name: "Clampy from assets.ts!", url: "./clampy.png" }`
+        // Inside assets.ts we have a line that says `"Clampy from assets.ts!": "./clampy.png",`
         this.clampy = Sprite.from("Clampy from assets.ts!");
 
         this.clampy.anchor.set(0.5);

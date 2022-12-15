@@ -19,7 +19,7 @@ Enter Typescript: Typescript will force your hand to keep your code as strictly 
 As a nice bonus, you get _intellisense_ on Visual Studio Code (which is Microsoft's fancy name for code auto-complete).  
 
 ### I will never scream (`PIXI.`)
-I feel that doing `import * as PIXI from "pixi.js"` so that I can go `PIXI.Sprite`, `PIXI.Container`, `PIXI.Loader`, etc, is silly and makes me feel clumsy. I will use named imports: `import { Sprite, Container, Loader } from "pixi.js"` and that allows me to just use the class name without adding `PIXI` everywhere.  
+I feel that doing `import * as PIXI from "pixi.js"` so that I can go `PIXI.Sprite`, `PIXI.Container`, `PIXI.Assets`, etc, is silly and makes me feel clumsy. I will use named imports: `import { Sprite, Container, Assets } from "pixi.js"` and that allows me to just use the class name without adding `PIXI` everywhere.  
 I could say it is better for three-shaking (the step where the bundler doesn't add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  
 
 ## Enough talk, have at you!
@@ -90,7 +90,7 @@ As a parameter for the `Application` object, we give it some options. You can se
 Then, I create a `Sprite` with the `Sprite.from(...)` method, this is a super powerful shortcut that can take as a parameter one of many things, among which we can find:
 
 * A `Texture` object.
-* The name of a `Texture` object you loaded previously. (using a `Loader`, we will see this when we get to [loading assets](#recipe-preloading-assets))
+* The name of a `Texture` object you loaded previously. (using `Assets`, we will see this when we get to [loading assets](#recipe-preloading-assets))
 * The URL of an image file
 
 Can you guess what we used here?  
