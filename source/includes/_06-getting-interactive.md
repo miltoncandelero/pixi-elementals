@@ -9,7 +9,7 @@ We will explore how to use both of them and then we will do a quick overview on 
 _mouse... touch.... both?_
 
 ```ts
-import { Container, InteractionEvent, Sprite } from "pixi.js";
+import { Container, FederatedPointerEvent, Sprite } from "pixi.js";
 
 export class Scene extends Container {
     private clampy: Sprite;
@@ -36,22 +36,24 @@ export class Scene extends Container {
         this.clampy.interactive = true;
     }
 
-    private onClicky(e: InteractionEvent): void {
+    private onClicky(e: FederatedPointerEvent): void {
         console.log("You interacted with Clampy!")
         console.log("The data of your interaction is super interesting", e)
 
         // Global position of the interaction
-        // e.data.global
+        // e.global
 
         // Local (inside clampy) position of the interaction
-        // e.data.getLocalPosition(this.clampy) 
+        // clampy.toLocal(e.global)
+        // or the "unsafe" way:
+        // (e.target as DisplayObject).toLocal(e.global)
         // Remember Clampy has the 0,0 in its center because we set the anchor to 0.5!
     }
 }
 ```
 
 PixiJS has a _thing_ that whenever you click or move your mouse on the screen it checks what object were you on, no matter how deep in the display list that object is, and lets it know that _a mouse_ happened.  
-(If curious, that _thing_ is a renderer plugin called [Interaction Manager](https://pixijs.download/dev/docs/PIXI.InteractionManager.html))  
+(If curious, that _thing_ is a plugin called [Federated Events System](https://pixijs.download/dev/docs/PIXI.EventSystem.html))  
 
 The basic anatomy of adding an event listener to an imput is:  
 `yourObject.on("stringOfWhatYouWantToKnow", functionToBeCalled, contextForTheFunction)`
@@ -75,19 +77,19 @@ The rule of thumb is that if it has `pointer` in the name, it will catch both mo
 
 ### The event that fired
 
-When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the [full shape of the object here](https://pixijs.download/dev/docs/PIXI.InteractionEvent.html).  
+When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the [full shape of the object here](https://pixijs.download/dev/docs/PIXI.FederatedPointerEvent.html).  
 I will list now some of the most common properties here now:  
 
-* `event.data.global` This is the global (stage) position of the interaction
-* `e.data.getLocalPosition(e.target)` This is the local (object that has the event) position of the interaction
-* `event.data.pointerType` This will say `mouse` or `touch`
+* `event.global` This is the global (stage) position of the interaction
+* `(e.target as DisplayObject).toLocal(e.global)` This is the local (object that has the event) position of the interaction. It has an unsafe cast due to the new Event System being a bit paranoid.
+* `event.pointerType` This will say `mouse` or `touch`
 
-### Magical stuff
+### Old Magical stuff (pre PixiJS v7)
 
-You might come across by accident the fact that if you have a function that is called exactly the same as an event (for example a `click` function) and your object is interactive, that function gets called automagically.  
-That is because there is a line inside one of the [Interaction Manager's](https://pixijs.download/dev/docs/packages_interaction_src_InteractionManager.ts.html) methods that if it finds that a display object has a method with the same name as an event it calls it.
+You might have come across by the fact that if you have a function that is called exactly the same as an event (for example a `click` function) and your object is interactive, that function gets called automagically.  
+That was because there is a line inside the old [Interaction Manager's](https://pixijs.download/v6.5.8/docs/packages_interaction_src_InteractionManager.ts.html) that if it finds that a display object has a method with the same name as an event it calls it.
 
-You can use it but I am not sure if this is legacy or why this exists.
+**This was removed on PixiJS' v7 new [Federated Events System](https://pixijs.download/dev/docs/PIXI.EventSystem.html)**
 
 --
 
