@@ -1,5 +1,42 @@
 # Recipe: Lazy loading assets
 
+Back in the day, people had patience to wait for a game or webpage to fully load before using it, but now users are a lot more impatient and want to have everything ready right now!  
+To achieve this, the only solution is to have faster and faster internet connections but even that has a limit, so what can we do? **We fake it.**
+
+By downloading just enough assets so that we can build the screen needed _right now_ we can hope to bamboozle the user on a single screen while we keep loading the rest of the assets in the background and, hopefully, by the time they want to move on to the next screen we already have the assets.
+
+What if we fail to _bamboozle_ the user long enough and they try to advance faster than what our assets download? Well, they will have to wait.
+
+
+## Initialize Early
+
+> jaja, ejemplo.
+
+For this setup, we will no longer use the `LoaderScene`, so we need to make sure we initialize `Assets` in our `Manager` constructor before we create any `Scene`.  
+We also set to download everything in the background. Whenever we need to load something for a scene, the background downloads will pause and then resume _automagically._
+
+## Bundles we depend on
+
+> jaja, el otro ejemplo
+
+For this to work, we will need a way for each `Scene` to know which _asset bundles_ it needs to show itself. Depending on how we divided our assets we might need just one bundle per scene or we might need many. We will use an array just in case.
+
+We can also set the scene constructor to begin downloading our _asset bundles_ but...
+
+## Async constructors aren't a thing!
+
+> jajajaja, mas ejemplos
+
+As I said before, `async` constructors are not a thing so we can't `await` on the construction of a `Scene` for our assets. We are forced to use a method to finish the construction of our `Scene`.  
+But that brings us another question, how can we tell from the outside that the scene is finally built and ready to be used? Well, we can store a promise that we will resolve when we finished building our scene.
+
+## Let's put everything together now
+
+Now we have to use this new construction promise we made.  
+It is left as an exercise to the reader to make the _interstitial loading thingy_ in case the user goes too fast and has to wait for more assets to download.  
+(Or you can cheat and always keep the _interstitial loading thingy_ in the background and it will only be seen when there is no scene covering it)
+
+
 // todo!
 
 
