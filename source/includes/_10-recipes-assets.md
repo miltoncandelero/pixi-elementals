@@ -107,14 +107,16 @@ If you are _absolutely_ sure that your asset has been loaded before and you don'
 > Let's start with our _manifest_ object. I will call this file `assets.ts` {manifest's entries can have many shapes, this is the one I like the most.}
 
 ```ts
-export const manifest = {
+import type { ResolverManifest } from "pixi.js";
+
+export const manifest:ResolverManifest = {
     bundles: [
         {
             name : "bundleName",
             assets:
             {
                 "Clampy the clamp" : "./clampy.png",
-                "nother image" : "./monster.png",
+                "another image" : "./monster.png",
             }
         },
         {

@@ -10,8 +10,7 @@ For this purpose, we are going to create a _Manager_ static global class that wr
 > Ok, let's write our `Manager.ts` file. This file will store the static class _Manager_ and an Interface for our _Scenes_
 
 ```ts
-import { Application } from "@pixi/app";
-import { DisplayObject } from "@pixi/display";
+import { Application, DisplayObject } from "pixi.js";
 
 export class Manager {
     private constructor() { /*this class is purely static. No constructor to see here*/ }
