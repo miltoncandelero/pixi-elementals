@@ -17,7 +17,7 @@ includes:
   - 07-collision
   - 08-sounding-good
   - 09-recipes-start
-  - 10-recipes-loader
+  - 10-recipes-assets
   - 11-recipes-manager
   - 12-recipes-resize
   - 90-legacy-start
