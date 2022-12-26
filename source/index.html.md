@@ -20,6 +20,7 @@ includes:
   - 10-recipes-assets
   - 11-recipes-manager
   - 12-recipes-resize
+  - 13-recipes-lazy-loading
   - 90-legacy-start
   - 99-recipes-loader-v6
 
