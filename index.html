@@ -485,6 +485,20 @@
               </ul>
           </li>
           <li>
+            <a href="#recipe-lazy-loading-assets" class="toc-h1 toc-link" data-title="Recipe: Lazy loading assets">Recipe: Lazy loading assets</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#initialize-early" class="toc-h2 toc-link" data-title="Initialize Early">Initialize Early</a>
+                  </li>
+                  <li>
+                    <a href="#bundles-we-depend-on" class="toc-h2 toc-link" data-title="Bundles we depend on">Bundles we depend on</a>
+                  </li>
+                  <li>
+                    <a href="#async-constructors-aren-39-t-a-thing" class="toc-h2 toc-link" data-title="Async constructors aren't a thing!">Async constructors aren't a thing!</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#older-guides" class="toc-h1 toc-link" data-title="Older guides">Older guides</a>
           </li>
           <li>
@@ -2457,6 +2471,170 @@ Let's get the javascript out of the way: <code>window.devicePixelRatio</code> sh
 <aside class="info">
 Fun fact: Some devices consider the standard to be 76 dpi instead of 96. However don't worry, this doesn't change how we use <code>devicePixelRatio</code>
 </aside>
+<h1 id='recipe-lazy-loading-assets'>Recipe: Lazy loading assets</h1>
+<p>Back in the day, people had patience to wait for a game or webpage to fully load before using it, but now users are a lot more impatient and want to have everything ready right now!<br>
+To achieve this, the only solution is to have faster and faster internet connections but even that has a limit, so what can we do? <strong>We fake it.</strong></p>
+
+<p>By downloading just enough assets so that we can build the screen needed <em>right now</em> we can hope to <em>bamboozle</em> the user on a single screen while we keep loading the rest of the assets in the background and, hopefully, by the time they want to move on to the next screen we already have the assets.</p>
+
+<p>What if we fail to <em>bamboozle</em> the user long enough and they try to advance faster than what our assets download? Well, they will have to wait. It will be up to you to create and show them an <em>interstitial loading thingy</em></p>
+<h2 id='initialize-early'>Initialize Early</h2>
+<blockquote>
+<p>delete your <code>LoaderScene</code> and make some changes to the <code>Manager.initialize()</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">manifest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// This is a promise that will resolve when Assets has been initialized.</span>
+    <span class="c1">// Promise&lt;unknown&gt; means this is a promise but we don't care what value it resolves to, only that it resolves.</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">initializeAssetsPromise</span><span class="p">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">unknown</span><span class="o">&gt;</span><span class="p">;</span> 
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+
+        <span class="c1">// We store it to be sure we can use Assets later on</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">initializeAssetsPromise</span> <span class="o">=</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span> <span class="na">manifest</span><span class="p">:</span> <span class="nx">manifest</span> <span class="p">});</span>
+
+        <span class="c1">// Black js magic to extract the bundle names into an array.</span>
+        <span class="kd">const</span> <span class="nx">bundleNames</span> <span class="o">=</span> <span class="nx">manifest</span><span class="p">.</span><span class="nx">bundles</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+
+        <span class="c1">// Initialize the assets and then start downloading the bundles in the background</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">initializeAssetsPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">backgroundLoadBundle</span><span class="p">(</span><span class="nx">bundleNames</span><span class="p">));</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Bonus points if you want to make initialize <code>async</code> and <code>await</code> the initialize promise...</p>
+</blockquote>
+
+<p>For this setup, we will no longer use the <code>LoaderScene</code>, so we need to make sure we initialize <code>Assets</code> in our <code>Manager</code> constructor before we create any <code>Scene</code>.<br>
+We also set to download everything in the background. Whenever we need to load something for a scene, the background downloads will pause and then resume <em>automagically.</em></p>
+<h2 id='bundles-we-depend-on'>Bundles we depend on</h2>
+<blockquote>
+<p>we make a variable to store what bundles we need</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nl">assetBundles</span><span class="p">:</span><span class="kr">string</span><span class="p">[];</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>make sure you write something inside that array inside your <code>Scene</code>!</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">GameScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nl">assetBundles</span><span class="p">:</span><span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">game</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">sounds</span><span class="dl">"</span><span class="p">];</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For this to work, we will need a way for each <code>Scene</code> to know which <em>asset bundles</em> it needs to show itself. Depending on how we divided our assets we might need just one bundle per scene or we might need many. We will use an array just in case.</p>
+
+<p>We can also set the scene constructor to begin downloading our <em>asset bundles</em> but...</p>
+<h2 id='async-constructors-aren-39-t-a-thing'>Async constructors aren&#39;t a thing!</h2>
+<blockquote>
+<p>we <strong>can&#39;t</strong> do this!</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">GameScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
+
+    <span class="nl">assetBundles</span><span class="p">:</span><span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">game</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">sounds</span><span class="dl">"</span><span class="p">];</span>
+
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+
+        <span class="c1">// This is illegal!</span>
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">loadBundle</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">assetBundles</span><span class="p">);</span>
+
+        <span class="c1">// But we need to wait to have assets D:</span>
+        <span class="kd">const</span> <span class="nx">clampy</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Clampy the clamp!</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">clampy</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>We go in a different way, let Manager load your assets and let the scene now.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nl">assetBundles</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+    <span class="nx">constructorWithAssets</span><span class="p">():</span> <span class="k">void</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>And change how Manager changes the scene...</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="nx">changeScene</span><span class="p">(</span><span class="nx">newScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+
+        <span class="c1">// let's make sure our Assets were initialized correctly</span>
+        <span class="k">await</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">initializeAssetsPromise</span><span class="p">;</span>
+
+
+        <span class="c1">// Remove and destroy old scene... if we had one..</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// If you were to show a loading thingy, this will be the place to show it...</span>
+
+        <span class="c1">// Now, let's start downloading the assets we need and wait for them...</span>
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">loadBundle</span><span class="p">(</span><span class="nx">newScene</span><span class="p">.</span><span class="nx">assetBundles</span><span class="p">);</span>
+
+        <span class="c1">// If you have shown a loading thingy, this will be the place to hide it...</span>
+
+        <span class="c1">// when we have assets, we tell that scene</span>
+        <span class="nx">newScene</span><span class="p">.</span><span class="nx">constructorWithAssets</span><span class="p">();</span>
+
+        <span class="c1">// we now store it and show it, as it is completely created</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span> <span class="o">=</span> <span class="nx">newScene</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Finally, an example of how an scene should kinda look</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">GameScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
+
+    <span class="nl">assetBundles</span><span class="p">:</span><span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">game</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">sounds</span><span class="dl">"</span><span class="p">];</span>
+
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+        <span class="c1">// We can make anything here as long as we don't need assets!</span>
+    <span class="p">}</span>
+    <span class="nx">constructorWithAssets</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Manager will call this when we have all the assets!</span>
+
+        <span class="kd">const</span> <span class="nx">clampy</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Clampy the clamp!</span><span class="dl">"</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">clampy</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As I said before, <code>async</code> constructors are not a thing so we can&#39;t <code>await</code> on the construction of a <code>Scene</code> for our assets. We are forced to use a method to finish the construction of our <code>Scene</code>. Let&#39;s say this is the <code>constructorWithAssets()</code> method. We will delegate the responsibility of downloading the assets a <code>Scene</code> needs to the <code>Manager</code> and make it tell the scene when the assets are downloaded.</p>
+
+<aside class="info">Remember, we fired <code>Assets.backgroundLoadBundle(...)</code> before, so hopefully the assets were already downloaded and the <code>Assets.loadBundle(...)</code> call should resolve immediately.</aside>
+
+<p>It is left as an exercise to the reader to make the <em>interstitial loading thingy</em> in case the user goes too fast and has to wait for more assets to download.<br>
+(Or you can cheat and always keep the <em>interstitial loading thingy</em> in the background and it will only be seen when there is no scene covering it)</p>
 <h1 id='older-guides'>Older guides</h1>
 <p>As PixiJS moves forward I will try to keep these guides updated. Sometimes this will mean that I will make small modifications here and there to make sure this guide works for the latest version of PixiJS.<br>
 However, some changes will be too big and entire sections will become obsolete and new sections will need to be created.<br>
