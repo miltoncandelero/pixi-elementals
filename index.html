@@ -6,6 +6,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32-94db8bb5.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16-f7a9ef35.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="canonical" href="https://www.pixijselementals.com">
+    <meta name="title" content="PixiJS Elementals">
+    <meta name="description" content="A compilation of essential knowledge to get started making games and content with PixiJS. Boilerplate included!">
+    <meta name="keywords" content="pixijs, typescript, tutorial, guide, boilerplate, elementals, course">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Milton Candelero (elementalcode)">
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -426,10 +434,16 @@
             <a href="#recipe-preloading-assets" class="toc-h1 toc-link" data-title="Recipe: Preloading assets">Recipe: Preloading assets</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#the-file-to-download-manifest" class="toc-h2 toc-link" data-title="The file to download manifest.">The file to download manifest.</a>
+                    <a href="#first-of-all-a-primer-on-promises" class="toc-h2 toc-link" data-title="First of all, a primer on Promises.">First of all, a primer on <em>Promises</em>.</a>
                   </li>
                   <li>
-                    <a href="#how-to-use-the-loader" class="toc-h2 toc-link" data-title="How to use the Loader">How to use the <em>Loader</em></a>
+                    <a href="#using-assets" class="toc-h2 toc-link" data-title="Using Assets">Using <em>Assets</em></a>
+                  </li>
+                  <li>
+                    <a href="#the-files-to-download-manifest" class="toc-h2 toc-link" data-title="The files-to-download Manifest.">The files-to-download Manifest.</a>
+                  </li>
+                  <li>
+                    <a href="#using-our-manifest" class="toc-h2 toc-link" data-title="Using our Manifest">Using our <em>Manifest</em></a>
                   </li>
                   <li>
                     <a href="#making-it-look-pretty" class="toc-h2 toc-link" data-title="Making it look pretty">Making it look pretty</a>
@@ -457,7 +471,7 @@
               </ul>
           </li>
           <li>
-            <a href="#recipe-resize-your-game" class="toc-h1 toc-link" data-title="Recipe: Resize your game.">Recipe: Resize your game.</a>
+            <a href="#recipe-resize-your-game" class="toc-h1 toc-link" data-title="Recipe: Resize your game">Recipe: Resize your game</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#letterbox-scale" class="toc-h2 toc-link" data-title="Letterbox scale">Letterbox scale</a>
@@ -467,6 +481,29 @@
                   </li>
                   <li>
                     <a href="#resolution-device-pixel-ratio" class="toc-h2 toc-link" data-title="Resolution (Device Pixel Ratio)">Resolution (Device Pixel Ratio)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#older-guides" class="toc-h1 toc-link" data-title="Older guides">Older guides</a>
+          </li>
+          <li>
+            <a href="#recipe-preloading-assets-v6" class="toc-h1 toc-link" data-title="Recipe: Preloading assets v6">Recipe: Preloading assets v6</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#the-file-to-download-manifest" class="toc-h2 toc-link" data-title="The file to download manifest.">The file to download manifest.</a>
+                  </li>
+                  <li>
+                    <a href="#how-to-use-the-loader" class="toc-h2 toc-link" data-title="How to use the Loader">How to use the <em>Loader</em></a>
+                  </li>
+                  <li>
+                    <a href="#making-it-look-pretty" class="toc-h2 toc-link" data-title="Making it look pretty">Making it look pretty</a>
+                  </li>
+                  <li>
+                    <a href="#how-to-easily-use-your-loaded-sprites-and-sounds" class="toc-h2 toc-link" data-title="How to easily use your loaded Sprites and Sounds?">How to easily use your loaded Sprites and Sounds?</a>
+                  </li>
+                  <li>
+                    <a href="#advanced-loading" class="toc-h2 toc-link" data-title="Advanced loading">Advanced loading</a>
                   </li>
               </ul>
           </li>
@@ -503,7 +540,7 @@ It is a <em>just-add-npm</em> solution that sets you up with <em>typescript</em>
 Enter Typescript: Typescript will force your hand to keep your code as strictly typed as possible, and if you need to use type coercion and really <em>javascripty</em> code, you must consciously choose to make the data type as <code>any</code>.<br>
 As a nice bonus, you get <em>intellisense</em> on Visual Studio Code (which is Microsoft&#39;s fancy name for code auto-complete).  </p>
 <h3 id='i-will-never-scream-pixi'>I will never scream (<code>PIXI.</code>)</h3>
-<p>I feel that doing <code>import * as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Loader</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Loader } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
+<p>I feel that doing <code>import * as PIXI from &quot;pixi.js&quot;</code> so that I can go <code>PIXI.Sprite</code>, <code>PIXI.Container</code>, <code>PIXI.Assets</code>, etc, is silly and makes me feel clumsy. I will use named imports: <code>import { Sprite, Container, Assets } from &quot;pixi.js&quot;</code> and that allows me to just use the class name without adding <code>PIXI</code> everywhere.<br>
 I could say it is better for three-shaking (the step where the bundler doesn&#39;t add to your code stuff that you never use) or that I fight the smurf naming convention... but at the end of the day I just like named imports better. Sorry, not sorry.  </p>
 <h2 id='enough-talk-have-at-you'>Enough talk, have at you!</h2>
 <blockquote>
@@ -583,7 +620,7 @@ As a parameter for the <code>Application</code> object, we give it some options.
 
 <ul>
 <li>A <code>Texture</code> object.</li>
-<li>The name of a <code>Texture</code> object you loaded previously. (using a <code>Loader</code>, we will see this when we get to <a href="#recipe-preloading-assets">loading assets</a>)</li>
+<li>The name of a <code>Texture</code> object you loaded previously. (using <code>Assets</code>, we will see this when we get to <a href="#recipe-preloading-assets">loading assets</a>)</li>
 <li>The URL of an image file</li>
 </ul>
 
@@ -936,7 +973,7 @@ Technically applying a filter on a <code>Sprite</code> should be cheaper than ap
 
 <p>Once we have our particles looking good on the editor we download a <code>.json</code> file and we will feed the parsed object into the <code>Emitter</code> constructor along with a container for our particles (it can be any <code>Container</code> but if you have a lot of particles you might want a <code>ParticleContainer</code>), and the <code>Texture</code> (or an array of textures) you want your particles to use.</p>
 
-<p>To make that <code>.json</code> into something usable we need to either load it with the <code>Loader</code> or just add it as part of our source code and <code>import</code> it.</p>
+<p>To make that <code>.json</code> into something usable we need to either load it with <code>Assets</code> or just add it as part of our source code and <code>import</code> it.</p>
 
 <p>Methods and properties that you will use most frequently:  </p>
 
@@ -1317,7 +1354,7 @@ Remember to <code>.update()</code> your groups!
 <p>--</p>
 <h2 id='pointer-events'>Pointer Events</h2>
 <p><em>mouse... touch.... both?</em></p>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">InteractionEvent</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">FederatedPointerEvent</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Scene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="p">{</span>
     <span class="k">private</span> <span class="nx">clampy</span><span class="p">:</span> <span class="nx">Sprite</span><span class="p">;</span>
@@ -1344,21 +1381,23 @@ Remember to <code>.update()</code> your groups!
         <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">interactive</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">private</span> <span class="nx">onClicky</span><span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">InteractionEvent</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nx">onClicky</span><span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">FederatedPointerEvent</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">You interacted with Clampy!</span><span class="dl">"</span><span class="p">)</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The data of your interaction is super interesting</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
 
         <span class="c1">// Global position of the interaction</span>
-        <span class="c1">// e.data.global</span>
+        <span class="c1">// e.global</span>
 
         <span class="c1">// Local (inside clampy) position of the interaction</span>
-        <span class="c1">// e.data.getLocalPosition(this.clampy) </span>
+        <span class="c1">// clampy.toLocal(e.global)</span>
+        <span class="c1">// or the "unsafe" way:</span>
+        <span class="c1">// (e.target as DisplayObject).toLocal(e.global)</span>
         <span class="c1">// Remember Clampy has the 0,0 in its center because we set the anchor to 0.5!</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>PixiJS has a <em>thing</em> that whenever you click or move your mouse on the screen it checks what object were you on, no matter how deep in the display list that object is, and lets it know that <em>a mouse</em> happened.<br>
-(If curious, that <em>thing</em> is a renderer plugin called <a href="https://pixijs.download/dev/docs/PIXI.InteractionManager.html">Interaction Manager</a>)  </p>
+(If curious, that <em>thing</em> is a plugin called <a href="https://pixijs.download/dev/docs/PIXI.EventSystem.html">Federated Events System</a>)  </p>
 
 <p>The basic anatomy of adding an event listener to an imput is:<br>
 <code>yourObject.on(&quot;stringOfWhatYouWantToKnow&quot;, functionToBeCalled, contextForTheFunction)</code></p>
@@ -1401,19 +1440,19 @@ The rule of thumb is that if it has <code>pointer</code> in the name, it will ca
 
 <aside class="warning">Still not working? You forgot the <code>.interactive = true</code>, didn't you?</aside>
 <h3 id='the-event-that-fired'>The event that fired</h3>
-<p>When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the <a href="https://pixijs.download/dev/docs/PIXI.InteractionEvent.html">full shape of the object here</a>.<br>
+<p>When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the <a href="https://pixijs.download/dev/docs/PIXI.FederatedPointerEvent.html">full shape of the object here</a>.<br>
 I will list now some of the most common properties here now:  </p>
 
 <ul>
-<li><code>event.data.global</code> This is the global (stage) position of the interaction</li>
-<li><code>e.data.getLocalPosition(e.target)</code> This is the local (object that has the event) position of the interaction</li>
-<li><code>event.data.pointerType</code> This will say <code>mouse</code> or <code>touch</code></li>
+<li><code>event.global</code> This is the global (stage) position of the interaction</li>
+<li><code>(e.target as DisplayObject).toLocal(e.global)</code> This is the local (object that has the event) position of the interaction. It has an unsafe cast due to the new Event System being a bit paranoid.</li>
+<li><code>event.pointerType</code> This will say <code>mouse</code> or <code>touch</code></li>
 </ul>
-<h3 id='magical-stuff'>Magical stuff</h3>
-<p>You might come across by accident the fact that if you have a function that is called exactly the same as an event (for example a <code>click</code> function) and your object is interactive, that function gets called automagically.<br>
-That is because there is a line inside one of the <a href="https://pixijs.download/dev/docs/packages_interaction_src_InteractionManager.ts.html">Interaction Manager&#39;s</a> methods that if it finds that a display object has a method with the same name as an event it calls it.</p>
+<h3 id='old-magical-stuff-pre-pixijs-v7'>Old Magical stuff (pre PixiJS v7)</h3>
+<p>You might have come across by the fact that if you have a function that is called exactly the same as an event (for example a <code>click</code> function) and your object is interactive, that function gets called automagically.<br>
+That was because there is a line inside the old <a href="https://pixijs.download/v6.5.8/docs/packages_interaction_src_InteractionManager.ts.html">Interaction Manager&#39;s</a> that if it finds that a display object has a method with the same name as an event it calls it.</p>
 
-<p>You can use it but I am not sure if this is legacy or why this exists.</p>
+<p><strong>This was removed on PixiJS&#39; v7 new <a href="https://pixijs.download/dev/docs/PIXI.EventSystem.html">Federated Events System</a></strong></p>
 
 <p>--</p>
 <h2 id='keyboard'>Keyboard</h2><div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
@@ -1659,7 +1698,774 @@ That being said... there are some things I&#39;ve picked up along the way making
 </blockquote>
 <h1 id='recipe-preloading-assets'>Recipe: Preloading assets</h1>
 <p>So far we have seen how to create images and sounds by downloading the asset behind them just as we need to show it to the user. While this is good enough if we want a quick way to make a proof of concept or prototype, it won&#39;t be good enough for a project release.<br>
-The elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache. To this purpose, PixiJS includes <a href="https://pixijs.download/dev/docs/PIXI.Loader.html">Loader</a>: An extensible class to allow the download and caching of any file you might need for your game.  </p>
+The old and elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache.<br>
+However, times change and users now want everything ready <strong>right now!</strong> so instead of having one big load at the beginning we will aim to have the smaller download possible to make do and keep everything loading in the background and <em>hopefully</em> when the user reaches further into the game our assets will be ready.<br>
+To this purpose, PixiJS includes <a href="https://pixijs.download/dev/docs/PIXI.Assets.html">Assets</a>: A system for your resource management needs. A promise-based, background-loading, webworker-using, format-detecting, juggernaut of a system.</p>
+
+<p>In this recipe, we are going to create one of our <code>Scene</code> to load all the files we declare in a manifest object and then I will teach you how to recover the files from the <code>Assets</code> cache.</p>
+<h2 id='first-of-all-a-primer-on-promises'>First of all, a primer on <em>Promises</em>.</h2>
+<blockquote>
+<p>use <code>.then(..)</code> to be notified when that value is ready</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">somePromise</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">myValue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// This function will be called when "myValue" is ready to go!</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>A promise is something that <em>will eventually have a value</em> for you to use but you can&#39;t be sure if that value is ready or not just yet, so you ask nicely to be notified when that happens.<br>
+When a Promise has your value, it is said that it <em>resolves</em> your value. For you to use the value you need to give a function to the <code>.then(...)</code> method.</p>
+
+<blockquote>
+<p>keep in mind that even resolved promises take a bit of time before executing your then, so take a look at this code...</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">before</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">alreadyResolvedPromise</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">inside the then with my value</span><span class="dl">"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">after</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>will give us: &quot;before&quot; -&gt; &quot;after&quot; -&gt; &quot;inside the then with my value&quot;.</p>
+</blockquote>
+
+<aside class="info">Even if the promise was resolved long ago, adding a <code>.then(...)</code> will trigger almost immediately, this means you don't have to <i>see it</i> resolve, you can come after it has resolved and it will still give you a value.</aside>
+<h3 id='awaiting-promises'>Awaiting Promises</h3>
+<blockquote>
+<p>Take a look at this very naïve code...</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="c1">// async functions always return a Promise of whatever they return</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">waitForPromise</span><span class="p">()</span> <span class="p">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This starts excecuting</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="c1">// As this next line has `await` in it, it will "freeze" the execution here until that magical promise resolves to a value.</span>
+    <span class="kd">const</span> <span class="nx">magicalNumber</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">someMagicalPromise</span><span class="p">;</span>
+
+    <span class="c1">// When the promise is resolved, our code keeps executing</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Wow, that took a while!</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="c1">// We return a string with the resolved value... but that took some time, so the entire function actually returns a promise.</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">This will be finally resolved! The Magical number was </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">magicalNumber</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="c1">// We kinda need to call the function, right?</span>
+<span class="nx">waitForPromise</span><span class="p">();</span>
+</code></pre></div>
+<p>To keep code somewhat easier to read, you can use two keywords <code>async</code> and <code>await</code> to <em>freeze</em> the code until a promise resolves.<br>
+This doesn&#39;t really change how Promises work, this is only <em>syntax sugar</em> that will be turned into the regular functions by the browser.  </p>
+
+<aside class="warning">
+Some rules about <code>async</code> and <code>await</code>:
+<ul>
+<li><code>await</code> can only be used inside an <code>async</code> function.</li>
+<li>a Constructor can never be <code>async</code></li>
+<li>try to avoid mixing <code>.then(...)</code> and <code>await</code> inside an <code>async</code> function if you can. It can get confusing very fast</li>
+</ul>
+</aside>
+<h2 id='using-assets'>Using <em>Assets</em></h2>
+<blockquote>
+<p>Using <code>Assets.load(...)</code> with <code>.then(...)</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">Assets</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="dl">"</span><span class="s2">./clampy.png</span><span class="dl">"</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">clampyTexture</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">clampySprite</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">clampyTexture</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Be careful, `clampySprite` doesn't exist out here, only inside those brackets!</span>
+</code></pre></div>
+<blockquote>
+<p>Using <code>Assets.load(...)</code> with <code>async</code> <code>await</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">loadClampy</span><span class="p">()</span> <span class="p">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Sprite</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">clampyTexture</span> <span class="o">=</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="dl">"</span><span class="s2">./clampy.png</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">clampyTexture</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// now calling `loadClampy()` will yield a Clampy sprite promise!</span>
+</code></pre></div>
+<p>Sometimes we just want to load one single file, quick and dirty. For that purpose we have <code>Assets.load(...)</code>.<br>
+This will return a promise that will solve with the loaded and parsed asset ready to use! </p>
+
+<aside class="info">Assets is a very smart piece of code and it will never download twice the same asset! Feel free to call <code>Assets.load(...)</code> every time you need an asset and it will give you the cached asset if it was already downloaded.</aside>
+<h3 id='load-vs-get'>.load(...) vs .get(...)</h3>
+<p><code>Assets</code> has two methods to get your asset from inside it. The safer <code>Assets.load(...)</code> that will return a promise and the unsafe <code>Assets.get(...)</code> that will just return your asset... or <code>undefined</code>.<br>
+If you are <em>absolutely</em> sure that your asset has been loaded before and you don&#39;t want to deal with the promise that <code>Assets.load(...)</code> returns, you can use <code>Assets.get(...)</code> to get your asset directly from the cache, however if you were wrong and your asset wasn&#39;t loaded before you will get <code>undefined</code>.</p>
+<h2 id='the-files-to-download-manifest'>The files-to-download Manifest.</h2>
+<blockquote>
+<p>Let&#39;s start with our <em>manifest</em> object. I will call this file <code>assets.ts</code> {manifest&#39;s entries can have many shapes, this is the one I like the most.}</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">ResolverManifest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">manifest</span><span class="p">:</span><span class="nx">ResolverManifest</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">bundles</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">bundleName</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">assets</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">Clampy the clamp</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">./clampy.png</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">another image</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">./monster.png</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="na">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">another bundle</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">assets</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">whistle</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">./whistle.mp3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As javascript is unable to &quot;scan&quot; a directory and just load everything inside we need to add some sort of <em>manifest object</em> that lists all the files that we need to download. Conveniently, <code>Assets</code> has a format to feed <em>Asset Bundles</em> from a <em>manifest</em>.<br>
+An <em>Asset Bundle</em> is just that, a group of assets that make sense for our game to download together, for example, you make an <em>bundle</em> for each screen of your game.<br>
+Here we can see we are how we can declare (and export for outside use) an <em>Asset Bundle</em> with the format that <code>Assets</code> wants it.<br>
+Each bundle has a <code>name</code> field and an object of <code>assets</code> where the <em>key</em> is the name for each asset and the <em>value</em> is the URL for it. (by starting with <code>./</code> we mean &quot;relative to our <em>index.html</em>&quot;).  </p>
+
+<aside class="info">Remember that Assets never downloads the same asset twice so don't be afraid to put the same asset in two different bundles.</aside>
+<h2 id='using-our-manifest'>Using our <em>Manifest</em></h2>
+<blockquote>
+<p>This is just a snippet of how to initialize <code>Assets</code>. After this, we will see how to make a full loader <code>Scene</code> and background loading.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="c1">// remember the assets manifest we created before? You need to import it here</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">initializeLoader</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="c1">// This promise won't return any value, will just take time to finish.</span>
+<span class="p">{</span>
+    <span class="c1">// Make sure you don't use Assets before this or you will get a warning and it won't work!</span>
+    <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span> <span class="na">manifest</span><span class="p">:</span> <span class="nx">manifest</span> <span class="p">});</span>
+
+    <span class="c1">// let's extract the bundle ids. This is a bit of js black magic</span>
+    <span class="kd">const</span> <span class="nx">bundleIds</span> <span class="o">=</span>  <span class="nx">manifest</span><span class="p">.</span><span class="nx">bundles</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">bundle</span> <span class="o">=&gt;</span> <span class="nx">bundle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+
+    <span class="c1">// we download ALL our bundles and wait for them</span>
+    <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">loadBundle</span><span class="p">(</span><span class="nx">bundleIds</span><span class="p">);</span>
+
+    <span class="c1">// Code ends when all bundles are loaded!</span>
+<span class="p">}</span>
+
+<span class="c1">// Remember to call it and remember it returns a promise</span>
+<span class="nx">initializeLoader</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// ALL your assets are ready!</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>This is enough to start downloading assets... but what about progress? and how can we tell when we are done?</p>
+</blockquote>
+
+<p><code>Assets</code> is the global static instance in charge of resolving, downloading and keeping track of all our assets so we never download twice. We initialize with <code>Assets.init(...)</code> feeding it our manifest and then we call <code>Assets.loadBundle(...)</code> with <em>all</em> the names of our <em>asset bundles</em>.  </p>
+<h2 id='making-it-look-pretty'>Making it look pretty</h2>
+<blockquote>
+<p>This is our full code for <code>LoaderScene.ts</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Graphics</span><span class="p">,</span> <span class="nx">Assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">manifest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">LoaderScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="p">{</span>
+
+    <span class="c1">// for making our loader graphics...</span>
+    <span class="k">private</span> <span class="nx">loaderBar</span><span class="p">:</span> <span class="nx">Container</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nx">loaderBarBoder</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nx">loaderBarFill</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">screenWidth</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">screenHeight</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+
+        <span class="c1">// lets make a loader graphic:</span>
+        <span class="kd">const</span> <span class="nx">loaderBarWidth</span> <span class="o">=</span> <span class="nx">screenWidth</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">;</span> <span class="c1">// just an auxiliar variable</span>
+        <span class="c1">// the fill of the bar.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">beginFill</span><span class="p">(</span><span class="mh">0x008800</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">endFill</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// we draw the filled bar and with scale we set the %</span>
+
+        <span class="c1">// The border of the bar.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+        <span class="c1">// Now we keep the border and the fill in a container so we can move them together.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">);</span>
+        <span class="c1">//Looks complex but this just centers the bar on screen.</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenWidth</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> 
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenHeight</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">);</span>
+
+        <span class="c1">// Start loading!</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">initializeLoader</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// Remember that constructors can't be async, so we are forced to use .then(...) here!</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">gameLoaded</span><span class="p">();</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">async</span> <span class="nx">initializeLoader</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span> <span class="na">manifest</span><span class="p">:</span> <span class="nx">manifest</span> <span class="p">});</span>
+
+        <span class="kd">const</span> <span class="nx">bundleIds</span> <span class="o">=</span>  <span class="nx">manifest</span><span class="p">.</span><span class="nx">bundles</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">bundle</span> <span class="o">=&gt;</span> <span class="nx">bundle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+
+        <span class="c1">// The second parameter for `loadBundle` is a function that reports the download progress!</span>
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">loadBundle</span><span class="p">(</span><span class="nx">bundleIds</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">downloadProgress</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="nx">downloadProgress</span><span class="p">(</span><span class="nx">progressRatio</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// progressRatio goes from 0 to 1, so set it to scale</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">progressRatio</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="nx">gameLoaded</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Our game finished loading!</span>
+
+        <span class="c1">// Let's remove our loading bar</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">);</span>
+
+        <span class="c1">// all your assets are ready! I would probably change to another scene</span>
+        <span class="c1">// ...but you could build your entire game here if you want</span>
+        <span class="c1">// (pls don't)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Keep in mind that if you have few assets (or a really fast internet connection), you might not see the progress bar at all!</p>
+</blockquote>
+
+<p>I will not explain how the loading bar was made. If you need to refresh how to put stuff on screen check <a href="#putting-stuff-on-screen">that chapter again</a>.</p>
+
+<p>You will see that the constructor calls an <code>async</code> function and is forced to use the <code>.then(...)</code> method, that is because constructors can never be <code>async</code>. 
+You might have realized that we just downloaded <em>all</em> our assets at the same time, at the very beginning of our game. This is has the benefit that once we leave that loading screen we will never need to download anything else ever again, however we forced our user to stay some time waiting and users nowadays don&#39;t like waiting.<br>
+To remedy this we can take a different approach: we just load the bare minimum needed for the current screen and let the rest download in the background. We will see this in a <a href="#recipe-lazy-loading-assets">future recipe</a></p>
+
+<aside class="warning">You might have noted that I used only <code>Graphics</code> to make my loader progress bar. This is because if I were to use assets I would need a loader for the loader assets and that would mess with the space-time continuum. However, should you want your loader to have assets you can reference them directly by URL (<code>Sprite.from(urlHere)</code>) but make sure you call <code>Asssets.init(...)</code> before that, otherwise <code>Assets</code> will auto-initialize itself and your loader will break with a cryptic warning.</aside>
+<h2 id='how-to-easily-use-your-loaded-sprites-and-sounds'>How to easily use your loaded Sprites and Sounds?</h2>
+<p>Now that we downloaded and safely stored our assets in a cache... how do we use them?<br>
+The two basic components we have seen so far are <code>Sprite</code> and <code>Sound</code> and we will use them in different ways.  </p>
+
+<p>For <em>Sprites</em>, all our textures are stored in a <a href="https://pixijs.download/dev/docs/PIXI.utils.html#TextureCache">TextureCache somewhere in the PixiJS universe</a> but all we need to know is that we can access that cache by doing <code>Sprite.from(...)</code> but instead of giving an URL we just give the name we gave our asset in the manifest file. In my example above I could do <code>Sprite.from(&quot;Clampy the clamp&quot;)</code>.  (If you ever need a <code>Texture</code> object, you can get it the same way with <code>Texture.from(...)</code> just remember that <em>Sprites</em> go on screen and <em>Textures</em> hide inside sprites.)</p>
+
+<p>For <em>Sounds</em>, all our sounds are stored in what PixiJS Sound calls <em>sound library</em>. To access it we have to import it as <code>import { sound } from &quot;@pixi/sound&quot;;</code>. That is <code>sound</code> with a <strong>lowercase s</strong>. From there you can play it by doing <code>sound.play(&quot;name we gave in the manifest&quot;);</code>.</p>
+
+<aside class="warning">
+PixiJS Sound names can be confusing, while <code>Sound</code> with uppercase is the class for a single sound file, <code>sound</code> with lowercase is the sound library object.
+</aside>
+
+<aside class="info">
+Remember you can always access your assets with <code>Assets.get("the name you gave your asset in the manifest");</code> and that will return the correct object (for example <code>Texture</code> or a <code>Sound</code>) as long as it was already loaded before. If you are not sure if the asset was loaded before, you should use <code>Assets.load(...);</code>
+</aside>
+<h2 id='advanced-loading'>Advanced loading</h2>
+<p>Ok, we have seen how to load our basic <em>png</em> and <em>mp3</em> but what about other kinds of assets? What about <em>spritesheets</em>, <em>fonts</em>, <em>levels</em>, and more?<br>
+This section will show some of the most common asset types and how to load and use them.</p>
+
+<p>But before we start, a bit of how things will work behind the curtains: <em>Assets</em>, <em>Resolvers</em>, <em>Loader</em>, <em>Cache</em> and <em>Detection</em>. 
+You might never need to know more about these, but I have to mention them.  </p>
+
+<ul>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Assets.html">Assets</a> is a static instance for <code>AssetsClass</code>. It&#39;s the entry point and coordinator of the rest of the system.</li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Resolver.html">Resolver</a> is a class that knows how to map assets to URLs. It also knows how to pick the best asset type for your system.</li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.AssetLoader.html">Loader</a> is the bit that actually downloads your file. It does noting else than going to an URL and getting data from it.</li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Cache.html">Cache</a> stores all the related assets for a certain key.</li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.FormatDetectionParser.html">Detection</a> is how you tell the rest of the system that you can totally handle that format of asset.</li>
+</ul>
+<h3 id='spritesheets'>Spritesheets</h3>
+<blockquote>
+<p>Add this to one of your bundles in <code>assets.ts</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="p">...</span>
+    <span class="nx">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">bundleName</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">assets</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="dl">"</span><span class="s2">you probably wont use this name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./yourSpritesheetUrl.json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="c1">// Don't add an entry for the .png file! Just make sure it exists next to your json file and it will work.</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<blockquote>
+<p>Then your textures from inside your spritesheet will exist in the cache! Ready to Sprite.from()</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Name from inside your spritesheet</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="nx">Texture</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Name from inside your spritesheet</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>
+<p>A spritesheet (also known as texture atlas) is a single image file with many assets inside next to a text file (in our case a <code>json</code> file) that explains how to slice that texture to extract all the assets. It is really good for performance and you should try to always use them.<br>
+To create a spritesheet you can use paid programs like <a href="https://www.codeandweb.com/texturepacker">TexturePacker</a> or free ones like <a href="https://renderhjs.net/shoebox/">ShoeBox</a> or <a href="http://free-tex-packer.com/">FreeTexPacker</a>.<br>
+If you have problems finding a <em>PixiJS</em> compatible format in the packer of your choice, it might also be called <em>JSON Hash format</em></p>
+
+<p>PixiJS includes a spritesheet parser so all you need to do is provide the <em>url</em> for the <em>json</em> file. <strong>You shouldn&#39;t add the URL for .png file but it must be next to the json file!</strong></p>
+<h3 id='fonts'>Fonts</h3>
+<blockquote>
+<p>Add your fonts to a bundle in your <code>assets.ts</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="p">...</span>
+    <span class="nx">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">bundleName</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">assets</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="dl">"</span><span class="s2">you probably wont use this name but don't repeat names</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./fonts/open-sans.woff2</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<blockquote>
+<p>Your fonts will be registered into the system and you can just ask for the Font Name. You can check the font name by opening your font file and checking the name. Also, remember you can make your text style with the <a href="https://pixijs.io/pixi-text-style">PixiJS Textstyle editor</a>.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="kd">const</span> <span class="nx">customStyleFont</span><span class="p">:</span> <span class="nx">TextStyle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextStyle</span><span class="p">({</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open Sans Condensed</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// Your official font name</span>
+<span class="p">});</span>
+<span class="k">new</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ready to use!</span><span class="dl">'</span><span class="p">,</span> <span class="nx">customStyleFont</span><span class="p">);</span> <span class="c1">// Text supports unicode!</span>
+</code></pre></div>
+<p>In PixiJS v7 fonts are now first class citizens!
+To use a custom font your just need to add the font to your manifest, it can be in any format: <code>ttf</code>, <code>otf</code>, <code>woff</code> or <code>woff2</code>.</p>
+
+<aside class="info">
+On PixiJS v6 you needed a plugin to load fonts but not anymore. Feel free to remove it if you have it.
+</aside>
+<h3 id='maps-from-level-editors-or-custom-txt-json-xml-etc'>Maps from level editors or custom txt, json, xml, etc.</h3>
+<blockquote>
+<p>Just add your custom file to your <code>assets.ts</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code>
+<span class="p">...</span>
+    <span class="nx">name</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">bundleName</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">assets</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="dl">"</span><span class="s2">my text</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myTextFile.txt</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">my json</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myJsonFile.json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">my xml</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./myXMLFile.xml</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<blockquote>
+<p>A good way to see what you got is to <code>console.log()</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="c1">// I can use `Assets.get(...)` because I am 100% sure that the assets are loaded!</span>
+<span class="c1">// When in doubt use `Assets.load(...)`!</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Assets</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">my text</span><span class="dl">"</span><span class="p">));</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Assets</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">my json</span><span class="dl">"</span><span class="p">));</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Assets</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">my xml</span><span class="dl">"</span><span class="p">));</span> 
+</code></pre></div>
+<p>The <em>Assets</em> class will recognize simple text formats like <code>txt</code>, <code>json</code> or <code>xml</code> and will give out a somewhat usable object.</p>
+
+<aside class="info">
+If a json file happens to be a spritesheet, the Loader will recognize it automatically and process it accordingly. No extra steps are needed!
+</aside>
+
+<p>If you would like to parse a particular kind of file you will need to write your own <em>Assets plugin</em>. The best way is to look at the <a href="https://github.com/pixijs/pixijs/blob/dev/packages/spritesheet/src/spritesheetAsset.ts">Spritesheet</a> or <a href="https://github.com/pixijs/pixijs/blob/dev/packages/text-bitmap/src/loadBitmapFont.ts">BitmapFont</a> one and work from there.</p>
+<h1 id='recipe-scene-manager'>Recipe: Scene Manager</h1>
+<p>In the <a href="#splitting-code">Splitting Code</a> chapter I explained how to create a <code>Scene</code> object to try to encapsulate different parts of our object and be able to swap them when needed but I didn&#39;t explain how to actually change from one scene to the next.<br>
+For this purpose, we are going to create a <em>Manager</em> static global class that wraps the PixiJS <code>Application</code> object and exposes a simple way to change from one scene to the next.</p>
+
+<aside class="info">If you are a hardcore programmer from another language you might be familiar with the Singleton pattern and might prefer to use that instead of a static class. Feel free to do so if you feel that is better.</aside>
+<h2 id='the-manager-class'>The Manager Class</h2>
+<blockquote>
+<p>Ok, let&#39;s write our <code>Manager.ts</code> file. This file will store the static class <em>Manager</em> and an Interface for our <em>Scenes</em></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Application</span><span class="p">,</span> <span class="nx">DisplayObject</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/*this class is purely static. No constructor to see here*/</span> <span class="p">}</span>
+
+    <span class="c1">// Safely store variables for our game</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
+
+    <span class="c1">// Width and Height are read-only after creation (for now)</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">_width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">_height</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+
+
+    <span class="c1">// With getters but not setters, these variables become read-only</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Use this function ONCE to start the entire machinery</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+
+        <span class="c1">// store our width and height</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+
+        <span class="c1">// Create our pixi app</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
+            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
+            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
+            <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
+            <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
+        <span class="p">});</span>
+
+        <span class="c1">// Add the ticker</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Call this function when you want to go to a new scene</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">changeScene</span><span class="p">(</span><span class="nx">newScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Remove and destroy old scene... if we had one..</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Add the new one</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span> <span class="o">=</span> <span class="nx">newScene</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// This update will be called by a pixi ticker and tell the scene that a tick happened</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Let the current scene know that we updated it...</span>
+        <span class="c1">// Just for funzies, sanity check that it exists first.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// as I said before, I HATE the "frame passed" approach. I would rather use `Manager.app.ticker.deltaMS`</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// This could have a lot more generic functions that you force all your scenes to have. Update is just an example.</span>
+<span class="c1">// Also, this could be in its own file...</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
+    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Lots to unpack here but let&#39;s take it easy.<br>
+First of all, see that since I made this a fully static class I never use <code>this</code> object but instead I refer to everything by using the <code>Manager.</code> notation. This prevents the need to keep track of the context in this class.  </p>
+
+<p>Next, we have a private constructor; that means nobody will be able to do <code>new Manager()</code>. That is important because our class is fully static and it&#39;s meant to be initialized by calling <code>Manager.initialize(...)</code> and we feed parameters about the screen size and the background color for our game.<br>
+The <code>Application</code> instance and the <em>width</em> and <em>height</em> are safely stored and hidden in private static variables but these last two have getters so we can ask globally what is the size of our game.  </p>
+
+<p>The initialize function has one last trick: it adds links from your entire <code>Manager</code> to a ticker so that our <code>Manager.update()</code> method gets called. That update will then call the current scene update method. This will allow you to have an update method in your scenes that appears to be called <em>magically</em>.</p>
+
+<p>Then we have the <code>Manager.changeScene(...)</code> method, this is exactly why we started all of this, an easy way to tell our game that the current scene is no longer useful and that we want to change it for a new one.<br>
+It&#39;s quite simple to see that <code>Manager</code> removes the old one from the screen, destroys it (actually, <code>destroy()</code> is a PixiJS method!), and then proceeds to put your new scene directly on screen.  </p>
+
+<p>But...<br>
+<em>What is a Scene? A miserable little pile of pixels!</em><br>
+Well, it has to be a <code>DisplayObject</code> of some sort because we need to put it on the screen (remember that <code>Containers</code> <em>are DisplayObjects</em>) but we also want it to have our custom <code>update(...)</code> method and to enforce that we create an interface <code>IScene</code> (I like to begin my interfaces with <code>I</code>). This makes sure that if an object wants to be a <em>Scene</em> then it must follow the two rules: be some sort of <code>DisplayObject</code> and have an <code>update(...)</code> method.</p>
+<h2 id='now-some-reruns-of-your-favorite-classes'>Now, some reruns of your favorite classes!</h2>
+<blockquote>
+<p>Look at this buffed up <code>LoaderScene.ts</code> that now <code>implements IScene</code> and uses <code>Manager</code> to know its size!</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Graphics</span><span class="p">,</span> <span class="nx">Assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">IScene</span><span class="p">,</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../Manager</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">GameScene</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./GameScene</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">LoaderScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
+
+    <span class="c1">// for making our loader graphics...</span>
+    <span class="k">private</span> <span class="nx">loaderBar</span><span class="p">:</span> <span class="nx">Container</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nx">loaderBarBoder</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nx">loaderBarFill</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+
+        <span class="kd">const</span> <span class="nx">loaderBarWidth</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">beginFill</span><span class="p">(</span><span class="mh">0x008800</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">endFill</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">initializeLoader</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">gameLoaded</span><span class="p">();</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">async</span> <span class="nx">initializeLoader</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span> <span class="na">manifest</span><span class="p">:</span> <span class="nx">manifest</span> <span class="p">});</span>
+
+        <span class="kd">const</span> <span class="nx">bundleIds</span> <span class="o">=</span>  <span class="nx">manifest</span><span class="p">.</span><span class="nx">bundles</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">bundle</span> <span class="o">=&gt;</span> <span class="nx">bundle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+
+        <span class="k">await</span> <span class="nx">Assets</span><span class="p">.</span><span class="nx">loadBundle</span><span class="p">(</span><span class="nx">bundleIds</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">downloadProgress</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="nx">downloadProgress</span><span class="p">(</span><span class="nx">progressRatio</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">progressRatio</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="nx">gameLoaded</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Change scene to the game scene!</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">changeScene</span><span class="p">(</span><span class="k">new</span> <span class="nx">GameScene</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// To be a scene we must have the update method even if we don't use it.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In this new <code>LoaderScene</code> that extends from <code>IScene</code> there are really only two changes:<br>
+* It now extends from <code>IScene</code> so it must have an <code>update(...)</code> method even if we don&#39;t need it.
+* When the loader finishes, it changes the scene to another one! We can finally see <code>Manager.changeScene()</code> in action!</p>
+
+<blockquote>
+<p>And this is what the simpler <code>GameScene.ts</code> looks like.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">IScene</span><span class="p">,</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../Manager</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">GameScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nx">clampy</span><span class="p">:</span> <span class="nx">Sprite</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nx">clampyVelocity</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+
+        <span class="c1">// Inside assets.ts we have a line that says `"Clampy from assets.ts!": "./clampy.png",`</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Clampy from assets.ts!</span><span class="dl">"</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// Lets move clampy!</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">*</span> <span class="nx">framesPassed</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='turning-on-the-entire-machine'>Turning on the entire machine</h2>
+<blockquote>
+<p><code>index.ts</code> has always been the entry point of our game. Let&#39;s use it to start our <code>Manager</code> and open our first ever <code>Scene</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Manager</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LoaderScene</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./scenes/LoaderScene</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">Manager</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mh">0x6495ed</span><span class="p">);</span>
+
+<span class="c1">// We no longer need to tell the scene the size because we can ask Manager!</span>
+<span class="kd">const</span> <span class="nx">loady</span><span class="p">:</span> <span class="nx">LoaderScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LoaderScene</span><span class="p">();</span>
+<span class="nx">Manager</span><span class="p">.</span><span class="nx">changeScene</span><span class="p">(</span><span class="nx">loady</span><span class="p">);</span>
+</code></pre></div>
+<p>So far we have a <em>Manager</em> that can change from one <em>Scene</em> to the next but... how do we start it and go to the first scene ever?<br>
+That is what the <code>Manager.initialize(...)</code> was for and we will call it directly from <code>index.ts</code> and right after that, we ask it to go to the first scene of our game: the <code>LoaderScene</code>.  </p>
+
+<p>That is all there is to it. You <em>initialize</em> your <em>manager</em> and are ready to rumble from <em>scene</em> to <em>scene</em>!</p>
+<h1 id='recipe-resize-your-game'>Recipe: Resize your game</h1>
+<p>By now you probably have realized that all the examples so far have the game in the top-left corner of the screen, this is because we never bothered to move it or change its size: Let&#39;s make it fill the screen.<br>
+There are two ways to fill the screen that I like to call <em>letterbox</em> and <em>responsive</em>.<br>
+In <em>letterbox</em> you scale your entire game and add black bars to the side when the aspect ratio doesn&#39;t match, this is the easier approach and is good enough for small games that will be embedded in an iframe of another website. By using this method the resize is done entirely by the browser with some <em>css</em> trickery so you don&#39;t have to add any logic inside your game.
+In <em>responsive</em> you make your <code>stage</code> grow to fill the entire screen and you have to resize and rearrange your game elements to make your game take advantage of all the screen space available, this is almost is mandatory if you are trying to make a game that looks and feel <em>native</em> on every device (mostly smartphones). However, this approach is <em>harder</em> to implement as you have to always be mindful of the scale of your objects, sizes, and positions of the elements of your game.</p>
+
+<blockquote>
+<p>To ask the browser what is the current screen size we will use a small catch-all piece of code. This is to make sure we get the correct measurement no matter what web browser the user has.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="kd">const</span> <span class="nx">screenWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">screenHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<p>In any case, we will know the initial screen size (and if the screen changed the size) by using what the browser provides us.</p>
+<h2 id='letterbox-scale'>Letterbox scale</h2>
+<blockquote>
+<p>Here you have a modified <code>Manager.ts</code> class that listens for a resize event and uses css to fix the size of the game.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">_width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">_height</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+
+
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
+            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
+            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
+            <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
+            <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
+        <span class="p">});</span>
+
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
+
+        <span class="c1">// listen for the browser telling us that the screen size changed</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">resize</span><span class="dl">"</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">);</span>
+
+        <span class="c1">// call it manually once so we are sure we are the correct size after starting</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">resize</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// current screen size</span>
+        <span class="kd">const</span> <span class="nx">screenWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">screenHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="c1">// uniform scale for our game</span>
+        <span class="kd">const</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">screenWidth</span> <span class="o">/</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">screenHeight</span> <span class="o">/</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+
+        <span class="c1">// the "uniformly englarged" size for our game</span>
+        <span class="kd">const</span> <span class="nx">enlargedWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">scale</span> <span class="o">*</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">enlargedHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">scale</span> <span class="o">*</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+
+        <span class="c1">// margins for centering our game</span>
+        <span class="kd">const</span> <span class="nx">horizontalMargin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenWidth</span> <span class="o">-</span> <span class="nx">enlargedWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">verticalMargin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenHeight</span> <span class="o">-</span> <span class="nx">enlargedHeight</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+        <span class="c1">// now we use css trickery to set the sizes and margins</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">enlargedWidth</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">enlargedHeight</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginLeft</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginRight</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">horizontalMargin</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginTop</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginBottom</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">verticalMargin</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* More code of your Manager.ts like `changeScene` and `update`*/</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>If you are not using a <em>Manager</em> you need to focus on the <code>window.addEventListener(...)</code> and the <code>resize()</code> method.</p>
+</blockquote>
+
+<p>Letterbox scale implies two things: Making our game <em>as big as possible</em> (while still fitting on screen) and then <em>centering it on the screen</em> (letting black bars appear on the edges where the ratio doesn&#39;t match).<br>
+It is very important that when we make it <em>as big as possible</em> we don&#39;t stretch it and make it look funky, to make sure of this we find the <em>enlargement factor</em> and increase our width and height by multiplying this <em>factor</em>.<br>
+To get a factor you just <em>divide the size of the screen by the size of your game</em> but since you have <em>width</em> and <em>height</em> you end up with two factors. To make sure our game doesn&#39;t <em>bleed out</em> of the screen and <em>fits inside</em> we pick the smaller of the two factors we found and we multiply our <em>width</em> and <em>height</em> by it.</p>
+
+<p>After we have our <em>englarged</em> size by multiplying by a factor, we calculate the difference between that size and the size of the screen and split it evenly in the margins so our game ends up centered.</p>
+
+<aside class="info">
+You might see that I read but never change the <code>Manager.width</code> and <code>Manager.height</code> variables. That is because our game never realizes it is now being enlarged: everything happens at the browser level with css so our game still believes to have the size that <code>Manager.width</code> and <code>Manager.height</code> says.
+</aside>
+<h2 id='responsive-scale'>Responsive Scale</h2>
+<blockquote>
+<p>Here you have a modified <code>Manager.ts</code> class that listens for a resize event and notifies the current scene of the new size.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript"><code>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
+
+    <span class="c1">// We no longer need to store width and height since now it is literally the size of the screen.</span>
+    <span class="c1">// We just modify our getters</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
+            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
+            <span class="na">resizeTo</span><span class="p">:</span> <span class="nb">window</span><span class="p">,</span> <span class="c1">// This line here handles the actual resize!</span>
+            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
+        <span class="p">});</span>
+
+        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
+
+        <span class="c1">// listen for the browser telling us that the screen size changed</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">resize</span><span class="dl">"</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="nx">resize</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="c1">// if we have a scene, we let it know that a resize happened!</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* More code of your Manager.ts like `changeScene` and `update`*/</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
+    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+
+    <span class="c1">// we added the resize method to the interface</span>
+    <span class="nx">resize</span><span class="p">(</span><span class="nx">screenWidth</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">screenHeight</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>If you are not using a <em>Manager</em> you need to focus on the <code>resizeTo: window,</code> line in the constructor of <code>Application</code>.</p>
+</blockquote>
+
+<p>To turn on Responsive resize is actually just one line of code: you add <code>resizeTo: window,</code> to your PixiJS <code>Application</code> object and it will work however your game won&#39;t realize that now has to move and fill the new space (or fit inside a smaller space).<br>
+To make this task a bit less hard, we need to know <em>when</em> the game changed size and what is that new size.<br>
+To do this, we will listen for the <code>resize</code> event, update our <code>Manager.width</code> and <code>Manager.height</code> variables, and let the current scene know that a change in size occurred. To <em>let the scene know</em> we are going to add a function to our <code>IScene</code> interface so all scenes must now have the <code>resize(...)</code> method.  </p>
+
+<p>After that... you are on your own: You need to write your own code inside each scene <code>resize(...)</code> method to make sure every single object in your game reacts accordingly to your new screen size. Good luck.</p>
+
+<aside class="info">
+You might realize that we no longer have `width` and `height` variables but instead, we calculate them directly from the screen. You might want to store an <i>ideal size</i> for making scale calculations.
+</aside>
+<h2 id='resolution-device-pixel-ratio'>Resolution (Device Pixel Ratio)</h2><div class="highlight"><pre class="highlight typescript"><code><span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
+    <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
+    <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">// This bad boy right here...</span>
+    <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// and his friend</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>The keen-eyed of you might have noticed that when we create our <code>Application</code> object we have a line that says <code>resolution: window.devicePixelRatio || 1</code> but what does that mean?<br>
+The standard for screens was set to 96 dpi (dots per inch) for a long time and we were happy until the Apple nation attacked with their <em>Retina Display</em> that had twice as many dots per inch, thus if <code>devicePixelRatio</code> was equal to 1 it meant <em>96 dpi</em> and if it was equal to 2 it was <em>Retina display</em>.<br>
+And then the world kept moving forward, adding more and more dots per inch, in seemingly random amounts so <code>devicePixelRatio</code> started reporting decimal numbers left and right: everything as a factor of that original  <em>96 dpi</em>.  </p>
+
+<p>There is the complementary line that says <code>autoDensity: true</code> and that is meant for the <code>InteractionManager</code>. It makes it so that DOM and CSS coordinates (and thus, touch and mouse coordinates) match your global pixel units.</p>
+
+<p>By letting feeding the <code>Apllication</code> constructor the <code>devicePixelRatio</code> we render our game in a <em>native resolution</em> for the displays dpi, resulting in a sharper image on devices that have more than <em>96 dpi</em> but at the cost of some performance since we are effectively <em>supersampling</em> every pixel.  </p>
+
+<p>If a particular device (most likely an iOS device) isn&#39;t strong enough to render all the pixels of the <em>native resoluton</em> you can always force the resolution to 96 dpi with <code>resolution: 1</code> and get an image that might be blurry but you get a non-despicable performance boost.</p>
+
+<aside class="info">
+Let's get the javascript out of the way: <code>window.devicePixelRatio</code> should always be a number however some old browsers might say <code>NaN</code> or <code>undefined</code> and feeding such a value to the <code>Application</code> constructor might produce unexpected results. That <code>||1</code> makes sure we never feed it something that isn't a number.
+</aside>
+
+<aside class="info">
+Fun fact: Some devices consider the standard to be 76 dpi instead of 96. However don't worry, this doesn't change how we use <code>devicePixelRatio</code>
+</aside>
+<h1 id='older-guides'>Older guides</h1>
+<p>As PixiJS moves forward I will try to keep these guides updated. Sometimes this will mean that I will make small modifications here and there to make sure this guide works for the latest version of PixiJS.<br>
+However, some changes will be too big and entire sections will become obsolete and new sections will need to be created.<br>
+Below you will find all those sections that got retired.</p>
+<h1 id='recipe-preloading-assets-v6'>Recipe: Preloading assets v6</h1>
+<p><em>Superseded by the <code>Assets</code> class in PixiJS v7</em></p>
+
+<p>So far we have seen how to create images and sounds by downloading the asset behind them just as we need to show it to the user. While this is good enough if we want a quick way to make a proof of concept or prototype, it won&#39;t be good enough for a project release.<br>
+The elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache. To this purpose, PixiJS includes <a href="https://pixijs.download/v6.5.8/docs/PIXI.Loader.html">Loader</a>: An extensible class to allow the download and caching of any file you might need for your game.  </p>
 
 <p>In this recipe, we are going to create one of our <code>Scene</code> to load all the files we declare in a manifest object and then I will teach you how to recover the files from the <code>Loader</code> cache.</p>
 <h2 id='the-file-to-download-manifest'>The file to download manifest.</h2>
@@ -1869,410 +2675,6 @@ If a json file happens to be a spritesheet, the Loader will recognize it automat
 </aside>
 
 <p>If you would like to parse a particular kind of file you will need to write your own <em>Loader plugin</em>. I might write a tutorial for that in the future but for now, you can read <a href="https://medium.com/@bigtimebuddy/new-pixijs-v5-plugins-75a7d86afb6">this one by Matt Karl</a>.</p>
-<h1 id='recipe-scene-manager'>Recipe: Scene Manager</h1>
-<p>In the <a href="#splitting-code">Splitting Code</a> chapter I explained how to create a <code>Scene</code> object to try to encapsulate different parts of our object and be able to swap them when needed but I didn&#39;t explain how to actually change from one scene to the next.<br>
-For this purpose, we are going to create a <em>Manager</em> static global class that wraps the PixiJS <code>Application</code> object and exposes a simple way to change from one scene to the next.</p>
-
-<aside class="info">If you are a hardcore programmer from another language you might be familiar with the Singleton pattern and might prefer to use that instead of a static class. Feel free to do so if you feel that is better.</aside>
-<h2 id='the-manager-class'>The Manager Class</h2>
-<blockquote>
-<p>Ok, let&#39;s write our <code>Manager.ts</code> file. This file will store the static class <em>Manager</em> and an Interface for our <em>Scenes</em></p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Application</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@pixi/app</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DisplayObject</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@pixi/display</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/*this class is purely static. No constructor to see here*/</span> <span class="p">}</span>
-
-    <span class="c1">// Safely store variables for our game</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
-
-    <span class="c1">// Width and Height are read-only after creation (for now)</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">_width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">_height</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
-
-
-    <span class="c1">// With getters but not setters, these variables become read-only</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Use this function ONCE to start the entire machinery</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-
-        <span class="c1">// store our width and height</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
-
-        <span class="c1">// Create our pixi app</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
-            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
-            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
-            <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
-            <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
-        <span class="p">});</span>
-
-        <span class="c1">// Add the ticker</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Call this function when you want to go to a new scene</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">changeScene</span><span class="p">(</span><span class="nx">newScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// Remove and destroy old scene... if we had one..</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
-            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-        <span class="p">}</span>
-
-        <span class="c1">// Add the new one</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span> <span class="o">=</span> <span class="nx">newScene</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// This update will be called by a pixi ticker and tell the scene that a tick happened</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// Let the current scene know that we updated it...</span>
-        <span class="c1">// Just for funzies, sanity check that it exists first.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="c1">// as I said before, I HATE the "frame passed" approach. I would rather use `Manager.app.ticker.deltaMS`</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// This could have a lot more generic functions that you force all your scenes to have. Update is just an example.</span>
-<span class="c1">// Also, this could be in its own file...</span>
-<span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
-    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Lots to unpack here but let&#39;s take it easy.<br>
-First of all, see that since I made this a fully static class I never use <code>this</code> object but instead I refer to everything by using the <code>Manager.</code> notation. This prevents the need to keep track of the context in this class.  </p>
-
-<p>Next, we have a private constructor; that means nobody will be able to do <code>new Manager()</code>. That is important because our class is fully static and it&#39;s meant to be initialized by calling <code>Manager.initialize(...)</code> and we feed parameters about the screen size and the background color for our game.<br>
-The <code>Application</code> instance and the <em>width</em> and <em>height</em> are safely stored and hidden in private static variables but these last two have getters so we can ask globally what is the size of our game.  </p>
-
-<p>The initialize function has one last trick: it adds links from your entire <code>Manager</code> to a ticker so that our <code>Manager.update()</code> method gets called. That update will then call the current scene update method. This will allow you to have an update method in your scenes that appears to be called <em>magically</em>.</p>
-
-<p>Then we have the <code>Manager.changeScene(...)</code> method, this is exactly why we started all of this, an easy way to tell our game that the current scene is no longer useful and that we want to change it for a new one.<br>
-It&#39;s quite simple to see that <code>Manager</code> removes the old one from the screen, destroys it (actually, <code>destroy()</code> is a PixiJS method!), and then proceeds to put your new scene directly on screen.  </p>
-
-<p>But...<br>
-<em>What is a Scene? A miserable little pile of pixels!</em><br>
-Well, it has to be a <code>DisplayObject</code> of some sort because we need to put it on the screen (remember that <code>Containers</code> <em>are DisplayObjects</em>) but we also want it to have our custom <code>update(...)</code> method and to enforce that we create an interface <code>IScene</code> (I like to begin my interfaces with <code>I</code>). This makes sure that if an object wants to be a <em>Scene</em> then it must follow the two rules: be some sort of <code>DisplayObject</code> and have an <code>update(...)</code> method.</p>
-<h2 id='now-some-reruns-of-your-favorite-classes'>Now, some reruns of your favorite classes!</h2>
-<blockquote>
-<p>Look at this buffed up <code>LoaderScene.ts</code> that now <code>implements IScene</code> and uses <code>Manager</code> to know its size!</p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Graphics</span><span class="p">,</span> <span class="nx">Loader</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">IScene</span><span class="p">,</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../Manager</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">GameScene</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./GameScene</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">LoaderScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
-
-    <span class="c1">// for making our loader graphics...</span>
-    <span class="k">private</span> <span class="nx">loaderBar</span><span class="p">:</span> <span class="nx">Container</span><span class="p">;</span>
-    <span class="k">private</span> <span class="nx">loaderBarBoder</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
-    <span class="k">private</span> <span class="nx">loaderBarFill</span><span class="p">:</span> <span class="nx">Graphics</span><span class="p">;</span>
-    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">();</span>
-
-        <span class="kd">const</span> <span class="nx">loaderBarWidth</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">;</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">beginFill</span><span class="p">(</span><span class="mh">0x008800</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">endFill</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphics</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">.</span><span class="nx">drawRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">loaderBarWidth</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBarBoder</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">loaderBar</span><span class="p">);</span>
-
-        <span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">assets</span><span class="p">);</span>
-
-        <span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">onProgress</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">downloadProgress</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">onComplete</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gameLoaded</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-
-        <span class="nx">Loader</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="nx">downloadProgress</span><span class="p">(</span><span class="nx">loader</span><span class="p">:</span> <span class="nx">Loader</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">progressRatio</span> <span class="o">=</span> <span class="nx">loader</span><span class="p">.</span><span class="nx">progress</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loaderBarFill</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">progressRatio</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="nx">gameLoaded</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// Change scene to the game scene!</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">changeScene</span><span class="p">(</span><span class="k">new</span> <span class="nx">GameScene</span><span class="p">());</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// To be a scene we must have the update method even if we don't use it.</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>In this new <code>LoaderScene</code> that extends from <code>IScene</code> there are really only two changes:<br>
-* It now extends from <code>IScene</code> so it must have an <code>update(...)</code> method even if we don&#39;t need it.
-* When the loader finishes, it changes the scene to another one! We can finally see <code>Manager.changeScene()</code> in action!</p>
-
-<blockquote>
-<p>And this is what the simpler <code>GameScene.ts</code> looks like.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Sprite</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">IScene</span><span class="p">,</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../Manager</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">GameScene</span> <span class="kd">extends</span> <span class="nx">Container</span> <span class="k">implements</span> <span class="nx">IScene</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="nx">clampy</span><span class="p">:</span> <span class="nx">Sprite</span><span class="p">;</span>
-    <span class="k">private</span> <span class="nx">clampyVelocity</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
-    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">();</span>
-
-        <span class="c1">// Inside assets.ts we have a line that says `{ name: "Clampy from assets.ts!", url: "./clampy.png" }`</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="dl">"</span><span class="s2">Clampy from assets.ts!</span><span class="dl">"</span><span class="p">);</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">);</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// Lets move clampy!</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">*</span> <span class="nx">framesPassed</span><span class="p">;</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span> <span class="o">=</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">clampyVelocity</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h2 id='turning-on-the-entire-machine'>Turning on the entire machine</h2>
-<blockquote>
-<p><code>index.ts</code> has always been the entry point of our game. Let&#39;s use it to start our <code>Manager</code> and open our first ever <code>Scene</code></p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Manager</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">LoaderScene</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./scenes/LoaderScene</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="nx">Manager</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mh">0x6495ed</span><span class="p">);</span>
-
-<span class="c1">// We no longer need to tell the scene the size because we can ask Manager!</span>
-<span class="kd">const</span> <span class="nx">loady</span><span class="p">:</span> <span class="nx">LoaderScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LoaderScene</span><span class="p">();</span>
-<span class="nx">Manager</span><span class="p">.</span><span class="nx">changeScene</span><span class="p">(</span><span class="nx">loady</span><span class="p">);</span>
-</code></pre></div>
-<p>So far we have a <em>Manager</em> that can change from one <em>Scene</em> to the next but... how do we start it and go to the first scene ever?<br>
-That is what the <code>Manager.initialize(...)</code> was for and we will call it directly from <code>index.ts</code> and right after that, we ask it to go to the first scene of our game: the <code>LoaderScene</code>.  </p>
-
-<p>That is all there is to it. You <em>initialize</em> your <em>manager</em> and are ready to rumble from <em>scene</em> to <em>scene</em>!</p>
-<h1 id='recipe-resize-your-game'>Recipe: Resize your game.</h1>
-<p>By now you probably have realized that all the examples so far have the game in the top-left corner of the screen, this is because we never bothered to move it or change its size: Let&#39;s make it fill the screen.<br>
-There are two ways to fill the screen that I like to call <em>letterbox</em> and <em>responsive</em>.<br>
-In <em>letterbox</em> you scale your entire game and add black bars to the side when the aspect ratio doesn&#39;t match, this is the easier approach and is good enough for small games that will be embedded in an iframe of another website. By using this method the resize is done entirely by the browser with some <em>css</em> trickery so you don&#39;t have to add any logic inside your game.
-In <em>responsive</em> you make your <code>stage</code> grow to fill the entire screen and you have to resize and rearrange your game elements to make your game take advantage of all the screen space available, this is almost is mandatory if you are trying to make a game that looks and feel <em>native</em> on every device (mostly smartphones). However, this approach is <em>harder</em> to implement as you have to always be mindful of the scale of your objects, sizes, and positions of the elements of your game.</p>
-
-<blockquote>
-<p>To ask the browser what is the current screen size we will use a small catch-all piece of code. This is to make sure we get the correct measurement no matter what web browser the user has.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="kd">const</span> <span class="nx">screenWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">screenHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-</code></pre></div>
-<p>In any case, we will know the initial screen size (and if the screen changed the size) by using what the browser provides us.</p>
-<h2 id='letterbox-scale'>Letterbox scale</h2>
-<blockquote>
-<p>Here you have a modified <code>Manager.ts</code> class that listens for a resize event and uses css to fix the size of the game.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
-
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">_width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">_height</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
-
-
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span><span class="p">;</span>
-    <span class="p">}</span>
-
-
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">height</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
-
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
-            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
-            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
-            <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
-            <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
-        <span class="p">});</span>
-
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
-
-        <span class="c1">// listen for the browser telling us that the screen size changed</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">resize</span><span class="dl">"</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">);</span>
-
-        <span class="c1">// call it manually once so we are sure we are the correct size after starting</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">resize</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// current screen size</span>
-        <span class="kd">const</span> <span class="nx">screenWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="kd">const</span> <span class="nx">screenHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-
-        <span class="c1">// uniform scale for our game</span>
-        <span class="kd">const</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">screenWidth</span> <span class="o">/</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">screenHeight</span> <span class="o">/</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
-
-        <span class="c1">// the "uniformly englarged" size for our game</span>
-        <span class="kd">const</span> <span class="nx">enlargedWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">scale</span> <span class="o">*</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
-        <span class="kd">const</span> <span class="nx">enlargedHeight</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">scale</span> <span class="o">*</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
-
-        <span class="c1">// margins for centering our game</span>
-        <span class="kd">const</span> <span class="nx">horizontalMargin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenWidth</span> <span class="o">-</span> <span class="nx">enlargedWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="kd">const</span> <span class="nx">verticalMargin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">screenHeight</span> <span class="o">-</span> <span class="nx">enlargedHeight</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-
-        <span class="c1">// now we use css trickery to set the sizes and margins</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">enlargedWidth</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">enlargedHeight</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginLeft</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginRight</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">horizontalMargin</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginTop</span> <span class="o">=</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginBottom</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">verticalMargin</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cm">/* More code of your Manager.ts like `changeScene` and `update`*/</span>
-<span class="p">}</span>
-</code></pre></div>
-<blockquote>
-<p>If you are not using a <em>Manager</em> you need to focus on the <code>window.addEventListener(...)</code> and the <code>resize()</code> method.</p>
-</blockquote>
-
-<p>Letterbox scale implies two things: Making our game <em>as big as possible</em> (while still fitting on screen) and then <em>centering it on the screen</em> (letting black bars appear on the edges where the ratio doesn&#39;t match).<br>
-It is very important that when we make it <em>as big as possible</em> we don&#39;t stretch it and make it look funky, to make sure of this we find the <em>enlargement factor</em> and increase our width and height by multiplying this <em>factor</em>.<br>
-To get a factor you just <em>divide the size of the screen by the size of your game</em> but since you have <em>width</em> and <em>height</em> you end up with two factors. To make sure our game doesn&#39;t <em>bleed out</em> of the screen and <em>fits inside</em> we pick the smaller of the two factors we found and we multiply our <em>width</em> and <em>height</em> by it.</p>
-
-<p>After we have our <em>englarged</em> size by multiplying by a factor, we calculate the difference between that size and the size of the screen and split it evenly in the margins so our game ends up centered.</p>
-
-<aside class="info">
-You might see that I read but never change the <code>Manager.width</code> and <code>Manager.height</code> variables. That is because our game never realizes it is now being enlarged: everything happens at the browser level with css so our game still believes to have the size that <code>Manager.width</code> and <code>Manager.height</code> says.
-</aside>
-<h2 id='responsive-scale'>Responsive Scale</h2>
-<blockquote>
-<p>Here you have a modified <code>Manager.ts</code> class that listens for a resize event and notifies the current scene of the new size.</p>
-</blockquote>
-<div class="highlight"><pre class="highlight typescript"><code>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">Manager</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">app</span><span class="p">:</span> <span class="nx">Application</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">currentScene</span><span class="p">:</span> <span class="nx">IScene</span><span class="p">;</span>
-
-    <span class="c1">// We no longer need to store width and height since now it is literally the size of the screen.</span>
-    <span class="c1">// We just modify our getters</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">width</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="kd">get</span> <span class="nx">height</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">background</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
-            <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
-            <span class="na">resizeTo</span><span class="p">:</span> <span class="nb">window</span><span class="p">,</span> <span class="c1">// This line here handles the actual resize!</span>
-            <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
-        <span class="p">});</span>
-
-        <span class="nx">Manager</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span>
-
-        <span class="c1">// listen for the browser telling us that the screen size changed</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">resize</span><span class="dl">"</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">resize</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="nx">resize</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="c1">// if we have a scene, we let it know that a resize happened!</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">Manager</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="cm">/* More code of your Manager.ts like `changeScene` and `update`*/</span>
-<span class="p">}</span>
-
-<span class="k">export</span> <span class="kr">interface</span> <span class="nx">IScene</span> <span class="kd">extends</span> <span class="nx">DisplayObject</span> <span class="p">{</span>
-    <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
-
-    <span class="c1">// we added the resize method to the interface</span>
-    <span class="nx">resize</span><span class="p">(</span><span class="nx">screenWidth</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">screenHeight</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<blockquote>
-<p>If you are not using a <em>Manager</em> you need to focus on the <code>resizeTo: window,</code> line in the constructor of <code>Application</code>.</p>
-</blockquote>
-
-<p>To turn on Responsive resize is actually just one line of code: you add <code>resizeTo: window,</code> to your PixiJS <code>Application</code> object and it will work however your game won&#39;t realize that now has to move and fill the new space (or fit inside a smaller space).<br>
-To make this task a bit less hard, we need to know <em>when</em> the game changed size and what is that new size.<br>
-To do this, we will listen for the <code>resize</code> event, update our <code>Manager.width</code> and <code>Manager.height</code> variables, and let the current scene know that a change in size occurred. To <em>let the scene know</em> we are going to add a function to our <code>IScene</code> interface so all scenes must now have the <code>resize(...)</code> method.  </p>
-
-<p>After that... you are on your own: You need to write your own code inside each scene <code>resize(...)</code> method to make sure every single object in your game reacts accordingly to your new screen size. Good luck.</p>
-
-<aside class="info">
-You might realize that we no longer have `width` and `height` variables but instead, we calculate them directly from the screen. You might want to store an <i>ideal size</i> for making scale calculations.
-</aside>
-<h2 id='resolution-device-pixel-ratio'>Resolution (Device Pixel Ratio)</h2><div class="highlight"><pre class="highlight typescript"><code><span class="k">new</span> <span class="nx">Application</span><span class="p">({</span>
-    <span class="na">view</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">pixi-canvas</span><span class="dl">"</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLCanvasElement</span><span class="p">,</span>
-    <span class="na">resolution</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">// This bad boy right here...</span>
-    <span class="na">autoDensity</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// and his friend</span>
-    <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">background</span><span class="p">,</span>
-    <span class="na">width</span><span class="p">:</span> <span class="nx">width</span><span class="p">,</span>
-    <span class="na">height</span><span class="p">:</span> <span class="nx">height</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>The keen-eyed of you might have noticed that when we create our <code>Application</code> object we have a line that says <code>resolution: window.devicePixelRatio || 1</code> but what does that mean?<br>
-The standard for screens was set to 96 dpi (dots per inch) for a long time and we were happy until the Apple nation attacked with their <em>Retina Display</em> that had twice as many dots per inch, thus if <code>devicePixelRatio</code> was equal to 1 it meant <em>96 dpi</em> and if it was equal to 2 it was <em>Retina display</em>.<br>
-And then the world kept moving forward, adding more and more dots per inch, in seemingly random amounts so <code>devicePixelRatio</code> started reporting decimal numbers left and right: everything as a factor of that original  <em>96 dpi</em>.  </p>
-
-<p>There is the complementary line that says <code>autoDensity: true</code> and that is meant for the <code>InteractionManager</code>. It makes it so that DOM and CSS coordinates (and thus, touch and mouse coordinates) match your global pixel units.</p>
-
-<p>By letting feeding the <code>Apllication</code> constructor the <code>devicePixelRatio</code> we render our game in a <em>native resolution</em> for the displays dpi, resulting in a sharper image on devices that have more than <em>96 dpi</em> but at the cost of some performance since we are effectively <em>supersampling</em> every pixel.  </p>
-
-<p>If a particular device (most likely an iOS device) isn&#39;t strong enough to render all the pixels of the <em>native resoluton</em> you can always force the resolution to 96 dpi with <code>resolution: 1</code> and get an image that might be blurry but you get a non-despicable performance boost.</p>
-
-<aside class="info">
-Let's get the javascript out of the way: <code>window.devicePixelRatio</code> should always be a number however some old browsers might say <code>NaN</code> or <code>undefined</code> and feeding such a value to the <code>Application</code> constructor might produce unexpected results. That <code>||1</code> makes sure we never feed it something that isn't a number.
-</aside>
-
-<aside class="info">
-Fun fact: Some devices consider the standard to be 76 dpi instead of 96. However don't worry, this doesn't change how we use <code>devicePixelRatio</code>
-</aside>
 
       </div>
       <div class="dark-box">
