@@ -122,7 +122,7 @@ We can use this math every single frame to move an object after we give it a vel
 
 Now that we are on board on what we need to do, let's see how to use the PixiJS Ticker.  
 You can create one for yourself or just use the `Ticker.shared` instance that is already created for quick use. You just attach a function you want to be called every frame with the `.add()` and that's it!
-[PixiJS Ticker API](https://pixijs.download/dev/docs/PIXI.Ticker_.html)  
+[PixiJS Ticker API](https://pixijs.download/dev/docs/PIXI.Ticker.html)  
 Tips and Tricks:
 
 * If you make your own `Ticker`, remember to `start()` it.
