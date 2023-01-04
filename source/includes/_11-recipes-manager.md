@@ -67,7 +67,7 @@ export class Manager {
     }
 
     // This update will be called by a pixi ticker and tell the scene that a tick happened
-    private static update(framesPassed): void {
+    private static update(framesPassed: number): void {
         // Let the current scene know that we updated it...
         // Just for funzies, sanity check that it exists first.
         if (Manager.currentScene) {
@@ -106,7 +106,7 @@ Well, it has to be a `DisplayObject` of some sort because we need to put it on t
 
 ```ts
 import { Container, Graphics, Assets } from "pixi.js";
-import { assets } from "../assets";
+import { manifest } from "../assets";
 import { IScene, Manager } from "../Manager";
 import { GameScene } from "./GameScene";
 
