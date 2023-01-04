@@ -2129,7 +2129,7 @@ For this purpose, we are going to create a <em>Manager</em> static global class 
     <span class="p">}</span>
 
     <span class="c1">// This update will be called by a pixi ticker and tell the scene that a tick happened</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">update</span><span class="p">(</span><span class="nx">framesPassed</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
         <span class="c1">// Let the current scene know that we updated it...</span>
         <span class="c1">// Just for funzies, sanity check that it exists first.</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">Manager</span><span class="p">.</span><span class="nx">currentScene</span><span class="p">)</span> <span class="p">{</span>
@@ -2165,7 +2165,7 @@ Well, it has to be a <code>DisplayObject</code> of some sort because we need to 
 <p>Look at this buffed up <code>LoaderScene.ts</code> that now <code>implements IScene</code> and uses <code>Manager</code> to know its size!</p>
 </blockquote>
 <div class="highlight"><pre class="highlight typescript"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">Graphics</span><span class="p">,</span> <span class="nx">Assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">pixi.js</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">assets</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">manifest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../assets</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">IScene</span><span class="p">,</span> <span class="nx">Manager</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../Manager</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">GameScene</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./GameScene</span><span class="dl">"</span><span class="p">;</span>
 
