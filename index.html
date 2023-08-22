@@ -1418,6 +1418,16 @@ Remember to <code>.update()</code> your groups!
 
 <p>and the second super important thing is:<br>
 <code>yourObject.eventMode = &#39;dynamic&#39;</code></p>
+<h3 id='about-event-modes'>About Event Modes</h3>
+<p><code>eventMode</code> is a new addition in v7.2.0 that replaces the old <code>interactive</code> property. These are the valid values:</p>
+
+<ul>
+<li><code>none</code>: Ignores all interaction events, even on its children.</li>
+<li><code>passive</code>: Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.</li>
+<li><code>auto</code>: Does not emit events and but is hit tested if parent is interactive. Same as <code>interactive = false</code> in v7</li>
+<li><code>static</code>: Emit events and is hit tested. Same as <code>interactive = true</code> in v7</li>
+<li><code>dynamic</code>: Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn&#39;t moving</li>
+</ul>
 <h3 id='touch-mouse-i-want-it-all'>Touch? Mouse? I want it all!</h3>
 <p>The web has moved forward since its first inception and now we have mouses and touchscreens!<br>
 Here is a small list of the most useful events with their mouse, touch, and catch-all variants.<br>
