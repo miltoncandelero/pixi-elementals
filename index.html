@@ -1392,7 +1392,7 @@ Remember to <code>.update()</code> your groups!
         <span class="c1">// this.clampy.on("tap", this.onClicky, this);</span>
 
         <span class="c1">// Super important or the object will never receive mouse events!</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">interactive</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">clampy</span><span class="p">.</span><span class="nx">eventMode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">dynamic</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span>
 
     <span class="k">private</span> <span class="nx">onClicky</span><span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">FederatedPointerEvent</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
@@ -1417,7 +1417,7 @@ Remember to <code>.update()</code> your groups!
 <code>yourObject.on(&quot;stringOfWhatYouWantToKnow&quot;, functionToBeCalled, contextForTheFunction)</code></p>
 
 <p>and the second super important thing is:<br>
-<code>yourObject.interactive = true</code></p>
+<code>yourObject.eventMode = &#39;dynamic&#39;</code></p>
 <h3 id='touch-mouse-i-want-it-all'>Touch? Mouse? I want it all!</h3>
 <p>The web has moved forward since its first inception and now we have mouses and touchscreens!<br>
 Here is a small list of the most useful events with their mouse, touch, and catch-all variants.<br>
@@ -1452,7 +1452,7 @@ The rule of thumb is that if it has <code>pointer</code> in the name, it will ca
 </tr>
 </tbody></table>
 
-<aside class="warning">Still not working? You forgot the <code>.interactive = true</code>, didn't you?</aside>
+<aside class="warning">Still not working? You forgot the <code>.eventMode = 'dynamic'</code>, didn't you?</aside>
 <h3 id='the-event-that-fired'>The event that fired</h3>
 <p>When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the <a href="https://pixijs.download/dev/docs/PIXI.FederatedPointerEvent.html">full shape of the object here</a>.<br>
 I will list now some of the most common properties here now:  </p>
