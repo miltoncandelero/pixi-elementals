@@ -61,6 +61,15 @@ The basic anatomy of adding an event listener to an imput is:
 and the second super important thing is:  
 `yourObject.eventMode = 'dynamic'`
 
+### About Event Modes
+`eventMode` is a new addition in v7.2.0 that replaces the old `interactive` property. These are the valid values:
+
+- `none`: Ignores all interaction events, even on its children.
+- `passive`: Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.
+- `auto`: Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7
+- `static`: Emit events and is hit tested. Same as `interactive = true` in v7
+- `dynamic`: Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving
+
 ### Touch? Mouse? I want it all!  
 The web has moved forward since its first inception and now we have mouses and touchscreens!  
 Here is a small list of the most useful events with their mouse, touch, and catch-all variants.  
