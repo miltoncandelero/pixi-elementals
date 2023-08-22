@@ -33,7 +33,7 @@ export class Scene extends Container {
         // this.clampy.on("tap", this.onClicky, this);
 
         // Super important or the object will never receive mouse events!
-        this.clampy.interactive = true;
+        this.clampy.eventMode = 'dynamic';
     }
 
     private onClicky(e: FederatedPointerEvent): void {
@@ -59,7 +59,7 @@ The basic anatomy of adding an event listener to an imput is:
 `yourObject.on("stringOfWhatYouWantToKnow", functionToBeCalled, contextForTheFunction)`
 
 and the second super important thing is:  
-`yourObject.interactive = true`
+`yourObject.eventMode = 'dynamic'`
 
 ### Touch? Mouse? I want it all!  
 The web has moved forward since its first inception and now we have mouses and touchscreens!  
@@ -73,7 +73,7 @@ The rule of thumb is that if it has `pointer` in the name, it will catch both mo
 | `mouseup`   | `touchend`   | `pointerup`   |
 | `mousemove` | `touchmove`  | `pointermove` |
 
-<aside class="warning">Still not working? You forgot the <code>.interactive = true</code>, didn't you?</aside>
+<aside class="warning">Still not working? You forgot the <code>.eventMode = 'dynamic'</code>, didn't you?</aside>
 
 ### The event that fired
 
