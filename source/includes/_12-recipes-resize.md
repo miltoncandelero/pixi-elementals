@@ -42,7 +42,7 @@ export class Manager {
         Manager._width = width;
         Manager._height = height;
 
-        Manager.app = new Application({
+        Manager.app = new Application<HTMLCanvasElement>({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
@@ -121,7 +121,7 @@ export class Manager {
 
     public static initialize(background: number): void {
 
-        Manager.app = new Application({
+        Manager.app = new Application<HTMLCanvasElement>({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resizeTo: window, // This line here handles the actual resize!
             resolution: window.devicePixelRatio || 1,
@@ -168,7 +168,7 @@ You might realize that we no longer have `width` and `height` variables but inst
 ## Resolution (Device Pixel Ratio)
 
 ```ts
-new Application({
+new Application<HTMLCanvasElement>({
     view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
     resolution: window.devicePixelRatio || 1, // This bad boy right here...
     autoDensity: true, // and his friend

@@ -49,7 +49,7 @@ See how I passed the screen size as a parameter to the constructor and stored it
 import { Application } from 'pixi.js'
 import { Scene } from './scenes/Scene'; // This is the import statement
 
-const app = new Application({
+const app = new Application<HTMLCanvasElement>({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
     autoDensity: true,

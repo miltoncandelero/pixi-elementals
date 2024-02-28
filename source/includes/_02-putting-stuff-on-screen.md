@@ -17,7 +17,7 @@ Finally, we have the root of everything, the granddaddy of them all, the greates
 ```ts
 import { Application, Sprite, Container } from 'pixi.js'
 
-const app = new Application({
+const app = new Application<HTMLCanvasElement>({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
   autoDensity: true,

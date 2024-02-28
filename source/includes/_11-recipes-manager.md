@@ -40,7 +40,7 @@ export class Manager {
         Manager._height = height;
 
         // Create our pixi app
-        Manager.app = new Application({
+        Manager.app = new Application<HTMLCanvasElement>({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
