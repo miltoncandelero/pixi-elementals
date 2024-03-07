@@ -4,7 +4,7 @@ title: PixiJS Elementals
 language_tabs: 
 
 toc_footers:
-  - <a href='https://commerce.coinbase.com/checkout/aadf6aa9-fa06-4a7f-b4b2-3ca868b86b9a'>If you have money to spare...</a>
+  - <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Help me pay the bills!', '#eb145f', 'H2H1VDYEI');kofiwidget2.draw();</script> 
 
 includes:
   - 00-about
