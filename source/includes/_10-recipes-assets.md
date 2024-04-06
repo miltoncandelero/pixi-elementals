@@ -3,7 +3,7 @@
 So far we have seen how to create images and sounds by downloading the asset behind them just as we need to show it to the user. While this is good enough if we want a quick way to make a proof of concept or prototype, it won't be good enough for a project release.  
 The old and elegant way of doing it is downloading all the assets you are going to need beforehand and storing them in some sort of cache.   
 However, times change and users now want everything ready **right now!** so instead of having one big load at the beginning we will aim to have the smaller download possible to make do and keep everything loading in the background and _hopefully_ when the user reaches further into the game our assets will be ready.  
-To this purpose, PixiJS includes [Assets](https://pixijs.download/dev/docs/PIXI.Assets.html): A system for your resource management needs. A promise-based, background-loading, webworker-using, format-detecting, juggernaut of a system.
+To this purpose, PixiJS includes [Assets](https://pixijs.download/v7.4.2/docs/PIXI.Assets.html): A system for your resource management needs. A promise-based, background-loading, webworker-using, format-detecting, juggernaut of a system.
 
 In this recipe, we are going to create one of our `Scene` to load all the files we declare in a manifest object and then I will teach you how to recover the files from the `Assets` cache.
 
@@ -257,7 +257,7 @@ To remedy this we can take a different approach: we just load the bare minimum n
 Now that we downloaded and safely stored our assets in a cache... how do we use them?  
 The two basic components we have seen so far are `Sprite` and `Sound` and we will use them in different ways.  
 
-For _Sprites_, all our textures are stored in a [TextureCache somewhere in the PixiJS universe](https://pixijs.download/dev/docs/PIXI.utils.html#TextureCache) but all we need to know is that we can access that cache by doing `Sprite.from(...)` but instead of giving an URL we just give the name we gave our asset in the manifest file. In my example above I could do `Sprite.from("Clampy the clamp")`.  (If you ever need a `Texture` object, you can get it the same way with `Texture.from(...)` just remember that _Sprites_ go on screen and _Textures_ hide inside sprites.)
+For _Sprites_, all our textures are stored in a [TextureCache somewhere in the PixiJS universe](https://pixijs.download/v7.4.2/docs/PIXI.utils.html#TextureCache) but all we need to know is that we can access that cache by doing `Sprite.from(...)` but instead of giving an URL we just give the name we gave our asset in the manifest file. In my example above I could do `Sprite.from("Clampy the clamp")`.  (If you ever need a `Texture` object, you can get it the same way with `Texture.from(...)` just remember that _Sprites_ go on screen and _Textures_ hide inside sprites.)
 
 For _Sounds_, all our sounds are stored in what PixiJS Sound calls _sound library_. To access it we have to import it as `import { sound } from "@pixi/sound";`. That is `sound` with a **lowercase s**. From there you can play it by doing `sound.play("name we gave in the manifest");`.
 
@@ -277,11 +277,11 @@ This section will show some of the most common asset types and how to load and u
 But before we start, a bit of how things will work behind the curtains: _Assets_, _Resolvers_, _Loader_, _Cache_ and _Detection_. 
 You might never need to know more about these, but I have to mention them.  
 
-- [Assets](https://pixijs.download/dev/docs/PIXI.Assets.html) is a static instance for `AssetsClass`. It's the entry point and coordinator of the rest of the system.
-- [Resolver](https://pixijs.download/dev/docs/PIXI.Resolver.html) is a class that knows how to map assets to URLs. It also knows how to pick the best asset type for your system.
-- [Loader](https://pixijs.download/dev/docs/PIXI.AssetLoader.html) is the bit that actually downloads your file. It does noting else than going to an URL and getting data from it.
-- [Cache](https://pixijs.download/dev/docs/PIXI.Cache.html) stores all the related assets for a certain key.
-- [Detection](https://pixijs.download/dev/docs/PIXI.FormatDetectionParser.html) is how you tell the rest of the system that you can totally handle that format of asset.
+- [Assets](https://pixijs.download/v7.4.2/docs/PIXI.Assets.html) is a static instance for `AssetsClass`. It's the entry point and coordinator of the rest of the system.
+- [Resolver](https://pixijs.download/v7.4.2/docs/PIXI.Resolver.html) is a class that knows how to map assets to URLs. It also knows how to pick the best asset type for your system.
+- [Loader](https://pixijs.download/v7.4.2/docs/PIXI.AssetLoader.html) is the bit that actually downloads your file. It does noting else than going to an URL and getting data from it.
+- [Cache](https://pixijs.download/v7.4.2/docs/PIXI.Cache.html) stores all the related assets for a certain key.
+- [Detection](https://pixijs.download/v7.4.2/docs/PIXI.FormatDetectionParser.html) is how you tell the rest of the system that you can totally handle that format of asset.
 
 ### Spritesheets
 
@@ -381,4 +381,4 @@ The _Assets_ class will recognize simple text formats like `txt`, `json` or `xml
 If a json file happens to be a spritesheet, the Loader will recognize it automatically and process it accordingly. No extra steps are needed!
 </aside>
 
-If you would like to parse a particular kind of file you will need to write your own _Assets plugin_. The best way is to look at the [Spritesheet](https://github.com/pixijs/pixijs/blob/dev/packages/spritesheet/src/spritesheetAsset.ts) or [BitmapFont](https://github.com/pixijs/pixijs/blob/dev/packages/text-bitmap/src/loadBitmapFont.ts) one and work from there.
+If you would like to parse a particular kind of file you will need to write your own _Assets plugin_. The best way is to look at the [Spritesheet](https://github.com/pixijs/pixijs/blob/v7.4.2/packages/spritesheet/src/spritesheetAsset.ts) or [BitmapFont](https://github.com/pixijs/pixijs/blob/v7.4.2/packages/text-bitmap/src/loadBitmapFont.ts) one and work from there.

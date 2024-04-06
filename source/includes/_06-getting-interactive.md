@@ -53,7 +53,7 @@ export class Scene extends Container {
 ```
 
 PixiJS has a _thing_ that whenever you click or move your mouse on the screen it checks what object were you on, no matter how deep in the display list that object is, and lets it know that _a mouse_ happened.  
-(If curious, that _thing_ is a plugin called [Federated Events System](https://pixijs.download/dev/docs/PIXI.EventSystem.html))  
+(If curious, that _thing_ is a plugin called [Federated Events System](https://pixijs.download/v7.4.2/docs/PIXI.EventSystem.html))  
 
 The basic anatomy of adding an event listener to an imput is:  
 `yourObject.on("stringOfWhatYouWantToKnow", functionToBeCalled, contextForTheFunction)`
@@ -86,7 +86,7 @@ The rule of thumb is that if it has `pointer` in the name, it will catch both mo
 
 ### The event that fired
 
-When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the [full shape of the object here](https://pixijs.download/dev/docs/PIXI.FederatedPointerEvent.html).  
+When your function gets called you will also receive a parameter, that is all the data that event produced. You can see the [full shape of the object here](https://pixijs.download/v7.4.2/docs/PIXI.FederatedPointerEvent.html).  
 I will list now some of the most common properties here now:  
 
 * `event.global` This is the global (stage) position of the interaction
@@ -98,7 +98,7 @@ I will list now some of the most common properties here now:
 You might have come across by the fact that if you have a function that is called exactly the same as an event (for example a `click` function) and your object is interactive, that function gets called automagically.  
 That was because there is a line inside the old [Interaction Manager's](https://pixijs.download/v6.5.8/docs/packages_interaction_src_InteractionManager.ts.html) that if it finds that a display object has a method with the same name as an event it calls it.
 
-**This was removed on PixiJS' v7 new [Federated Events System](https://pixijs.download/dev/docs/PIXI.EventSystem.html)**
+**This was removed on PixiJS' v7 new [Federated Events System](https://pixijs.download/v7.4.2/docs/PIXI.EventSystem.html)**
 
 --
 

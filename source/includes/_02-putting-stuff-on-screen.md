@@ -82,13 +82,13 @@ bigConty.addChild(littleConty);
 > A bit of a silly example, it won't show anything on screen since containers don't have content by themselves.
 
 The most basic class you will have. While it doesn't have any graphical representation on its own, you can use it to group other objects and affect them as a unit.  
-[PixiJS Container API](https://pixijs.download/dev/docs/PIXI.Container.html)  
+[PixiJS Container API](https://pixijs.download/v7.4.2/docs/PIXI.Container.html)  
 Methods and properties that you will use most frequently:  
 
 * `addChild(...)`: You use this to add something to the container.
 * `removeChild(...)`: You use this to remove said something to the container.
 * `children`: An array of the objects you added to the container.
-* `position`, `scale` and `skew`: If you care to know, those are two PixiJS [Point](https://pixijs.download/dev/docs/PIXI.ObservablePoint.html)
+* `position`, `scale` and `skew`: If you care to know, those are two PixiJS [Point](https://pixijs.download/v7.4.2/docs/PIXI.ObservablePoint.html)
   * `position.x` and `position.y` have shortcuts on `.x` and `.y`
   * Even if `position` is an object, setting it to a new position or to another object's position won't break it since it has a setter that copies the value! This makes `one.position = another.position` totally safe!
 * `rotation` and `angle`: Rotation is in _radians_ while angle is in _degrees_. Changing one updates the other. 
@@ -107,7 +107,7 @@ const particleConty: ParticleContainer = new ParticleContainer();
 // Pretty much everything that worked on a Container will work with a ParticleContainer.
 ```
 
-A [Particle Container](https://pixijs.download/dev/docs/PIXI.ParticleContainer.html) is a special kind of container designed to go fast. To achieve this extra speed you sacrifice some functionality.  
+A [Particle Container](https://pixijs.download/v7.4.2/docs/PIXI.ParticleContainer.html) is a special kind of container designed to go fast. To achieve this extra speed you sacrifice some functionality.  
 The rules for Particle Containers are:
 
 * **No grandchildren**: Children of a ParticleContainer can't have children.
@@ -139,7 +139,7 @@ app.stage.addChild(clampy);
 > Here we use again the shortcuts for `position`. 
 
 The simplest way to show a bitmap on your screen. It inherits from `Container` so all the properties from above apply here too!  
-[PixiJS Sprite API](https://pixijs.download/dev/docs/PIXI.Sprite.html)  
+[PixiJS Sprite API](https://pixijs.download/v7.4.2/docs/PIXI.Sprite.html)  
 Methods and properties that you will use most frequently:  
 
 * `Sprite.from(...)`: This is a static method to create new sprites. It does some black magic inside it so that it can take a lot of different kinds of parameters. (You technically can use the `new Sprite(...)` way of creating sprites but this is way easier).  
@@ -174,7 +174,7 @@ graphy.y = 100;
 > I can't stress this enough: **Do** draw your graphics relative to their own origin and then move the object. **Don't** try to draw it directly on the screen position you want
 
 This class allows you to make primitive drawings like rectangles, circles, and lines. It is really useful when you need masks, hitboxes, or want a simple graphic without needing a bitmap file. It also inherits from `Container`.  
-[PixiJS Graphics API](https://pixijs.download/dev/docs/PIXI.Graphics.html)  
+[PixiJS Graphics API](https://pixijs.download/v7.4.2/docs/PIXI.Graphics.html)  
 Methods and properties that you will use most frequently:  
 
 * `beginFill(...)` and `endFill()`: You mark the beginning and end of a fill. Every shape you draw between the _begin_ and _end_ calls will be filled by the color you specify.
@@ -206,7 +206,7 @@ app.stage.addChild(texty);
 
 Oh boy, we could have an entire chapter dedicated to text but for now, just the basics.  
 Text has AMAZING support for Unicode characters (as long as your chosen font supports it) and it is pretty consistent on how it looks across browsers.  
-[PixiJS Text API](https://pixijs.download/dev/docs/PIXI.Text.html)  
+[PixiJS Text API](https://pixijs.download/v7.4.2/docs/PIXI.Text.html)  
 Tips:  
 
 * Go to [PixiJS Textstyle Editor](https://pixijs.io/pixi-text-style) to make your text look exactly like you want it to.
@@ -242,7 +242,7 @@ app.stage.addChild(bitmapTexty);
 > Remember, symbols won't show by default. Your sentence might not mean the same without commas.
 
 The faster but more limited brother to `Text`, BitmapText uses a BitmapFont to draw your text. That means that changing your text is just changing what sprites are shown on screen, which is really fast. Its downside is that if you need full Unicode support (Chinese, Japanese, Arabic, Russian, etc) you will end up with a font atlas so big that performance will start to go down again.  
-[PixiJS BitmapText API](https://pixijs.download/dev/docs/PIXI.BitmapText.html)  
+[PixiJS BitmapText API](https://pixijs.download/v7.4.2/docs/PIXI.BitmapText.html)  
 Tips:  
 
 * **PixiJS can create a BitmapFont on the fly from a regular font.** `BitmapFont.from(...)` will take an object similar to a TextStyle and make a font for you to use!
@@ -256,7 +256,7 @@ _Stunning effects with no effort!_
 
 PixiJS has a stunning collection of filters and effects you can apply either to only one _DisplayObject_ or to any _Container_ and it will apply to all its children!
 I won't cover **all** the filters (at the time of writing there are 37 of them!!) instead, I will show you how to use one of the pre-packaged filters and you will have to extrapolate the knowledge from there.  
-[You can see a demo of the filters](http://filters.pixijs.download/dev/demo/index.html) or [go directly to Github to see what package to install](https://github.com/pixijs/filters).  
+[You can see a demo of the filters](http://filters.pixijs.download/v7.4.2/demo/index.html) or [go directly to Github to see what package to install](https://github.com/pixijs/filters).  
 
 > Creating and using filters is so easy that I wasn't sure if I needed to make this part or not
 

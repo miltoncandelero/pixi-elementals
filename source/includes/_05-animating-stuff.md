@@ -49,7 +49,7 @@ export class Scene extends Container {
 > Clampy sequence assets don't exist. I lied to you. You will need your own assets.
 
 Frame-by-frame animations go with 2d games like toe and dirt. Animated sprite has got your back. (This inherits from `Sprite`)  
-[PixiJS AnimatedSprite API](https://pixijs.download/dev/docs/PIXI.AnimatedSprite.html)  
+[PixiJS AnimatedSprite API](https://pixijs.download/v7.4.2/docs/PIXI.AnimatedSprite.html)  
 Tips and stuff:
 
 * You make this by passing an array of `Texture` objects.
@@ -122,7 +122,7 @@ We can use this math every single frame to move an object after we give it a vel
 
 Now that we are on board on what we need to do, let's see how to use the PixiJS Ticker.  
 You can create one for yourself or just use the `Ticker.shared` instance that is already created for quick use. You just attach a function you want to be called every frame with the `.add()` and that's it!
-[PixiJS Ticker API](https://pixijs.download/dev/docs/PIXI.Ticker.html)  
+[PixiJS Ticker API](https://pixijs.download/v7.4.2/docs/PIXI.Ticker.html)  
 Tips and Tricks:
 
 * If you make your own `Ticker`, remember to `start()` it.

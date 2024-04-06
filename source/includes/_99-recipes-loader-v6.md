@@ -128,7 +128,7 @@ Those events don't look exactly like the other events we saw in the [Interaction
 Now that we downloaded and safely stored our assets in a cache... how do we use them?  
 The two basic components we have seen so far are `Sprite` and `Sound` and we will use them in different ways.  
 
-For _Sprites_, all our textures are stored in a [TextureCache somewhere in the PixiJS universe](https://pixijs.download/dev/docs/PIXI.utils.html#TextureCache) but all we need to know is that we can access that cache by doing `Sprite.from(...)` but instead of giving an URL we just give the name we gave our asset in the manifest file. In my example above I could do `Sprite.from("Clampy the clamp")`.  (If you ever need a `Texture` object, you can get it the same way with `Texture.from(...)` just remember that _Sprites_ go on screen and _Textures_ hide inside sprites.)
+For _Sprites_, all our textures are stored in a [TextureCache somewhere in the PixiJS universe](https://pixijs.download/v7.4.2/docs/PIXI.utils.html#TextureCache) but all we need to know is that we can access that cache by doing `Sprite.from(...)` but instead of giving an URL we just give the name we gave our asset in the manifest file. In my example above I could do `Sprite.from("Clampy the clamp")`.  (If you ever need a `Texture` object, you can get it the same way with `Texture.from(...)` just remember that _Sprites_ go on screen and _Textures_ hide inside sprites.)
 
 For _Sounds_, all our sounds are stored in what PixiJS Sound calls _sound library_. To access it we have to import it as `import { sound } from "@pixi/sound";`. That is `sound` with a **lowercase s**. From there you can play it by doing `sound.play("name we gave in the manifest");`.
 
